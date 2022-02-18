@@ -1,0 +1,41 @@
+.container {
+  margin: 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.item {
+  margin: auto;
+  height: 395px;
+  width: 372px;
+  border-radius: 25px;
+  background-color: rgb(0, 0, 0, 0.7);
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.part2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.part2Subpart1 {
+  display: flex;
+}
+
+.part3 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon {
+  color: white;
+}

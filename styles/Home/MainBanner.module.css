@@ -1,0 +1,51 @@
+.container {
+  height: 680px;
+  background-image: url(../../public/Rectangle\ 49.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -2;
+  color: whitesmoke;
+}
+
+.cover {
+  position: absolute;
+  height: 680px;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 0.5);
+  z-index: -1;
+  top: 0;
+}
+
+.parts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.part1 {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 680px;
+}
+
+.part2 {
+  padding: 2rem 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 680px;
+}
+
+.btnJoinNow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: #667eea;
+  border-radius: 30px;
+  color: whitesmoke;
+  width: 563px;
+  height: 87px;
+}

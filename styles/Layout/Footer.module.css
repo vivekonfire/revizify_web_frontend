@@ -1,0 +1,20 @@
+.items {
+  font-size: medium;
+  border-radius: 25px;
+  cursor: pointer;
+  color: whitesmoke;
+  font-weight: 500;
+  align-items: center;
+  margin: 1rem;
+}
+.itemSet {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  height: 80px;
+  background-color: lightslategrey;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
