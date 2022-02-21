@@ -1,30 +1,33 @@
 import Image from "next/image";
 import React from "react";
-import styles from "../../styles/Home/MainBanner.module.css";
 import videoimg from "../../public/video-bg.png";
-import videobtn from "../../public/video-button.png";
 
 const MainBanner = () => {
   return (
-    <div className={styles.container}>
-      <div className={styles.cover}></div>
-      <div className={styles.parts}>
-        <div className={styles.part1}>
-          <div style={{ fontSize: "48px", fontWeight: "700" }}>
-            Remember Everything You Study!!
-          </div>
-          <div style={{ fontSize: "24px", fontWeight: "400" }}>
-            Develop a Supermemory with Revizify's revision system.
-          </div>
-          <button className={styles.btnJoinNow}>
-            <p style={{ fontSize: "larger", padding: "0", margin: "0" }}>
+    <div className="main_banner_bg_image position-relative">
+      <div className="bg-dark bg-opacity-50 position-absolute w-100 h-100"></div>
+      <div
+        className="container my-auto d-flex align-items-center"
+        style={{ zIndex: "10", height: "680px" }}
+      >
+        <div className="d-md-flex text-light gap-5">
+          <div className="d-flex flex-column gap-5 text-center-md justify-content-center">
+            <div className="fs-1 fw-bold" style={{ zIndex: "10" }}>
+              Remember Everything You Study!!
+            </div>
+            <div className="fs-4 " style={{ zIndex: "10" }}>
+              Develop a Supermemory with Revizify's revision system.
+            </div>
+            <button
+              className="btn btn-lg text-light rounded-pill p-3"
+              style={{ zIndex: "10", background: "#667eea" }}
+            >
               Join Now
-            </p>
-          </button>
-        </div>
-        <div className={styles.part2}>
-          <Image src={videoimg} />
-          {/* <Image src={videobtn} /> */}
+            </button>
+          </div>
+          <div>
+            <Image src={videoimg} className="img-fluid" alt="video image" />
+          </div>
         </div>
       </div>
     </div>

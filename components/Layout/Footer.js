@@ -2,44 +2,33 @@ import React from "react";
 import logo from "../../public/logo-nav.png";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../../styles/Layout/Footer.module.css";
 import googlePlay from "../../public/google_play.png";
 
 const Footer = () => {
   return (
-    <div className={styles.container}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Image src={logo} />
+    <div
+      className="d-flex justify-content-between px-4 text-white"
+      style={{ backgroundColor: "#667EEA", height: "80px" }}
+    >
+      <div className="d-flex justify-content-center align-items-center">
+        <Image src={logo} alt="Revizify logo" />
         <div style={{ fontSize: "13px", color: "whitesmoke" }}>Revizify</div>
       </div>
-      <div className={styles.itemSet}>
-        <Link styles={{ cursor: "pointer" }} href="/">
-          <div className={styles.items}>About Us</div>
+      <div className="d-md-flex justify-content-center align-items-center">
+        <Link href="/">
+          <div className="mx-3 my-2 pointer_cursor">About Us</div>
         </Link>
         <Link href="/create">
-          <div className={styles.items}>Contact Us</div>
+          <div className="mx-3 my-2 pointer_cursor">Contact Us</div>
         </Link>
         <Link href="/download">
-          <div className={styles.items}>Terms</div>
+          <div className="mx-3 my-2 pointer_cursor">Terms</div>
         </Link>
         <Link href="/verify">
-          <div className={styles.items}>FAQ</div>
+          <div className="mx-3 my-2 pointer_cursor">FAQ</div>
         </Link>
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "1rem",
-        }}
-      >
+      <div className="d-flex justify-content-center align-items-center">
         <Image src={googlePlay} />
       </div>
     </div>
