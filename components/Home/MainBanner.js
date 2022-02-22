@@ -19,7 +19,7 @@ const MainBanner = () => {
               Develop a Supermemory with Revizify's revision system.
             </div>
             <button
-              className="btn btn-lg text-light rounded-pill p-3"
+              className="btn btn-lg text-light rounded-pill p-3 my-3"
               style={{ zIndex: "10", background: "#667eea" }}
             >
               Join Now
