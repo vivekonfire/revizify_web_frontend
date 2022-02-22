@@ -25,6 +25,7 @@ a {
   background-image: url(../public/Rectangle.png);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .small_text {
@@ -41,4 +42,33 @@ a {
 
 .pointer_cursor {
   cursor: pointer;
+}
+
+.on_it:hover,
+.on_it:focus {
+  background-color: black;
+  border-radius: 25px;
+}
+
+.leave_navbar {
+  margin-top: 90px;
+}
+
+.rounded-sm {
+  border-radius: 25px;
+}
+
+.rounded-md {
+  border-radius: 30px;
+}
+
+.height_text_area {
+  height: 170px;
+  resize: none;
+}
+
+@media only screen and (max-width: 1200px) {
+  .height_text_area {
+    height: 80px;
+  }
 }

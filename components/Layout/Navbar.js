@@ -9,7 +9,7 @@ import { FiMenu } from "react-icons/fi";
 const NavBar = () => {
   return (
     <div
-      className="d-md-flex text-light w-100 px-5 my-2 bg-transparent position-fixed justify-content-between gap-5 align-items-center navbar navbar-expand-md"
+      className="d-lg-flex text-light w-100 px-5 bg-transparent position-fixed justify-content-between gap-5 align-items-center navbar navbar-expand-md"
       style={{ zIndex: "10" }}
     >
       <button
@@ -24,19 +24,19 @@ const NavBar = () => {
       <div className="collapse navbar-collapse" id="navmenu">
         <ul className=" d-flex justify-content-between align-items-center w-100 navbar-nav">
           <li className="nav-item">
-            <div className="d-flex flex-column align-items-center">
+            <div className="d-flex flex-column align-items-center pointer_cursor">
               <Image src={logo} alt="revizify logo image" />
               <div className="fs-6">Revizify</div>
             </div>
           </li>
           <li className="nav-item">
             <Link href="/">
-              <div>Home</div>
+              <div className="on_it pointer_cursor p-3">Home</div>
             </Link>
           </li>
           <li className="nav-item">
             <Link href="/create">
-              <div>Create</div>
+              <div className="on_it pointer_cursor p-3">Create</div>
             </Link>
           </li>
           <li className="nav-item w-25">
@@ -47,12 +47,12 @@ const NavBar = () => {
           </li>
           <li className="nav-item">
             <Link href="/download">
-              <div>Download</div>
+              <div className="on_it pointer_cursor p-3">Download</div>
             </Link>
           </li>
           <li className="nav-item">
             <Link href="/verify">
-              <div>Verify As Educator</div>
+              <div className="on_it pointer_cursor p-3">Verify As Educator</div>
             </Link>
           </li>
         </ul>
