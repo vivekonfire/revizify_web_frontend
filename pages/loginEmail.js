@@ -3,26 +3,25 @@ import React from "react";
 
 const loginEmail = () => {
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center text-light">
-      <div
-        className="bg-black bg-opacity-50"
-        style={{ borderRadius: "30px" }}
-        p-5
-      >
-        <form className="m-5">
-          <label htmlFor="email" className="mt-5 mx-5 mb-2">
+    <div className="min-vh-100 d-flex align-items-center justify-content-center text-light flex-column">
+      <div className="d-flex flex-column align-items-center">
+        <h1 className="spaced_text">Revizify</h1>
+        <p>Your first step to the power of a Super memory</p>
+      </div>
+      <div className="bg-black bg-opacity-50 login_container rounded-md">
+        <form className="p-5 d-flex flex-column justify-content-evenly align-items-center w-100 h-100">
+          <label htmlFor="email" className="fs-4">
             Email Address
           </label>
           <input
-            style={{ width: "540px" }}
-            className="form-control rounded-pill bg-black bg-opacity-25 p-2 mx-5 my-3"
+            className="form-control rounded-pill bg-black bg-opacity-25 p-3 w-100"
             name="email"
             type="text"
             placeholder="Phone number, username or email"
           />
           <button
             type="submit"
-            className="btn rounded-pill bg-black text-light float-end mx-5 mb-5"
+            className="btn rounded-pill bg-black text-light float-bottom w-25"
           >
             <Link href="/loginPassword">
               <div>Proceed</div>

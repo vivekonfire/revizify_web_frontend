@@ -11,9 +11,8 @@ const VerifyForm = () => {
             What topics do you teach / Create Courses on ?
           </p>
           <textarea
-            className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-75"
+            className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25"
             placeholder="Enter here"
-            style={{ height: "170px" }}
           />
           <p className="pt-3 ">How many years of experience in your field?</p>
           <Dropdown>
@@ -39,18 +38,16 @@ const VerifyForm = () => {
             paper, others etc)
           </p>
           <textarea
-            className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-75"
+            className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25"
             placeholder="Enter here"
-            style={{ height: "170px" }}
           />
           <p className="pt-3">
             Tell us a bit about yourself. Why should you get verified? (This can
             be different from your bio)
           </p>
           <textarea
-            className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-75"
+            className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25"
             placeholder="Enter here"
-            style={{ height: "170px" }}
           />
           <p className="pt-3">
             Any Prior experience on creating online courses?
@@ -63,10 +60,17 @@ const VerifyForm = () => {
           </button>
           <p className="pt-3">What Languages do you teach in ?</p>
           <textarea
-            className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-75"
+            className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25"
             placeholder="Enter here"
-            style={{ height: "170px" }}
           />
+          <div className="w-100 d-flex justify-content-center mt-4">
+            <button
+              className="w-50 bg-black btn rounded-pill p-3 text-light"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>

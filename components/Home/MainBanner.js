@@ -8,19 +8,19 @@ const MainBanner = () => {
       <div className="bg-dark bg-opacity-50 position-absolute w-100 h-100"></div>
       <div
         className="container my-auto d-flex align-items-center"
-        style={{ zIndex: "10", height: "680px" }}
+        style={{ zIndex: "9", height: "680px" }}
       >
         <div className="d-md-flex text-light gap-5">
           <div className="d-flex flex-column gap-5 text-center-md justify-content-center">
-            <div className="fs-1 fw-bold" style={{ zIndex: "10" }}>
+            <div className="fs-1 fw-bold" style={{ zIndex: "9" }}>
               Remember Everything You Study!!
             </div>
-            <div className="fs-4 " style={{ zIndex: "10" }}>
+            <div className="fs-4 " style={{ zIndex: "9" }}>
               Develop a Supermemory with Revizify's revision system.
             </div>
             <button
               className="btn btn-lg text-light rounded-pill p-3 my-3"
-              style={{ zIndex: "10", background: "#667eea" }}
+              style={{ zIndex: "9", background: "#667eea" }}
             >
               Join Now
             </button>

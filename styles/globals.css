@@ -21,6 +21,10 @@ a {
   box-sizing: border-box;
 }
 
+.background_gradient {
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
+
 .main_banner_bg_image {
   background-image: url(../public/Rectangle.png);
   background-repeat: no-repeat;
@@ -67,8 +71,32 @@ a {
   resize: none;
 }
 
+.login_container {
+  height: 400px;
+  width: 740px;
+}
+
+.spaced_text {
+  letter-spacing: 0.92em;
+  padding-left: 0.92em;
+}
+
 @media only screen and (max-width: 1200px) {
   .height_text_area {
     height: 80px;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .login_container {
+    height: 250px;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .login_container {
+    height: 230px;
+    width: 100%;
   }
 }

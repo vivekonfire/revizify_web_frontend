@@ -9,7 +9,7 @@ import { FiMenu } from "react-icons/fi";
 const NavBar = () => {
   return (
     <div
-      className="d-lg-flex text-light w-100 px-5 bg-transparent position-fixed justify-content-between gap-5 align-items-center navbar navbar-expand-md"
+      className="d-lg-flex text-light w-100 px-5 background_gradient shadow position-fixed justify-content-between gap-5 align-items-center navbar navbar-expand-md"
       style={{ zIndex: "10" }}
     >
       <button
@@ -41,7 +41,7 @@ const NavBar = () => {
           </li>
           <li className="nav-item w-25">
             <input
-              className="p-2 w-100 rounded-pill input-group-text"
+              className="p-2 w-100 rounded-pill input-group-text form-control border-0"
               placeholder="Search Courses..."
             ></input>
           </li>
