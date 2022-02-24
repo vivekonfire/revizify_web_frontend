@@ -4,7 +4,7 @@ import VerifyQuestions from "../components/Verify/VerifyQuestions";
 
 const verify = () => {
   return (
-    <div className="min-vh-100 d-lg-flex">
+    <div className="min-vh-100 d-lg-flex leave_navbar">
       <VerifyForm />
       <VerifyQuestions />
     </div>

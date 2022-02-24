@@ -4,7 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 const VerifyForm = () => {
   return (
     <div className="w-100 leave_navbar d-flex justify-content-center p-4 text-light">
-      <div className="bg-black bg-opacity-50 rounded-md h-100 w-100 mx-5 p-5 shadow-lg">
+      <div className="bg-black bg-opacity-50 rounded-md h-100 w-100 mx-md-5 p-5 shadow-lg">
         <form>
           <h1 className="mb-5">Verification Form</h1>
           <p className="pt-3 ">

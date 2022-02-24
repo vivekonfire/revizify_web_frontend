@@ -55,7 +55,7 @@ a {
 }
 
 .leave_navbar {
-  margin-top: 90px;
+  padding-top: 7rem;
 }
 
 .rounded-sm {
@@ -79,6 +79,16 @@ a {
 .spaced_text {
   letter-spacing: 0.92em;
   padding-left: 0.92em;
+}
+
+.z-1 {
+  z-index: 1;
+}
+.z-9 {
+  z-index: 9;
+}
+.z-10 {
+  z-index: 10;
 }
 
 @media only screen and (max-width: 1200px) {

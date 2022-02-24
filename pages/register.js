@@ -6,7 +6,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 
 const register = () => {
   return (
-    <div className="min-vh-100 d-lg-flex">
+    <div className="min-vh-100 d-lg-flex leave_navbar">
       <div className="w-100 leave_navbar d-flex justify-content-center p-4 text-light">
         <div className="bg-black bg-opacity-50 rounded-md h-100 w-100 mx-md-5 p-5 shadow-lg">
           <form>
