@@ -6,13 +6,10 @@ import googlePlay from "../../public/google_play.png";
 
 const Footer = () => {
   return (
-    <div
-      className="d-flex justify-content-between px-4 text-white p-3"
-      style={{ backgroundColor: "#667EEA" }}
-    >
-      <div className="d-flex justify-content-center align-items-center">
+    <div className="d-flex justify-content-between px-4 text-white p-3 bg-black bg-opacity-50">
+      <div className="d-flex p-1 gap-2 bg-light bg-opacity-25 border border-2 border-light rounded-3 align-items-center pointer_cursor">
         <Image src={logo} alt="Revizify logo" />
-        <div style={{ fontSize: "13px", color: "whitesmoke" }}>Revizify</div>
+        <div className="fs-6">Revizify</div>
       </div>
       <div className="d-md-flex justify-content-center text-center align-items-center">
         <Link href="/">

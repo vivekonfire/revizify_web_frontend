@@ -2,9 +2,10 @@ import React from "react";
 import Image from "next/image";
 import image from "../../public/unsplash_ucUB9wxkPgY.png";
 import profileImage from "../../public/unsplash_tAvpDE7fXgY.png";
-import { BsThreeDots, BsHandThumbsUp } from "react-icons/bs";
+import { BsThreeDots, BsHandThumbsUp, BsLightningFill } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import { FaShareAlt } from "react-icons/fa";
+import cards from "../../public/cards.svg";
 
 const EachCourse = () => {
   return (
@@ -12,11 +13,20 @@ const EachCourse = () => {
       className="col d-flex justify-content-center my-3"
       style={{ height: "395px", width: "372px" }}
     >
-      <div
-        className="w-100 bg-black bg-opacity-75 p-3 d-flex flex-column justify-content-between"
-        style={{ borderRadius: "30px" }}
-      >
-        <Image src={image} alt="course image" />
+      <div className="w-100 bg-black bg-opacity-75 p-3 d-flex flex-column justify-content-between rounded-md">
+        <div className="position-relative">
+          <Image src={image} alt="course image" />
+          <div className="bg-black bg-opacity-75 p-2 rounded-pill gap-2 d-flex align-items-center position-absolute bottom-0 start-0 mx-2 my-3">
+            <BsLightningFill />
+            <p className="p-0 m-0">100</p>
+          </div>
+          <div className="bg-black bg-opacity-75 p-2 rounded-pill gap-2 d-flex align-items-center position-absolute bottom-0 end-0 mx-2 my-3">
+            <div className="d-flex align-items-center justify-content-center">
+              <Image src={cards} alt="Image of cards" />
+            </div>
+            <p className="p-0 m-0">100</p>
+          </div>
+        </div>
         <div className="fs-6 m-2">
           Pariatur cillum sit sunt sint sit deserunt nisi consectetur ipsum.
         </div>
