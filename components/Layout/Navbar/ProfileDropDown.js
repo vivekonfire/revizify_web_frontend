@@ -1,4 +1,6 @@
 import React from "react";
+import profile_image from "../../../public/unsplash_tAvpDE7fXgY.png";
+import Image from "next/image";
 
 const ProfileDropDown = () => {
   return (

@@ -68,7 +68,7 @@ const NavBar = () => {
         className="pointer_cursor"
         onClick={handleProfileDropDown}
       />
-      {profileDropDown === true && ProfileDropDown}
+      {profileDropDown === true && <ProfileDropDown />}
     </nav>
   );
 };

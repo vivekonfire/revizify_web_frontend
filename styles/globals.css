@@ -9,19 +9,19 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 7.5px;
   background-color: #764ba2;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f0f4ff;
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 25px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #799dfa;
+  background: white;
   border-radius: 25px;
 }
 
