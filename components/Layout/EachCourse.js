@@ -13,7 +13,7 @@ const EachCourse = () => {
       className="col d-flex justify-content-center my-3"
       style={{ height: "395px", width: "372px" }}
     >
-      <div className="w-100 bg-black bg-opacity-75 p-3 d-flex flex-column justify-content-between rounded-md">
+      <div className="w-100 bg-black bg-opacity-50 p-3 d-flex flex-column justify-content-between rounded-md">
         <div className="position-relative">
           <Image src={image} alt="course image" />
           <div className="bg-black bg-opacity-75 p-2 rounded-pill gap-2 d-flex align-items-center position-absolute bottom-0 start-0 mx-2 my-3">

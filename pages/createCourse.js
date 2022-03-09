@@ -6,7 +6,7 @@ const createCourse = () => {
   return (
     <div className="min-vh-100 d-lg-flex leave_navbar">
       <div className="w-100 leave_navbar d-flex justify-content-center p-4 text-light">
-        <div className="bg-black bg-opacity-50 rounded-md h-100 w-100 mx-md-5 p-5 shadow-lg">
+        <div className="bg-black bg-opacity-25 rounded-md h-100 w-100 mx-md-5 p-5 shadow-lg">
           <form>
             <h1 className="mb-5">Create New Course</h1>
             <div>
@@ -16,7 +16,7 @@ const createCourse = () => {
               >
                 <div className="fs-4">Course Name</div>
                 <div className="fs-6">(0/100)</div>
-                <div className="fs-6">The title of your course</div>
+                <div className="fs-6">The Title of your course</div>
               </label>
               <input
                 name="name"
@@ -37,29 +37,36 @@ const createCourse = () => {
                 placeholder="Enter here"
               />
               a small description of what users get to study/revise when they
-              downloadyour course
+              download your course
             </div>
             <br />
             <div>
-              <label htmlFor="thumbnail" className="pt-4 fs-4 ">
+              <label htmlFor="thumbnail" className="pt-4 fs-4">
                 Upload Course Thumbnail
                 <br />
-                <div
-                  className="bg-black bg-opacity-25 rounded-sm pointer_cursor"
-                  style={{ height: "225px", width: "390px" }}
-                />
+                <div className=" d-lg-flex justify-content-center align-items-stretch">
+                  <div className="bg-black bg-opacity-25 rounded-sm pointer_cursor col-lg-6 vr" />
+                  <p className="fs-6 col-lg-6 p-2 align-self-end">
+                    Select or upload a picture that shows whats in your course.
+                    A good thumbnailstands out and grabs viewers’ attention.
+                    Thumbnail Requirements: Have a resolution of 1280*720 (with
+                    a minimum width of 640 pixels). Be uploaded in image formats
+                    such as JPG, GIF, or PNG. Remain under the 2MB Limit.
+                  </p>
+                </div>
               </label>
               <input
                 type="file"
                 accept="image/*"
                 id="thumbnail"
-                style={{ display: "none" }}
+                className="d-none"
               />
             </div>
+
             <br />
             <div className="w-100 d-flex justify-content-start mt-4">
               <button
-                className="w-50 bg-black btn rounded-pill p-3 text-light"
+                className="col-4 background_gradient button_shadow border-0 btn rounded-pill p-3 text-light fs-4 fw-bold"
                 type="submit"
               >
                 Save
@@ -68,7 +75,7 @@ const createCourse = () => {
           </form>
         </div>
       </div>
-      <div className="w-100 leave_navbar d-flex justify-content-center align-items-center p-4 text-light">
+      <div className="w-100 d-none d-xl-flex leave_navbar d-flex justify-content-center p-4 text-light">
         <div>
           <Image src={robot} alt="signup page image" />
         </div>

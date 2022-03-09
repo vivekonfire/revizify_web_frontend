@@ -51,6 +51,11 @@ ul {
     inset 0px 4px 20px rgba(0, 0, 0, 0.25);
 }
 
+.button_shadow:hover {
+  box-shadow: inset 0px 4px 20px rgba(0, 0, 0, 0.25),
+    inset -3px -14px 20px rgba(255, 255, 255, 0.25);
+}
+
 .main_banner_bg_image {
   background-image: url(../public/Rectangle.png);
   background-repeat: no-repeat;
@@ -76,8 +81,7 @@ ul {
 
 .on_it:hover,
 .on_it:focus {
-  background-color: black;
-  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .leave_navbar {
@@ -117,10 +121,7 @@ ul {
   z-index: 10;
 }
 
-@media only screen and (max-width: 1200px) {
-  .height_text_area {
-    height: 80px;
-  }
+@media only screen and (max-width: 1000px) {
 }
 
 @media only screen and (max-width: 770px) {
