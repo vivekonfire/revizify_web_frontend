@@ -3,16 +3,16 @@ import CourseDetails from "../components/CoursePage/CourseDetials";
 import Cards from "../components/CoursePage/Cards";
 import Comments from "../components/CoursePage/CommentList";
 
-const ViewCourse = () => {
+const PublishCards = () => {
   return (
     <div className="leave_navbar mx-sm-5 mx-1 min-vh-100">
       <div className="d-xl-flex justify-content-between p-0">
         <CourseDetails />
-        <Cards text="Download" />
+        <Cards text="Add new Card" />
       </div>
       <Comments />
     </div>
   );
 };
 
-export default ViewCourse;
+export default PublishCards;

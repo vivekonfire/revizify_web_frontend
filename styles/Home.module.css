@@ -1,0 +1,6 @@
+.main_banner_bg_image {
+  background-image: url(../public/Rectangle.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

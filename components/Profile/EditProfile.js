@@ -2,13 +2,12 @@ import React from "react";
 import Image from "next/image";
 import study from "../../public/study.png";
 import { FaUserAlt } from "react-icons/fa";
-import { BsFillEyeFill } from "react-icons/bs";
 
 const RegisterForm = () => {
   return (
     <div className="min-vh-100 d-lg-flex leave_navbar">
-      <div className="w-100 leave_navbar d-flex justify-content-center p-4 text-light">
-        <div className="bg-black bg-opacity-50 rounded-md h-100 w-100 mx-md-5 p-5 shadow-lg">
+      <div className="container d-flex justify-content-center p-4 text-light">
+        <div className="bg-black bg-opacity-25 rounded-md h-100 mx-xxl-5 mx-xl-0 mx-lg-5 mx-sm-0 p-5 shadow-lg">
           <form>
             <h1 className="mb-5">Profile</h1>
             <div>
@@ -51,7 +50,7 @@ const RegisterForm = () => {
             </div>
             <div>
               <label htmlFor="email" className="pt-5 fs-5">
-                Email Address *
+                Email Id
               </label>
               <input
                 name="email"
@@ -61,7 +60,7 @@ const RegisterForm = () => {
             </div>
             <div>
               <label htmlFor="number" className="pt-5 fs-5">
-                Phone Number *
+                Phone Number
               </label>
               <input
                 name="number"
@@ -81,9 +80,9 @@ const RegisterForm = () => {
               />
             </div>
             <br />
-            <div className="w-100 d-flex justify-content-start mt-4">
+            <div className="w-100 d-flex justify-content-end mt-4">
               <button
-                className="w-50 bg-black btn rounded-pill p-3 text-light"
+                className="col-4 background_gradient button_shadow border-0 btn rounded-pill p-2 text-light fs-5 fw-bold"
                 type="submit"
               >
                 Save
@@ -92,7 +91,7 @@ const RegisterForm = () => {
           </form>
         </div>
       </div>
-      <div className="w-100 leave_navbar d-xxl-flex justify-content-center p-4 text-light d-none">
+      <div className="col-6 d-xl-flex justify-content-center p-4 text-light d-none">
         <div>
           <Image src={study} alt="edit profile page image" />
         </div>

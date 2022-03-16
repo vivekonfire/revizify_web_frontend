@@ -23,7 +23,7 @@ const Deck = ({ name, energy, card, display }) => {
         return <Cards name={name} />;
       }}
       className="col-3 p-3 bg-black bg-opacity-50 rounded-sm m-1 pointer_cursor"
-      // style={{ height: "115px", width: "165px" }}
+      style={{ height: "115px", minWidth: "165px", width: "165px" }}
     >
       <h6 className="text-center">{name}</h6>
       {display !== false && (
@@ -44,7 +44,7 @@ const Deck = ({ name, energy, card, display }) => {
 
 const CourseDetials = () => {
   return (
-    <div className="col-8 me-5 text-white">
+    <div className="col-xl-8 col-12 me-5 text-white">
       <div className="fs-5 fw-bold">
         Eu et officia eiusmod commodo exercitation occaecat ad anim ipsum.
         Aliquip quis ut reprehenderit aliquip commodo in laboris sunt fugiat non
@@ -61,10 +61,15 @@ const CourseDetials = () => {
         </div>
       </div>
       <div className="d-xxl-flex ">
-        <div className="w-100 p-2">
+        <div className="w-100 p-2 d-flex justify-content-center">
           <div
             className="col d-flex justify-content-center my-3"
-            style={{ height: "250px", width: "520px" }}
+            style={{
+              minHeight: "153px",
+              minWidth: "339px",
+              maxWidth: "518px",
+              maxHeight: "246px",
+            }}
           >
             <div className="w-100 bg-black bg-opacity-50 p-3 d-flex flex-column justify-content-between rounded-sm">
               <div className="d-flex">
@@ -78,7 +83,7 @@ const CourseDetials = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-between">
-                <div className="d-flex justify-content-evenly align-items-center">
+                <div className="d-flex justify-content-evenly align-items-center mt-3">
                   <Image src={profileImage} alt="profile image" />
                   <p className="small_text">Shahi Shekhar</p>
                 </div>
@@ -104,7 +109,7 @@ const CourseDetials = () => {
             </div>
           </div>
         </div>
-        <div className="w-100 p-2 row row-cols-3 my-3 ">
+        <div className="w-100 p-2 row row-cols-3 my-3 justify-content-center">
           <Deck name={"NEW"} energy="100" card="100" />
           <Deck name={"1st Revision"} energy="100" card="100" />
           <Deck name={"2nd Revision"} energy="100" card="100" />

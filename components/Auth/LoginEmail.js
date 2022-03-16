@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/logo_border.png";
 
-const Register = () => {
+const LoginEmail = () => {
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center text-light flex-column">
       <div className="d-flex">
@@ -34,7 +34,7 @@ const Register = () => {
               type="submit"
               className="btn rounded-pill background_gradient button_shadow border-0 text-light col-4 p-2 fs-5 "
             >
-              <Link href="/registerForm">
+              <Link href="/loginPassword">
                 <div>Proceed</div>
               </Link>
             </button>
@@ -45,4 +45,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default LoginEmail;

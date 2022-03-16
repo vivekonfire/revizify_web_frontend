@@ -11,13 +11,13 @@ const Card = () => {
   );
 };
 
-const Cards = () => {
+const Cards = ({ text }) => {
   return (
-    <div className="col-3 text-white">
+    <div className="col-xl-3 col-lg-6 col-md-9 col-12 text-white">
       <div className="d-flex justify-content-end align-items-center gap-5">
-        <button className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center">
+        <button className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center border-0">
           <HiDownload />
-          Download
+          {text}
         </button>
         <BsBookmark />
         <BsThreeDots />
