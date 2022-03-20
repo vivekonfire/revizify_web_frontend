@@ -29,9 +29,9 @@ const NavBar = () => {
           <FiMenu className="fs-2" />
         </div>
         <Link href="/">
-          <div className="d-flex p-2 bg-light bg-opacity-25 border border-2 border-light rounded-3 align-items-center pointer_cursor">
+          <div className="d-flex p-2 bg-light bg-opacity-25 border border-2 border-light rounded-3 align-items-center pointer_cursor ">
             <Image src={logo} alt="revizify logo image" />
-            <div className="fs-6">Revizify</div>
+            <div className="fs-5 fw-bold ps-2">Revizify</div>
           </div>
         </Link>
       </button>
@@ -41,7 +41,7 @@ const NavBar = () => {
             <Link href="/">
               <div className="d-flex p-2 bg-light bg-opacity-25 border border-2 border-light rounded-3 align-items-center pointer_cursor">
                 <Image src={logo} alt="revizify logo image" />
-                <div className="fs-6">Revizify</div>
+                <div className="fs-5 fw-bold ps-2">Revizify</div>
               </div>
             </Link>
           </li>
@@ -76,22 +76,22 @@ const NavBar = () => {
         <div className="nav-item d-md-none text-white">
           <BiSearch className="fs-3 pointer_cursor" />
         </div>
-        <Link href="/loginEmail">
+        {/* <Link href="/loginEmail">
           <div className="d-flex align-items-center">
             <AiOutlineLogin className="fs-3 pointer_cursor" />
           </div>
-        </Link>
-        <Link href="/register">
+        </Link> */}
+        {/* <Link href="/register">
           <button className="rounded-pill py-2 px-4 background_gradient button_shadow border-0 text-white ">
-            Sign Up
+            Log In/Sign Up
           </button>
-        </Link>
-        {/* <Image
+        </Link> */}
+        <Image
           src={profile_image}
           alt="profile image"
           className="pointer_cursor"
           onClick={handleProfileDropDown}
-        /> */}
+        />
       </div>
       {profileDropDown === true && <ProfileDropDown />}
     </nav>

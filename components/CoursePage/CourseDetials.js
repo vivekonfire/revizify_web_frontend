@@ -14,6 +14,7 @@ import { HiDownload } from "react-icons/hi";
 import { FaShareAlt } from "react-icons/fa";
 import cards from "../../public/cards.svg";
 import Cards from "./Cards";
+import Link from "next/link";
 
 const Deck = ({ name, energy, card, display }) => {
   return (
@@ -21,10 +22,10 @@ const Deck = ({ name, energy, card, display }) => {
       onClick={() => {
         return <Cards name={name} />;
       }}
-      className="col-3 p-3 bg-black bg-opacity-50 rounded-sm m-1 pointer_cursor"
+      className="col-3 p-3 bg-black bg-opacity-50 rounded-sm m-1 pointer_cursor "
       style={{ height: "115px", minWidth: "165px", width: "165px" }}
     >
-      <h6 className="text-center">{name}</h6>
+      <h6 className="text-center ">{name}</h6>
       {display !== false && (
         <div className="d-flex justify-content-evenly align-items-center my-3">
           <div className="w-100">
@@ -43,14 +44,15 @@ const Deck = ({ name, energy, card, display }) => {
 
 const CourseDetials = () => {
   return (
-    <div className="col-xl-8 col-12 me-5 text-white">
-      <div className="fs-5 fw-bold">
+    <div className="col-xl-7 col-12 me-5 text-white">
+      <p className="fs-5 fw-bold">
         Eu et officia eiusmod commodo exercitation occaecat ad anim ipsum.
         Aliquip quis ut reprehenderit aliquip commodo in laboris sunt fugiat non
         non. Anim aliquip fugiat est sunt. Labore est veniam nostrud dolore.
         Cillum do in eiusmod fugiat cupidatat labore aliqua non.
-      </div>
-      <Image src={Video} alt="Video image" />
+      </p>
+      <Image src={Video} alt="Video image" className="w-100" />
+
       <div className="d-flex justify-content-center gap-4 my-3">
         <div className="rounded-circle p-4 text-success fs-6 bg-success bg-opacity-25 d-flex justify-content-center align-items-center shadow-lg">
           <Image src={tick} alt="tick image" width="36px" height="36px" />
@@ -82,10 +84,12 @@ const CourseDetials = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-between">
-                <div className="d-flex justify-content-evenly align-items-center mt-3">
-                  <Image src={profileImage} alt="profile image" />
-                  <p className="small_text">Shahi Shekhar</p>
-                </div>
+                <Link href="/profile">
+                  <div className="d-flex justify-content-evenly align-items-center mt-3 pointer_cursor">
+                    <Image src={profileImage} alt="profile image" />
+                    <p className="small_text">Shahi Shekhar</p>
+                  </div>
+                </Link>
               </div>
               <div className="d-flex justify-content-around">
                 <div className="d-flex justify-content-center align-items-center rounded-circle course_option bg-black">

@@ -2,5 +2,6 @@
   background-image: url(../public/Rectangle.png);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  /* background-position: center; */
+  height: 100%;
 }

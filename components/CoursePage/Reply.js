@@ -19,9 +19,7 @@ const Reply = () => {
           onClick={() => {
             setReply(!reply);
           }}
-        >
-          <h5>Reply</h5>
-        </div>
+        ></div>
       </div>
     </div>
   );

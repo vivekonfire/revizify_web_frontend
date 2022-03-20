@@ -13,7 +13,7 @@ const Card = () => {
 
 const Cards = ({ text }) => {
   return (
-    <div className="col-xl-3 col-lg-6 col-md-9 col-12 text-white">
+    <div className="col-xl-4 col-lg-6 col-md-9 col-12 text-white mx-auto">
       <div className="d-flex justify-content-end align-items-center gap-5">
         <button className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center border-0">
           <HiDownload />
@@ -22,7 +22,7 @@ const Cards = ({ text }) => {
         <BsBookmark />
         <BsThreeDots />
       </div>
-      <div className="my-4 mx-2 overflow-auto" style={{ height: "1000px" }}>
+      <div className="my-4 mx-2 overflow-auto" style={{ height: "700px" }}>
         <Card />
         <Card />
         <Card />
