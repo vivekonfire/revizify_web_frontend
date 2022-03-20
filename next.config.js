@@ -5,7 +5,8 @@
 
 // module.exports = nextConfig;
 
-// module.exports = {
+module.exports = {
 //   eslint: { ignoreDuringBuilds: true },
-//   // your other settings here ...
-// };
+  // your other settings here ...
+  swcMinify: false,
+};
