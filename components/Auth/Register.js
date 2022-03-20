@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/logo_border.png";
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center text-light flex-column">
       <div className="d-flex">
@@ -21,20 +23,26 @@ const Register = () => {
             htmlFor="email"
             className="fs-4 fw-bold col-12 text-md-start text-center mb-5"
           >
-            Proceed to LogIN
+            Proceed to SignUP
           </label>
           <input
-            className="form-control rounded-pill border-0 bg-black bg-opacity-25 p-3 mb-4 col-12"
+            className="form-control rounded-pill border-0 bg-black bg-opacity-25 p-3 mb-4 col-12 text-white"
             name="email"
             type="text"
+            value={email}
             placeholder="Phone number, username or email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <div className="d-flex justify-content-md-end justify-content-center">
             <button
               type="submit"
               className="btn rounded-pill background_gradient button_shadow border-0 text-light col-4 p-2 fs-5 "
             >
-              <Link href="/registerForm">
+              <Link
+                href={{ pathname: "/registerForm", query: { email: email } }}
+              >
                 <div>Proceed</div>
               </Link>
             </button>

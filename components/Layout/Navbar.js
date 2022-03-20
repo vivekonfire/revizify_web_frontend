@@ -6,6 +6,7 @@ import search_icon from "../../public/search-icon.png";
 import profile_image from "../../public/unsplash_tAvpDE7fXgY.png";
 import { FiMenu } from "react-icons/fi";
 import { BiSearch } from "react-icons/bi";
+import { AiOutlineLogin } from "react-icons/ai";
 import ProfileDropDown from "./Navbar/ProfileDropDown";
 
 const NavBar = () => {
@@ -73,14 +74,24 @@ const NavBar = () => {
       </div>
       <div className="d-flex gap-3">
         <div className="nav-item d-md-none text-white">
-          <BiSearch className="fs-3" />
+          <BiSearch className="fs-3 pointer_cursor" />
         </div>
-        <Image
+        <Link href="/loginEmail">
+          <div className="d-flex align-items-center">
+            <AiOutlineLogin className="fs-3 pointer_cursor" />
+          </div>
+        </Link>
+        <Link href="/register">
+          <button className="rounded-pill py-2 px-4 background_gradient button_shadow border-0 text-white ">
+            Sign Up
+          </button>
+        </Link>
+        {/* <Image
           src={profile_image}
           alt="profile image"
           className="pointer_cursor"
           onClick={handleProfileDropDown}
-        />
+        /> */}
       </div>
       {profileDropDown === true && <ProfileDropDown />}
     </nav>

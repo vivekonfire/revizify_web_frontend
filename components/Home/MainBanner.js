@@ -3,7 +3,13 @@ import Image from "next/image";
 import videoimg from "../../public/video-bg.png";
 import styles from "../../styles/Home.module.css";
 
+// import { useDispatch, useSelector } from "react-redux";
+
 const MainBanner = () => {
+  // const dispatch = useDispatch();
+
+  const onClick = () => {};
+
   return (
     <div
       className={`${styles.main_banner_bg_image} position-relative d-flex justify-content-center`}
@@ -16,10 +22,13 @@ const MainBanner = () => {
               Remember Everything You Study!!
             </div>
             <div className="fs-4 z-9 col-md-9 col-12">
-              Develop a Supermemory with Revizify's revision system.
+              Develop a Supermemory with Revizify&apos;s revision system.
             </div>
             <div className="d-flex justify-content-lg-start justify-content-center">
-              <button className="btn text-light rounded-pill p-3 my-3 background_gradient button_shadow border-0 z-9 fs-4 col-lg-4 col-xl-5 col-6">
+              <button
+                className="btn text-light rounded-pill p-3 my-3 background_gradient button_shadow border-0 z-9 fs-4 col-lg-4 col-xl-5 col-6"
+                onClick={onClick}
+              >
                 Join Now
               </button>
             </div>

@@ -16,7 +16,6 @@ import cards from "../../public/cards.svg";
 import Cards from "./Cards";
 
 const Deck = ({ name, energy, card, display }) => {
-  console.log(card);
   return (
     <div
       onClick={() => {
