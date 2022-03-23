@@ -1,47 +1,56 @@
-import React from "react";
-import profile_image from "../../../public/unsplash_tAvpDE7fXgY.png";
-import Image from "next/image";
+import React, { useState } from "react";
+import ProfileOptions from "./ProfileOptions";
+import Notifications from "./Notifications";
 
 const ProfileDropDown = () => {
+  const [focus, setFocus] = useState(0);
+
   return (
     <div
       className="background_gradient rounded-sm z-10 position-absolute top-0 end-0 mx-4 overflow-hidden"
-      style={{ marginTop: "4.5rem", width: "350px", height: "420px" }}
+      style={{ marginTop: "6rem", width: "350px", height: "420px" }}
     >
       <div className="d-flex">
-        <h5 className="text-center w-100 py-4 bg-black bg-opacity-50">
-          Notifications
-        </h5>
-        <h5 className="text-center w-100 py-4 bg-black bg-opacity-50">
-          My Profile
-        </h5>
-      </div>
-      <div>
-        <ul className="my-3 p-0 mx-4">
-          <li className="border-bottom border-bottom-2 border-white py-3 d-flex align-items-center">
-            <div className="me-3 d-flex align-items-center">
-              <Image
-                src={profile_image}
-                alt="profile image"
-                className="pointer_cursor"
-              />
-            </div>
-            <div className="fs-6">Vivek Matalia</div>
-          </li>
-          <li className="border-bottom border-bottom-2 border-white py-3">
+        {focus === 0 ? (
+          <div
+            className="text-center w-100 py-4 bg-black bg-opacity-50 pointer_cursor"
+            onClick={() => {
+              setFocus(1);
+            }}
+          >
+            Notifications
+          </div>
+        ) : (
+          <div
+            className="text-center w-100 py-4 pointer_cursor fs-5"
+            onClick={() => {
+              setFocus(1);
+            }}
+          >
+            Notifications
+          </div>
+        )}
+        {focus === 1 ? (
+          <div
+            className="text-center w-100 py-4 bg-black bg-opacity-50 pointer_cursor"
+            onClick={() => {
+              setFocus(0);
+            }}
+          >
             My Profile
-          </li>
-          <li className="border-bottom border-bottom-2 border-white py-3">
-            My Downloads
-          </li>
-          <li className="border-bottom border-bottom-2 border-white py-3">
-            Change Password
-          </li>
-        </ul>
-        <button className="background_gradient button_shadow p-2 rounded-pill w-50 float-end mx-3 btn text-light">
-          Log Out
-        </button>
+          </div>
+        ) : (
+          <div
+            className="text-center w-100 py-4 pointer_cursor fs-5"
+            onClick={() => {
+              setFocus(0);
+            }}
+          >
+            My Profile
+          </div>
+        )}
       </div>
+      {focus === 0 ? <ProfileOptions /> : <Notifications />}
     </div>
   );
 };

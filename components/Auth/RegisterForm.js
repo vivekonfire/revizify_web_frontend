@@ -112,6 +112,7 @@ const RegisterForm = () => {
                 name="name"
                 type="text"
                 className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 text-white"
+                onChange={onChange}
               />
             </div>
             <div className="d-sm-flex justify-content-between mt-5">
@@ -126,6 +127,7 @@ const RegisterForm = () => {
                   className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
                   name="password"
                   type="password"
+                  onChange={onChange}
                 />
                 <BsFillEyeFill className="position-absolute top-50 end-0 mx-3 translate-middle-y" />
               </div>
@@ -141,6 +143,7 @@ const RegisterForm = () => {
                 name="phone_number"
                 type="text"
                 className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
+                onChange={onChange}
               />
             </div>
             <p className="mt-3">

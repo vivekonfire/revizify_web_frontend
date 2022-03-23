@@ -23,7 +23,7 @@ const Register = () => {
             htmlFor="email"
             className="fs-4 fw-bold col-12 text-md-start text-center mb-5"
           >
-            Proceed to SignUP
+            Proceed to Log In
           </label>
           <input
             className="form-control rounded-pill border-0 bg-black bg-opacity-25 p-3 mb-4 col-12 text-white"

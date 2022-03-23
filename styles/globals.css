@@ -79,6 +79,14 @@ button:hover {
   font-weight: 400;
 }
 
+.font_sm {
+  font-size: 0.75rem;
+}
+
+.font_xsm {
+  font-size: 0.5rem;
+}
+
 .course_option {
   width: 42px;
   height: 42px;

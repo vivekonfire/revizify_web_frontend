@@ -6,9 +6,9 @@ export const registerAction = (form) => async (dispatch) => {
     const headers = {
       ContentType: "Application/json",
     };
-    // console.log(process.env.URL);
+    console.log(form);
     const res = await axios.post(
-      "http://data.revizify.com/api/v1/user/signup",
+      `http://data.revizify.com/api/v1/user/signup`,
       form,
       { headers }
     );
