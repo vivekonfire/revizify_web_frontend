@@ -4,7 +4,7 @@ import { REGISTER } from "../types";
 export const registerAction = (form) => async (dispatch) => {
   try {
     const headers = {
-      ContentType: "Application/json",
+      "Content-Type": "Application/json",
     };
 
     const res = await axios.post(
