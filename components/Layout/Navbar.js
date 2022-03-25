@@ -81,7 +81,7 @@ const NavBar = () => {
             <AiOutlineLogin className="fs-3 pointer_cursor" />
           </div>
         </Link> */}
-        <Link href="/register">
+        <Link href="/loginEmail">
           <button className="rounded-pill py-2 px-4 background_gradient button_shadow border-0 text-white ">
             Log In/Sign Up
           </button>
