@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import man_flying from "../../public/man_flying.png";
-import { FaTruckMonster, FaUserAlt } from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
 import { BsFillEyeFill } from "react-icons/bs";
 import Link from "next/link";
-
 import { useDispatch } from "react-redux";
 import { registerAction } from "../../store/actions/authActions";
 
@@ -35,6 +34,10 @@ const RegisterForm = () => {
     e.preventDefault();
 
     dispatch(registerAction(form));
+
+    setTimeout(() => {
+      router.replace("/");
+    }, 1000);
   };
 
   return (

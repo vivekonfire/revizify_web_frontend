@@ -1,31 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../../public/logo_border.png";
-import { checkUser } from "../../store/actions/authActions";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
+import { resetPasswordEmail } from "../../store/actions/authActions";
+import { useDispatch } from "react-redux";
 
-const LoginEmail = () => {
-  const router = useRouter();
-
+const ForgotPasswordEmail = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState("");
-
-  const user_exist = useSelector((state) => state.auth.user_exist);
 
   const onClick = (e) => {
     e.preventDefault();
 
-    dispatch(checkUser({ id: data }));
-
-    // setTimeout(() => {
-    // if (user_exist) {
-    router.replace("/loginPassword");
-    // }
-    // else {
-    // router.replace(`/registerForm?email=${data}`);
-    // }
-    // }, 1000);
+    dispatch(resetPasswordEmail({ email: data }));
   };
 
   return (
@@ -48,7 +34,7 @@ const LoginEmail = () => {
             htmlFor="email"
             className="fs-4 fw-bold col-12 text-md-start text-center mb-5"
           >
-            Proceed to LogIN
+            Email Address
           </label>
           <input
             className="form-control rounded-pill border-0 bg-black bg-opacity-25 p-3 mb-4 col-12 text-white"
@@ -74,4 +60,4 @@ const LoginEmail = () => {
   );
 };
 
-export default LoginEmail;
+export default ForgotPasswordEmail;

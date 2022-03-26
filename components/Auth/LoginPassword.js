@@ -61,7 +61,7 @@ const LoginPassword = () => {
             <BsFillEyeFill className="position-absolute top-50 end-0 mx-3 translate-middle-y" />
           </div>
           <div className="d-flex justify-content-end fw-lighter pointer_cursor">
-            <Link href="/forgotpassword">
+            <Link href="/forgotpasswordemail">
               <div>Forgot Password?</div>
             </Link>
           </div>

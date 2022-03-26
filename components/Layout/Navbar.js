@@ -8,8 +8,15 @@ import { FiMenu } from "react-icons/fi";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineLogin } from "react-icons/ai";
 import ProfileDropDown from "./Navbar/ProfileDropDown";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
+  const token = useSelector((state) => state.auth.valid_token);
+
+  useEffect(() => {
+    if (!token) setProfileDropDown(false);
+  }, [token]);
+
   const [profileDropDown, setProfileDropDown] = useState(false);
 
   const handleProfileDropDown = () => {
@@ -76,22 +83,20 @@ const NavBar = () => {
         <div className="nav-item d-md-none text-white">
           <BiSearch className="fs-3 pointer_cursor" />
         </div>
-        {/* <Link href="/loginEmail">
-          <div className="d-flex align-items-center">
-            <AiOutlineLogin className="fs-3 pointer_cursor" />
-          </div>
-        </Link> */}
-        <Link href="/loginEmail">
-          <button className="rounded-pill py-2 px-4 background_gradient button_shadow border-0 text-white ">
-            Log In/Sign Up
-          </button>
-        </Link>
-        <Image
-          src={profile_image}
-          alt="profile image"
-          className="pointer_cursor"
-          onClick={handleProfileDropDown}
-        />
+        {!token ? (
+          <Link href="/loginEmail">
+            <button className="rounded-pill py-2 px-4 background_gradient button_shadow border-0 text-white ">
+              Log In/Sign Up
+            </button>
+          </Link>
+        ) : (
+          <Image
+            src={profile_image}
+            alt="profile image"
+            className="pointer_cursor"
+            onClick={handleProfileDropDown}
+          />
+        )}
       </div>
       {profileDropDown === true && <ProfileDropDown />}
     </nav>

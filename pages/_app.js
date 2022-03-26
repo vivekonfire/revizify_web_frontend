@@ -11,6 +11,7 @@ import { createWrapper } from "next-redux-wrapper";
 import rootReducer from "../store/index";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
+import { validateToken } from "../store/actions/authActions";
 
 const middleware = [thunk];
 
@@ -25,7 +26,7 @@ function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("vivek");
+    dispatch(validateToken(refreshToken, token));
   }, []);
 
   return (
