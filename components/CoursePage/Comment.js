@@ -28,18 +28,6 @@ const Comment = () => {
           <h5>Reply</h5>
         </div>
       </div>
-      {reply && (
-        <div className="my-5 d-flex flex-column align-items-end">
-          <input
-            type="text"
-            className="border-top-0 border-start-0 border-end-0 border-bottom-2 border-white bg-transparent p-2 col-12 my-4 text-white"
-            placeholder="Write your reply here..."
-          />
-          <button className="col-3 btn border-0 background_gradient button_shadow rounded-pill text-white p-2 fs-6">
-            Post
-          </button>
-        </div>
-      )}
       {replyDropDown ? (
         <div
           className="my-4 fs-5 pointer_cursor"
@@ -63,6 +51,18 @@ const Comment = () => {
         <div className="d-flex flex-column justify-content-start align-items-end">
           <Reply />
           <Reply />
+        </div>
+      )}
+      {reply && (
+        <div className="my-5 d-flex flex-column align-items-end">
+          <input
+            type="text"
+            className="border-top-0 border-start-0 border-end-0 border-bottom-2 border-white bg-transparent p-2 col-12 my-4 text-white"
+            placeholder="Write your reply here..."
+          />
+          <button className="col-3 btn border-0 background_gradient button_shadow rounded-pill text-white p-2 fs-6">
+            Post
+          </button>
         </div>
       )}
     </div>

@@ -1,14 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import robot from "../../public/robot.png";
 import { BsCardImage } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addCourse } from "../../store/actions/courseAction";
 
 const CreateCourse = () => {
+  const dispatch = useDispatch();
+
+  const [courseName, setCourseName] = useState("");
+  const [aboutCourse, setAboutCourse] = useState("");
+  const [selectedImageFile, setSelectedImageFile] = useState(null);
+  const [selectedImage, setSelectedImage] = useState("");
+
+  const onImagePick = (e) => {
+    const image = e.target.files[0];
+    if (image) {
+      const result = URL.createObjectURL(image);
+      console.log(image);
+      setSelectedImageFile(image);
+      setSelectedImage(result);
+    }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    let formdata = new FormData();
+    formdata.append("course_img", selectedImageFile);
+    formdata.append("course_name", courseName);
+    formdata.append("course_desc", aboutCourse);
+
+    dispatch(addCourse(formdata));
+  };
+
   return (
     <div className="min-vh-100 d-lg-flex leave_navbar">
       <div className="container d-flex justify-content-center p-4 text-light ">
         <div className="bg-black bg-opacity-25 rounded-md h-100 mx-xxl-5 mx-xl-0 mx-lg-5 mx-sm-0 p-5 shadow-lg">
-          <form>
+          <form onSubmit={onSubmit}>
             <h1 className="mb-5">Create New Course</h1>
             <div>
               <label
@@ -22,7 +52,10 @@ const CreateCourse = () => {
               <input
                 name="name"
                 type="text"
-                className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3"
+                className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
+                onChange={(e) => {
+                  setCourseName(e.target.value);
+                }}
               />
             </div>
             <div>
@@ -34,8 +67,11 @@ const CreateCourse = () => {
                 <div className="fs-6">(0/500)</div>
               </label>
               <textarea
-                className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25"
+                className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25 text-white"
                 placeholder="Enter here"
+                onChange={(e) => {
+                  setAboutCourse(e.target.value);
+                }}
               />
               a small description of what users get to study/revise when they
               download your course
@@ -47,17 +83,29 @@ const CreateCourse = () => {
                 <br />
                 <div className=" d-xxl-flex justify-content-center align-items-stretch">
                   <div className="d-flex justify-content-center align-items-center col-xxl-6 col-12">
-                    <div
-                      className="bg-black bg-opacity-25 rounded-sm pointer_cursor col-6 d-flex justify-content-center align-items-center fs-1"
-                      style={{
-                        minHeight: "126px",
-                        minWidth: "223px",
-                        maxHeight: "126px",
-                        maxWidth: "223px",
-                      }}
-                    >
-                      <BsCardImage />
-                    </div>
+                    {selectedImage ? (
+                      <div className="col-8 d-flex justify-content-center">
+                        <Image
+                          src={selectedImage}
+                          alt="course image"
+                          width={223}
+                          height={126}
+                          className="rounded-sm"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className="bg-black bg-opacity-25 rounded-sm pointer_cursor col-6 d-flex justify-content-center align-items-center fs-1"
+                        style={{
+                          minHeight: "126px",
+                          minWidth: "223px",
+                          maxHeight: "126px",
+                          maxWidth: "223px",
+                        }}
+                      >
+                        <BsCardImage />
+                      </div>
+                    )}
                   </div>
                   <p className="fs-6 col-xxl-6 p-2 align-self-end">
                     Select or upload a picture that shows whats in your course.
@@ -73,6 +121,7 @@ const CreateCourse = () => {
                 accept="image/*"
                 id="thumbnail"
                 className="d-none"
+                onChange={onImagePick}
               />
             </div>
 
@@ -81,6 +130,7 @@ const CreateCourse = () => {
               <button
                 className="col-4 background_gradient button_shadow border-0 btn rounded-pill p-3 text-light fs-4 fw-bold"
                 type="submit"
+                onClick={onSubmit}
               >
                 Save
               </button>

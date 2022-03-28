@@ -15,7 +15,9 @@ const VerifyQuestions = () => {
         <p className="fs-6 pointer_cursor">
           What to do after submitting the verification form?
         </p>
-        <Image src={person_jumping} alt="person jumping in joy" />
+        <div className="position-fixed bottom-0 end-0">
+          <Image src={person_jumping} alt="person jumping in joy" />
+        </div>
       </div>
     </div>
   );

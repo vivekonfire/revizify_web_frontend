@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import image from "../../public/unsplash_ucUB9wxkPgY.png";
@@ -7,8 +7,11 @@ import { BsThreeDots, BsHandThumbsUp, BsLightningFill } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import { FaShareAlt } from "react-icons/fa";
 import cards from "../../public/cards.svg";
+import { MoreOption } from "./EachCourse/MoreOptions";
 
-const EachCourse = ({ keey }) => {
+const EachCourse = ({ keey, course, name }) => {
+  const [moreOption, setMoreOption] = useState(false);
+
   const Loader = ({ src }) => {
     return `https://picsum.photos/300/200?random=${src}`;
   };
@@ -16,6 +19,15 @@ const EachCourse = ({ keey }) => {
   const myLoader = ({ src, width, quality }) => {
     return `https://picsum.photos/${width}/200?random=${src}`;
   };
+
+  const {
+    course_name,
+    course_img,
+    num_of_downloads,
+    num_of_likes,
+    num_of_cards,
+    created_at,
+  } = course;
 
   return (
     <Link href="/viewCourse">
@@ -44,20 +56,18 @@ const EachCourse = ({ keey }) => {
               <div className="d-flex align-items-center justify-content-center">
                 <Image src={cards} alt="Image of cards" />
               </div>
-              <p className="p-0 m-0">100</p>
+              <p className="p-0 m-0">{num_of_cards}</p>
             </div>
           </div>
-          <div className="fs-6 m-2">
-            Pariatur cillum sit sunt sint sit deserunt nisi consectetur ipsum.
-          </div>
+          <div className="fs-6 m-2">{course_name}</div>
           <div className="d-flex justify-content-between">
             <div className="d-flex justify-content-evenly align-items-center">
               <Image src={profileImage} alt="profile image" />
               <Link href="/profile">
-                <p className="small_text pointer_cursor">Shahi Shekhar</p>
+                <p className="small_text pointer_cursor">{name}</p>
               </Link>
             </div>
-            <p className="small_text my-auto">Published - 17/09/22</p>
+            <p className="small_text my-auto">Published - {created_at}</p>
           </div>
           <div className="d-flex justify-content-around">
             <div className="d-flex justify-content-center align-items-center bg-black rounded-circle course_option">
@@ -69,7 +79,12 @@ const EachCourse = ({ keey }) => {
             <div className="d-flex justify-content-center align-items-center  rounded-circle course_option">
               <HiDownload />
             </div>
-            <div className="d-flex justify-content-center align-items-center  rounded-circle course_option">
+            <div
+              className="d-flex justify-content-center align-items-center  rounded-circle course_option"
+              onClick={() => {
+                setMoreOption(true);
+              }}
+            >
               <BsThreeDots />
             </div>
           </div>

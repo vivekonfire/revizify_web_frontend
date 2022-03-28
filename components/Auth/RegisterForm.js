@@ -46,7 +46,7 @@ const RegisterForm = () => {
         <div className="bg-black bg-opacity-25 rounded-md h-100 mx-xxl-5 mx-xl-0 mx-lg-5 mx-sm-0 p-4 p-md-5 shadow-lg">
           <form onSubmit={onSubmit}>
             <h1 className="mb-5">Register</h1>
-            <div>
+            {/* <div>
               <label htmlFor="image" className="pt-4 fd-5">
                 Upload Profile Picture
                 <br />
@@ -63,7 +63,7 @@ const RegisterForm = () => {
                 id="image"
                 style={{ display: "none" }}
               />
-            </div>
+            </div> */}
             <div className="d-sm-flex justify-content-between mt-5">
               <label
                 htmlFor="email"

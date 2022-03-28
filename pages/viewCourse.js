@@ -8,7 +8,7 @@ const ViewCourse = () => {
     <div className="leave_navbar mx-sm-5 mx-1 min-vh-100">
       <div className="d-xl-flex justify-content-between p-0">
         <CourseDetails />
-        <Cards text="Download" />
+        <Cards text="Download" className="position-relative" />
       </div>
       <Comments />
     </div>

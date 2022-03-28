@@ -1,0 +1,6 @@
+.is_sticky {
+  position: fixed;
+  top: 7rem;
+  right: 5.5rem;
+  height: 700px;
+}
