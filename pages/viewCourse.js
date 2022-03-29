@@ -1,6 +1,6 @@
 import React from "react";
 import CourseDetails from "../components/CoursePage/CourseDetials";
-import Cards from "../components/CoursePage/Cards";
+import DownloadCards from "../components/CoursePage/DownloadCards";
 import Comments from "../components/CoursePage/CommentList";
 
 const ViewCourse = () => {
@@ -8,7 +8,7 @@ const ViewCourse = () => {
     <div className="leave_navbar mx-sm-5 mx-1 min-vh-100">
       <div className="d-xl-flex justify-content-between p-0">
         <CourseDetails />
-        <Cards text="Download" className="position-relative" />
+        <DownloadCards className="position-relative" />
       </div>
       <Comments />
     </div>

@@ -16,7 +16,7 @@ const ShowCourse = () => {
   }, []);
 
   return (
-    <div className="text-light leave_navbar mx-5">
+    <div className="text-light leave_navbar mx-5 min-vh-100">
       <div className="my-5 d-lg-flex flex-row-reverse">
         <div className="d-flex w-100 justify-content-end py-2">
           <button className="background_gradient button_shadow p-2 btn rounded-pill text-light">

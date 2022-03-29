@@ -70,7 +70,7 @@ const CourseDetials = () => {
 
   return (
     <div className="col-xl-7 col-12 me-5 text-white">
-      <p className="fs-5 fw-bold">{course_desc}</p>
+      <p className="fs-5 fw-bold"></p>
       <Image src={Video} alt="Video image" className="w-100" />
 
       <div className="d-flex justify-content-center gap-4 my-3">
