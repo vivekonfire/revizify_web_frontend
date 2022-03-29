@@ -8,14 +8,14 @@ const download = () => {
         <div className="fs-1 fw-bold w-100">Courses Downloaded (25)</div>
       </div>
       <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 justify-content-evenly">
+        {/* <EachCourse />
         <EachCourse />
         <EachCourse />
         <EachCourse />
         <EachCourse />
         <EachCourse />
         <EachCourse />
-        <EachCourse />
-        <EachCourse />
+        <EachCourse /> */}
       </div>
     </div>
   );
