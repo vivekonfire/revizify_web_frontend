@@ -17,7 +17,7 @@ const ExploreCourses = () => {
     <div className="text-light m-5">
       <div className="fs-1 fw-bold my-5">Explore Course</div>
       <div className="row row-cols-6 row-cols-sm-4 row-cols-md-3 justify-content-evenly">
-        {explore?.results.length !== 0 &&
+        {explore?.count > 0 &&
           explore.results.map((course, index) => {
             return (
               <EachCourse
