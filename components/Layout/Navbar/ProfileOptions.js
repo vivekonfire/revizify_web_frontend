@@ -1,5 +1,5 @@
 import React from "react";
-import profile_image from "../../../public/unsplash_tAvpDE7fXgY.png";
+import { FaUserCircle } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
@@ -17,11 +17,7 @@ const ProfileOptions = () => {
       <ul className="my-3 p-0 mx-4">
         <li className="border-bottom border-bottom-2 border-white py-3 d-flex align-items-center">
           <div className="me-3 d-flex align-items-center">
-            <Image
-              src={profile_image}
-              alt="profile image"
-              className="pointer_cursor"
-            />
+            <FaUserCircle alt="profile image" className="pointer_cursor fs-3" />
           </div>
           <div className="fs-6">Vivek Matalia</div>
         </li>

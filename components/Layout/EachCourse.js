@@ -9,7 +9,7 @@ import {
   BsLightningFill,
 } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
-import { FaShareAlt } from "react-icons/fa";
+import { FaShareAlt, FaUserCircle } from "react-icons/fa";
 import cards from "../../public/cards.svg";
 import MoreOption from "./EachCourse/MoreOptions";
 import { likeCourse, removeLikeCourse } from "../../store/actions/courseAction";
@@ -33,6 +33,7 @@ const EachCourse = ({ keey, course, name }) => {
     num_of_likes,
     num_of_cards,
     created_at,
+    user_name,
   } = course;
 
   const likeClick = () => {
@@ -73,12 +74,16 @@ const EachCourse = ({ keey, course, name }) => {
         <div className="fs-6 m-2">{course_name}</div>
         <div className="d-flex justify-content-between">
           <div className="d-flex justify-content-evenly align-items-center">
-            <Image src={profileImage} alt="profile image" />
+            <FaUserCircle />
             <Link href="/profile">
-              <p className="small_text pointer_cursor">{name}</p>
+              <p className="small_text pointer_cursor">
+                {user_name === undefined ? name : user_name}
+              </p>
             </Link>
           </div>
-          <p className="small_text my-auto">Published - {created_at}</p>
+          {created_at !== undefined && (
+            <p className="small_text my-auto">Published - {created_at}</p>
+          )}
         </div>
         <div className="d-flex justify-content-around">
           <div className="d-flex justify-content-center align-items-center bg-black rounded-circle course_option">

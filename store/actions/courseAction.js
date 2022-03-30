@@ -202,3 +202,15 @@ export const getDownloadedCourses = () => async (dispatch) => {
     console.error(err);
   }
 };
+
+export const exploreCourse = () => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      "http://data.revizify.com/api/v1/courses/explore_course"
+    );
+
+    dispatch({ type: "EXPLORE_COURSE", payload: res.data });
+  } catch (error) {
+    console.error(error);
+  }
+};

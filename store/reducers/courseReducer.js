@@ -1,6 +1,7 @@
 const initialState = {
   courses: null,
   course: [],
+  explore: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         courses: action.payload,
+      }
+    case "EXPLORE_COURSE":
+      return {
+        ...state,
+        explore: action.payload,
       };
     default:
       return state;
