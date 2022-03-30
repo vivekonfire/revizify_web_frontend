@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo-nav.png";
 import search_icon from "../../public/search-icon.png";
-import profile_image from "../../public/unsplash_tAvpDE7fXgY.png";
 import { FiMenu } from "react-icons/fi";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineLogin } from "react-icons/ai";
+import { FaUserCircle } from "react-icons/fa";
 import ProfileDropDown from "./Navbar/ProfileDropDown";
 import { useSelector } from "react-redux";
 
@@ -85,15 +85,11 @@ const NavBar = () => {
         </div>
         {!token ? (
           <Link href="/loginEmail">
-            <button className="rounded-pill py-2 px-4 background_gradient button_shadow border-0 text-white ">
-              Log In/Sign Up
-            </button>
+            <AiOutlineLogin className="pointer_cursor fs-3" />
           </Link>
         ) : (
-          <Image
-            src={profile_image}
-            alt="profile image"
-            className="pointer_cursor"
+          <FaUserCircle
+            className="pointer_cursor fs-3"
             onClick={handleProfileDropDown}
           />
         )}
