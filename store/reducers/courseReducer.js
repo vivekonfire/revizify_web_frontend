@@ -15,6 +15,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         course: action.payload,
       };
+    case "GET_DOWNLOAD_COURSES":
+      return {
+        ...state,
+        courses: action.payload,
+      };
     default:
       return state;
   }
