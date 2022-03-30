@@ -3,7 +3,7 @@ import Image from "next/image";
 import profile_image from "../../public/profile_image.png";
 import styles from "../../styles/Profile.module.css";
 
-const ProfileDetails = () => {
+const ProfileDetails = ({ name, user_name, user_bio }) => {
   return (
     <div
       className={
@@ -17,16 +17,9 @@ const ProfileDetails = () => {
           <Image src={profile_image} alt="profile image" />
         </div>
         <div className="col-lg-8 my-auto z-9">
-          <div className="fs-3">Shashi Shekhar</div>
-          <div className="fs-6">@shashi527</div>
-          <div className="fs-6 mt-4">
-            Ut tempor occaecat tempor velit ut. Eiusmod incididunt quis non
-            occaecat veniam. Proident aliqua aliquip ut id quis non amet labore
-            occaecat mollit. Minim aliqua cillum reprehenderit est. Ipsum
-            ullamco dolor tempor in in amet proident nulla do nulla quis officia
-            elit consequat. Exercitation nisi commodo fugiat amet adipisicing ad
-            irure minim quis Lorem proident dolor id.
-          </div>
+          <div className="fs-3">{name}</div>
+          <div className="fs-6">@{user_name}</div>
+          <div className="fs-6 mt-4">{user_bio}</div>
         </div>
       </div>
     </div>

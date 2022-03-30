@@ -1,13 +1,11 @@
 import React from "react";
-import ProfileDetails from "../components/Profile/ProfileDetails";
-import CreatedCourses from "../components/Profile/CreatedCourses";
+import Profile from "../components/Profile/Profile";
 
 const profile = () => {
   return (
-    <div className="min-vh-100">
-      <ProfileDetails />
-      <CreatedCourses />
-    </div>
+    <>
+      <Profile />
+    </>
   );
 };
 

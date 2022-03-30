@@ -74,12 +74,16 @@ const EachCourse = ({ keey, course, name }) => {
         <div className="fs-6 m-2">{course_name}</div>
         <div className="d-flex justify-content-between">
           <div className="d-flex justify-content-evenly align-items-center">
-            <FaUserCircle />
-            <Link href="/profile">
-              <p className="small_text pointer_cursor">
-                {user_name === undefined ? name : user_name}
-              </p>
-            </Link>
+            <FaUserCircle className="fs-5" />
+            {name !== undefined ? (
+              <Link href={`/profile?name=${name}`}>
+                <p className="small_text pointer_cursor">{name}</p>
+              </Link>
+            ) : (
+              <Link href={`/profile?name=${user_name}`}>
+                <p className="small_text pointer_cursor">{user_name}</p>
+              </Link>
+            )}
           </div>
           {created_at !== undefined && (
             <p className="small_text my-auto">Published - {created_at}</p>
