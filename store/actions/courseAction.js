@@ -162,6 +162,47 @@ export const removeLikeCourse = (id) => async (dispatch) => {
   }
 };
 
+export const downloadCourse = (form) => async (dispatch) => {
+  try {
+    const token = Cookies.get("token");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `JWT ${token}`,
+    };
+
+    await axios.post(
+      "http://data.revizify.com/api/v1/courses/download_course",
+      form,
+      { headers }
+    );
+
+    dispatch(getDownloadedCourses());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getDownloadedCourses = () => async (dispatch) => {
+  try {
+    const token = Cookies.get("token");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `JWT ${token}`,
+    };
+
+    const res = await axios.get(
+      "http://data.revizify.com/api/v1/courses/download_course",
+      { headers }
+    );
+
+    dispatch({ type: "GET_DOWNLOAD_COURSES", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const exploreCourse = () => async (dispatch) => {
   try {
     const res = await axios.get(
