@@ -3,13 +3,17 @@ import { BiArchiveIn } from "react-icons/bi";
 import { AiOutlineDownload, AiFillEdit } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { archiveCourse } from "../../../store/actions/courseAction";
+import { deleteDownloadCourses } from "../../../store/actions/courseAction";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 const MoreOptions = ({ user, course_id }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const onClick = () => {
-    dispatch(archiveCourse(course_id));
+    if (router.pathname === "/create") dispatch(archiveCourse(course_id));
+    else dispatch(deleteDownloadCourses(course_id));
   };
 
   return (
@@ -33,7 +37,7 @@ const MoreOptions = ({ user, course_id }) => {
       ) : (
         <div className="text-white">
           <Link href={`/editCourse?id=${course_id}`}>
-            <div className="d-flex justify-content-start align-items-center gap-2">
+            <div className="d-flex justify-content-start align-items-center gap-2 pointer_cursor">
               <AiFillEdit />
               <p className="p-0 m-0">Edit</p>
             </div>

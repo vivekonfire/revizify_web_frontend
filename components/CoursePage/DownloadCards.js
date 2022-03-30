@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { BsThreeDots, BsBookmark, BsThreeDotsVertical } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import styles from "../../styles/Cards.module.css";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { downloadCourse } from "../../store/actions/courseAction";
 
 const Card = () => {
   return (
@@ -13,6 +16,19 @@ const Card = () => {
 };
 
 const DownloadCards = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const DownloadClick = (e) => {
+    e.preventDefault();
+
+    const form = {
+      course_id: router.query.id,
+    };
+
+    dispatch(downloadCourse(form));
+  };
+
   useEffect(() => {
     let elementId = document.getElementById("card");
     console.log(elementId);
@@ -32,7 +48,10 @@ const DownloadCards = () => {
       id="card"
     >
       <div className="d-flex justify-content-end align-items-center gap-5">
-        <button className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center border-0">
+        <button
+          className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center border-0"
+          onClick={DownloadClick}
+        >
           <HiDownload />
           Download
         </button>
