@@ -162,7 +162,7 @@ export const removeLikeCourse = (id) => async (dispatch) => {
   }
 };
 
-export const downloadCourse = (form) => async (dispatch) => {
+export const downloadCourse = (form) => async () => {
   try {
     const token = Cookies.get("token");
 
@@ -176,8 +176,6 @@ export const downloadCourse = (form) => async (dispatch) => {
       form,
       { headers }
     );
-
-    dispatch(getDownloadedCourses());
   } catch (err) {
     console.error(err);
   }
@@ -198,6 +196,30 @@ export const getDownloadedCourses = () => async (dispatch) => {
     );
 
     dispatch({ type: "GET_DOWNLOAD_COURSES", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const deleteDownloadCourses = (id) => async (dispatch) => {
+  try {
+    const token = Cookies.get("token");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `JWT ${token}`,
+    };
+
+    const data = {
+      course_id: id,
+    };
+
+    await axios.delete(
+      "http://data.revizify.com/api/v1/courses/download_course",
+      { headers, data }
+    );
+
+    dispatch(getDownloadedCourses());
   } catch (err) {
     console.error(err);
   }
