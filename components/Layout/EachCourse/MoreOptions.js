@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiArchiveIn } from "react-icons/bi";
 import { AiOutlineDownload, AiFillEdit } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { archiveCourse } from "../../../store/actions/courseAction";
+import { archiveCourse, restoreArchiveCourses } from "../../../store/actions/courseAction";
 import { deleteDownloadCourses } from "../../../store/actions/courseAction";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -10,9 +10,10 @@ import Link from "next/link";
 const MoreOptions = ({ user, course_id }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const pathname = router.pathname;
   const onClick = () => {
     if (router.pathname === "/create") dispatch(archiveCourse(course_id));
+    else if (router.pathname === "/archive") dispatch(restoreArchiveCourses(course_id));
     else dispatch(deleteDownloadCourses(course_id));
   };
 
@@ -24,10 +25,10 @@ const MoreOptions = ({ user, course_id }) => {
           onClick={onClick}
         >
           <BiArchiveIn />
-          <p className="p-0 m-0">Archive</p>
+          <p className="p-0 m-0">{pathname=="/archive"?"Restore":"Archive"}</p>
         </div>
       </div>
-      {user ? (
+      {pathname!=="/archive" ? user ? (
         <div className="text-white">
           <div className="d-flex justify-content-start align-items-center gap-2">
             <AiOutlineDownload />
@@ -43,7 +44,7 @@ const MoreOptions = ({ user, course_id }) => {
             </div>
           </Link>
         </div>
-      )}
+      ):""}
     </div>
   );
 };
