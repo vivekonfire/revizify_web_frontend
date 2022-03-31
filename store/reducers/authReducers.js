@@ -53,6 +53,8 @@ const authreducer = (state = initialState, action) => {
       return {
         ...state,
         valid_token: true,
+        token: action.payload.token,
+        refreshToken: action.payload.rtoken,
       };
     case "ERROR_VALIDATE":
       return {

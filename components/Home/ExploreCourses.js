@@ -10,8 +10,7 @@ const ExploreCourses = () => {
 
   useEffect(() => {
     dispatch(exploreCourse());
-    //eslint-disable-next-line
-  });
+  }, []);
 
   return (
     <div className="text-light m-5">

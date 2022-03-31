@@ -5,12 +5,21 @@ import Image from "next/image";
 import logo from "../../public/logo_border.png";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../store/actions/authActions";
+import { resetPasswordEmail } from "../../store/actions/authActions";
+import { useRouter } from "next/router";
 
 const LoginPassword = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const email = useSelector((state) => state.auth.user.email);
 
   const [password, setPassword] = useState(null);
+
+  const onForgot = (e) => {
+    e.preventDefault();
+    alert("Check your mail");
+    dispatch(resetPasswordEmail({ email: router.query.email }));
+  };
 
   const onClick = (e) => {
     e.preventDefault();
@@ -60,10 +69,11 @@ const LoginPassword = () => {
             />
             <BsFillEyeFill className="position-absolute top-50 end-0 mx-3 translate-middle-y" />
           </div>
-          <div className="d-flex justify-content-end fw-lighter pointer_cursor">
-            <Link href="/forgotpasswordemail">
-              <div>Forgot Password?</div>
-            </Link>
+          <div
+            className="d-flex justify-content-end fw-lighter pointer_cursor"
+            onClick={onForgot}
+          >
+            <div>Forgot Password?</div>
           </div>
           <div className="d-flex justify-content-md-end justify-content-center">
             <button

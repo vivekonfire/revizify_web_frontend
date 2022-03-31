@@ -20,7 +20,7 @@ const LoginEmail = () => {
 
     // setTimeout(() => {
     // if (user_exist) {
-    router.replace("/loginPassword");
+    router.replace(`/loginPassword?email=${data}`);
     // }
     // else {
     // router.replace(`/registerForm?email=${data}`);

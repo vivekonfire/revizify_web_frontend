@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import profileImage from "../../public/unsplash_tAvpDE7fXgY.png";
 import {
   BsThreeDots,
   BsHandThumbsUp,
@@ -14,16 +13,17 @@ import cards from "../../public/cards.svg";
 import MoreOption from "./EachCourse/MoreOptions";
 import { likeCourse, removeLikeCourse } from "../../store/actions/courseAction";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const EachCourse = ({ keey, course, name }) => {
   const [moreOption, setMoreOption] = useState(false);
+  const [like, setLike] = useState(false);
   const dispatch = useDispatch();
 
   const myLoader = ({ src, width, quality }) => {
     return `https://picsum.photos/${width}/200?random=${src}`;
   };
-
-  const course_liked = true;
 
   const {
     course_id,
@@ -36,10 +36,32 @@ const EachCourse = ({ keey, course, name }) => {
     user_name,
   } = course;
 
+  const token = useSelector((state) => state.auth.token);
+
   const likeClick = () => {
-    if (!course_liked) dispatch(likeCourse(course_id));
+    if (!like) dispatch(likeCourse(course_id));
     else dispatch(removeLikeCourse(course_id));
+    loader();
   };
+
+  const loader = async () => {
+    const token = Cookies.get("token");
+
+    const headers = {
+      Authorization: `JWT ${token}`,
+    };
+    const res = await axios.get(
+      `http://data.revizify.com/api/v1/courses/like?course_id=${course_id}`,
+      { headers }
+    );
+
+    if (res?.data?.like === 1) setLike(true);
+    else setLike(false);
+  };
+
+  useEffect(() => {
+    loader();
+  }, [course_id]);
 
   return (
     // <Link href={`/publishCards?id=${course_id}`}>
@@ -97,7 +119,7 @@ const EachCourse = ({ keey, course, name }) => {
             className="d-flex justify-content-center align-items-center  rounded-circle course_option"
             onClick={likeClick}
           >
-            {!course_liked ? <BsHandThumbsUp /> : <BsHandThumbsUpFill />}
+            {!like ? <BsHandThumbsUp /> : <BsHandThumbsUpFill />}
           </div>
           <div className="d-flex justify-content-center align-items-center  rounded-circle course_option">
             <HiDownload />

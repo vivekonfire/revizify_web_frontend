@@ -78,9 +78,14 @@ export const validateToken = (rtoken, token) => async (dispatch) => {
       { headers }
     );
 
-    if (Object.keys(res.data).length === 0)
-      dispatch({ type: "VALIDATE_TOKEN" });
-    else {
+    const data = {
+      token: token,
+      rtoken: rtoken,
+    };
+
+    if (Object.keys(res.data).length === 0) {
+      dispatch({ type: "VALIDATE_TOKEN", payload: data });
+    } else {
       dispatch({ type: "ERROR_VALIDATE" });
       dispatch(refreshToken(rtoken));
     }
