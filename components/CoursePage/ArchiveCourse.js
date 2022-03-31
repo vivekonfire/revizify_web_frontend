@@ -31,7 +31,6 @@ const ArchiveCourse = () => {
                 course={course}
                 key={course.course_id}
                 name={archive?.user_name}
-                is_archived={true}
               />
             );
           })
