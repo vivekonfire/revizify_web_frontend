@@ -23,7 +23,7 @@ export const createCard = (form) => async (dispatch) => {
   }
 };
 
-export const getCard = (form) => async (dispatch) => {
+export const getCard = (id) => async (dispatch) => {
   try {
     const token = Cookies.get("token");
 
@@ -42,4 +42,27 @@ export const getCard = (form) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const deckStatus = (id) => async (dispatch) => {
+  try {
+    const token = Cookies.get("token");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `JWT ${token}`,
+    };
+
+    const form = {
+      course_id: id,
+    };
+
+    const res = await axios.post(
+      "http://data.revizify.com/api/v1/courses/revision_count",
+      form,
+      { headers }
+    );
+
+    dispatch({ type: "DECK_STATUS", payload: res.data });
+  } catch (error) {}
 };
