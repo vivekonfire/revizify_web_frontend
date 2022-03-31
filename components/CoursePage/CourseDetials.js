@@ -13,21 +13,38 @@ import {
 import { HiDownload } from "react-icons/hi";
 import { FaShareAlt } from "react-icons/fa";
 import cards from "../../public/cards.svg";
-import Cards from "./Cards";
+// import Cards from "./Cards";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getCourse } from "../../store/actions/courseAction";
-import { deckStatus } from "../../store/actions/cardAction";
+import { deckStatus, getCards } from "../../store/actions/cardAction";
 
-const Deck = ({ name, energy, card, display }) => {
+const Deck = ({ name, energy, card, display, keey }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  let form;
+
+  const changeCard = () => {
+    if (display === false) {
+      form = {
+        course_id: router.query.id,
+      };
+    } else {
+      form = {
+        deck_status: keey,
+        course_id: router.query.id,
+      };
+    }
+
+    dispatch(getCards(form));
+  };
   return (
     <div
-      onClick={() => {
-        return <Cards name={name} />;
-      }}
       className="col-3 p-3 bg-black bg-opacity-50 rounded-sm m-1 pointer_cursor "
       style={{ height: "115px", minWidth: "165px", width: "165px" }}
+      onClick={changeCard}
     >
       <h6 className="text-center ">{name}</h6>
       {display !== false && (
@@ -139,26 +156,31 @@ const CourseDetials = () => {
             name={"NEW"}
             energy={deck?.revision0Percantage}
             card={deck?.revision0}
+            keey={0}
           />
           <Deck
             name={"1st Revision"}
             energy={deck?.revision1Percantage}
             card={deck?.revision1}
+            keey={1}
           />
           <Deck
             name={"2nd Revision"}
             energy={deck?.revision2Percantage}
             card={deck?.revision2}
+            keey={2}
           />
           <Deck
             name={"3rd Revision"}
             energy={deck?.revision3Percantage}
             card={deck?.revision3}
+            keey={3}
           />
           <Deck
             name={"4th Revision"}
             energy={deck?.revision4Percantage}
             card={deck?.revision4}
+            keey={4}
           />
           <Deck name={"View all cards"} display={false} />
         </div>

@@ -6,16 +6,16 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { downloadCourse } from "../../store/actions/courseAction";
 
-const Card = () => {
+const Card = ({ card }) => {
   return (
     <div className="col-11 rounded-3 bg-black bg-opacity-50 my-2 p-2 d-flex justify-content-between align-items-center">
-      Card
+      {card.title}
       <BsThreeDotsVertical />
     </div>
   );
 };
 
-const DownloadCards = () => {
+const DownloadCards = ({ cards }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ const DownloadCards = () => {
 
   useEffect(() => {
     let elementId = document.getElementById("card");
-    console.log(elementId);
+
     document.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
         elementId.classList.remove(`${styles.is_sticky}`);
@@ -59,6 +59,11 @@ const DownloadCards = () => {
         <BsThreeDots />
       </div>
       <div className="my-4 mx-2 overflow-auto" style={{ height: "700px" }}>
+        {cards?.count > 0 &&
+          cards?.results?.map((card) => {
+            return <Card card={card} />;
+          })}
+        {/* <Card />
         <Card />
         <Card />
         <Card />
@@ -93,8 +98,7 @@ const DownloadCards = () => {
         <Card />
         <Card />
         <Card />
-        <Card />
-        <Card />
+        <Card /> */}
       </div>
     </div>
   );

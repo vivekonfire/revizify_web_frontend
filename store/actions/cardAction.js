@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import axios from "axios";
-import { resetPassword } from "./authActions";
 
 export const createCard = (form) => async (dispatch) => {
   try {
@@ -23,7 +22,7 @@ export const createCard = (form) => async (dispatch) => {
   }
 };
 
-export const getCard = (id) => async (dispatch) => {
+export const getCards = (form) => async (dispatch) => {
   try {
     const token = Cookies.get("token");
 
@@ -33,10 +32,12 @@ export const getCard = (id) => async (dispatch) => {
     };
 
     const res = await axios.post(
-      "http://data.revizify.com/api/v1/courses/create_card",
+      "http://data.revizify.com/api/v1/courses/fetch_deck",
       form,
       { headers }
     );
+
+    console.log(res);
 
     dispatch({ type: "GET_CARDS", payload: res.data });
   } catch (error) {
