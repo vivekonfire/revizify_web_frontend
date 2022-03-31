@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getCourse } from "../../store/actions/courseAction";
+import { deckStatus } from "../../store/actions/cardAction";
 
 const Deck = ({ name, energy, card, display }) => {
   return (
@@ -50,9 +51,11 @@ const CourseDetials = () => {
   const dispatch = useDispatch();
 
   const course = useSelector((state) => state.course.course);
+  const deck = useSelector((state) => state.card.deck);
 
   useEffect(() => {
     dispatch(getCourse(router.query.id));
+    dispatch(deckStatus(router.query.id));
   }, [router.query.id]);
 
   const {
@@ -132,11 +135,31 @@ const CourseDetials = () => {
           </div>
         </div>
         <div className="w-100 p-2 row row-cols-3 my-3 justify-content-center">
-          <Deck name={"NEW"} energy="100" card="100" />
-          <Deck name={"1st Revision"} energy="100" card="100" />
-          <Deck name={"2nd Revision"} energy="100" card="100" />
-          <Deck name={"3rd Revision"} energy="100" card="100" />
-          <Deck name={"4th Revision"} energy="100" card="100" />
+          <Deck
+            name={"NEW"}
+            energy={deck?.revision0Percantage}
+            card={deck?.revision0}
+          />
+          <Deck
+            name={"1st Revision"}
+            energy={deck?.revision1Percantage}
+            card={deck?.revision1}
+          />
+          <Deck
+            name={"2nd Revision"}
+            energy={deck?.revision2Percantage}
+            card={deck?.revision2}
+          />
+          <Deck
+            name={"3rd Revision"}
+            energy={deck?.revision3Percantage}
+            card={deck?.revision3}
+          />
+          <Deck
+            name={"4th Revision"}
+            energy={deck?.revision4Percantage}
+            card={deck?.revision4}
+          />
           <Deck name={"View all cards"} display={false} />
         </div>
       </div>
