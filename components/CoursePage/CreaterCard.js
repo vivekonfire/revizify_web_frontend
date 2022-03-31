@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BsThreeDots, BsBookmark, BsThreeDotsVertical } from "react-icons/bs";
 import styles from "../../styles/Cards.module.css";
-
+import { useDispatch } from "react-redux";
+import { checkBookmarked } from "../../store/actions/courseAction";
 const Card = () => {
   return (
     <div className="col-11 rounded-3 bg-black bg-opacity-50 my-2 p-2 d-flex justify-content-between align-items-center">
@@ -12,6 +13,8 @@ const Card = () => {
 };
 
 const CreaterCard = ({ modal, setModal }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     let elementId = document.getElementById("card");
 
@@ -23,6 +26,8 @@ const CreaterCard = ({ modal, setModal }) => {
       }
     });
     window.scrollTo(0, 0);
+
+    dispatch(checkBookmarked());
   });
 
   return (
