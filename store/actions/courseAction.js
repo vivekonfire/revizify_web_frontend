@@ -257,3 +257,48 @@ export const checkBookmarked = (course_id, card_id) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const getArchivedCourses = () => async (dispatch) => {
+  try {
+    const token = Cookies.get("token");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `JWT ${token}`,
+    };
+
+    const res = await axios.get(
+      "http://data.revizify.com/api/v1/courses/archive_course",
+      { headers }
+    );
+
+    dispatch({ type: "GET_ARCHIVE_COURSES", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const restoreArchiveCourses = (id) => async (dispatch) => {
+  try {
+    const token = Cookies.get("token");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `JWT ${token}`,
+    };
+
+    const data = {
+      course_id: id,
+    };
+
+    await axios.put(
+      "http://data.revizify.com/api/v1/courses/archive_course",
+      data,
+      { headers }
+    );
+
+    dispatch(getArchivedCourses());
+  } catch (err) {
+    console.error(err);
+  }
+};

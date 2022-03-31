@@ -22,6 +22,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         courses: action.payload,
       };
+    case "GET_ARCHIVE_COURSES":
+      return {
+        ...state,
+        courses: action.payload,
+      };
     case "EXPLORE_COURSE":
       return {
         ...state,
