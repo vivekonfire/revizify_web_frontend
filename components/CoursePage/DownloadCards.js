@@ -61,7 +61,7 @@ const DownloadCards = ({ cards }) => {
       <div className="my-4 mx-2 overflow-auto" style={{ height: "700px" }}>
         {cards?.count > 0 &&
           cards?.results?.map((card) => {
-            return <Card card={card} />;
+            return <Card card={card} key={card.card_id} />;
           })}
         {/* <Card />
         <Card />
