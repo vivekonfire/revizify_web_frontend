@@ -36,8 +36,6 @@ const EachCourse = ({ keey, course, name }) => {
     user_name,
   } = course;
 
-  const token = useSelector((state) => state.auth.token);
-
   const likeClick = () => {
     if (!like) dispatch(likeCourse(course_id));
     else dispatch(removeLikeCourse(course_id));

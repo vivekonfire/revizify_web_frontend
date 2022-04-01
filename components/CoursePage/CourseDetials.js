@@ -18,7 +18,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getCourse } from "../../store/actions/courseAction";
-import { deckStatus, getCards } from "../../store/actions/cardAction";
+import { deckStatus, readCard, getCards } from "../../store/actions/cardAction";
 
 const Deck = ({ name, energy, card, display, keey }) => {
   const router = useRouter();
@@ -69,10 +69,24 @@ const CourseDetials = () => {
 
   const course = useSelector((state) => state.course.course);
   const deck = useSelector((state) => state.card.deck);
+  const card = useSelector((state) => state.card.card);
+
+  const tickClick = (e) => {
+    e.preventDefault();
+
+    const form = {
+      course_id: router.query.id,
+      card_id: card?.card_id,
+    };
+
+    dispatch(readCard(form));
+  };
 
   useEffect(() => {
-    dispatch(getCourse(router.query.id));
-    dispatch(deckStatus(router.query.id));
+    if (router.query.id !== undefined) {
+      dispatch(getCourse(router.query.id));
+      dispatch(deckStatus(router.query.id));
+    }
   }, [router.query.id]);
 
   const {
@@ -90,14 +104,17 @@ const CourseDetials = () => {
 
   return (
     <div className="col-xl-7 col-12 me-5 text-white">
-      <p className="fs-5 fw-bold"></p>
+      <p className="fs-5 fw-bold">{card?.title}</p>
       <Image src={Video} alt="Video image" className="w-100" />
 
       <div className="d-flex justify-content-center gap-4 my-3">
-        <div className="rounded-circle p-4 text-success fs-6 bg-success bg-opacity-25 d-flex justify-content-center align-items-center shadow-lg">
+        <div
+          className="rounded-circle p-4 text-success fs-6 bg-success bg-opacity-25 d-flex justify-content-center align-items-center shadow-lg pointer_cursor"
+          onClick={tickClick}
+        >
           <Image src={tick} alt="tick image" width="36px" height="36px" />
         </div>
-        <div className="rounded-circle p-4 text-danger bg-danger bg-opacity-25 d-flex justify-content-center align-items-center shadow-lg">
+        <div className="rounded-circle p-4 text-danger bg-danger bg-opacity-25 d-flex justify-content-center align-items-center shadow-lg pointer_cursor">
           <Image src={cross} alt="cross image" />
         </div>
       </div>
@@ -123,7 +140,7 @@ const CourseDetials = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-between">
-                <Link href="/profile">
+                <Link href={`/profile?name=${user_name}`}>
                   <div className="d-flex justify-content-evenly align-items-center mt-3 pointer_cursor">
                     <Image src={profileImage} alt="profile image" />
                     <p className="small_text">{user_name}</p>
@@ -136,14 +153,14 @@ const CourseDetials = () => {
                 </div>
                 <div className="d-flex justify-content-evenly align-items-center course_option w-25">
                   <Image src={cards} alt="Image of cards" />
-                  60/{num_of_cards}
+                  {num_of_cards}
                 </div>
                 <div className="d-flex justify-content-evenly align-items-center  rounded-circle course_option">
                   <HiDownload /> {num_of_downloads}
                 </div>
                 <div className="d-flex justify-content-between ps-4 align-items-center  rounded-pill course_option bg-black w-25">
                   <BsHandThumbsUpFill />
-                  <button className="btn background_gradient button_shadow rounded-pill text-white h-100">
+                  <button className="btn background_gradient button_shadow rounded-pill text-white h-100 border-0">
                     Like
                   </button>
                 </div>
