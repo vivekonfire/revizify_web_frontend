@@ -16,7 +16,7 @@ const ViewCourse = () => {
     const form = {
       course_id: router.query.id,
     };
-    dispatch(getCards(form));
+    if (router.query.id !== undefined) dispatch(getCards(form));
   }, [router.query.id]);
 
   return (

@@ -237,27 +237,6 @@ export const exploreCourse = () => async (dispatch) => {
   }
 };
 
-export const checkBookmarked = (course_id, card_id) => async (dispatch) => {
-  try {
-    const token = Cookies.get("at");
-
-    const headers = {
-      Authorization: `JWT ${token}`,
-      course_id: course_id,
-      card_id: card_id,
-    };
-
-    const res = await axios.get(
-      "http://data.revizify.com/api/v1/courses/bookmark",
-      { headers }
-    );
-
-    dispatch({ type: "CHECK_BOOKMARK", payload: res.data });
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 export const getArchivedCourses = () => async (dispatch) => {
   try {
     const token = Cookies.get("token");

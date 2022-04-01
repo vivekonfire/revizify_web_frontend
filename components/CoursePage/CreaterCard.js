@@ -1,19 +1,80 @@
-import React, { useEffect } from "react";
-import { BsThreeDots, BsBookmark, BsThreeDotsVertical } from "react-icons/bs";
+import React, { useState, useEffect } from "react";
+import {
+  BsThreeDots,
+  BsBookmark,
+  BsBookmarkFill,
+  BsThreeDotsVertical,
+} from "react-icons/bs";
 import styles from "../../styles/Cards.module.css";
-import { useDispatch } from "react-redux";
-import { checkBookmarked } from "../../store/actions/courseAction";
-const Card = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import {
+  getBookmark,
+  setBookmark,
+  deleteBookmark,
+} from "../../store/actions/cardAction";
+import { getCard } from "../../store/actions/cardAction";
+import CardMoreOptions from "./CardMoreOptions";
+
+const Card = ({ card, setUpdateModal, setUpdateCardId }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const [moreOption, setMoreOption] = useState(false);
+
+  const cardSelect = () => {
+    const form = {
+      course_id: router.query.id,
+      card_id: card.card_id,
+    };
+
+    dispatch(getCard(form));
+  };
+
   return (
-    <div className="col-11 rounded-3 bg-black bg-opacity-50 my-2 p-2 d-flex justify-content-between align-items-center">
-      Card
-      <BsThreeDotsVertical />
+    <div
+      className="col-11 rounded-3 bg-black bg-opacity-50 my-2 p-2 d-flex justify-content-between align-items-center pointer_cursor position-relative "
+      // onClick={cardSelect}
+    >
+      {card?.title}
+      <div
+        className="d-flex justify-content-center align-items-center rounded-circle course_option z-10"
+        onClick={() => {
+          setMoreOption(!moreOption);
+        }}
+      >
+        <BsThreeDotsVertical />
+      </div>
+      {moreOption && (
+        <CardMoreOptions
+          card_id={card.card_id}
+          setUpdateModal={setUpdateModal}
+          setMoreOption={setMoreOption}
+          setUpdateCardId={setUpdateCardId}
+        />
+      )}
     </div>
   );
 };
 
-const CreaterCard = ({ modal, setModal }) => {
+const CreaterCard = ({ setModal, cards, setUpdateModal, setUpdateCardId }) => {
+  const router = useRouter();
   const dispatch = useDispatch();
+
+  const card = useSelector((state) => state.card.card);
+  const bookmark = useSelector((state) => state.card.bookmark);
+
+  const bookmarkClick = (e) => {
+    e.preventDefault();
+
+    const form = {
+      course_id: router.query.id,
+      card_id: card?.card_id,
+    };
+
+    if (bookmark) dispatch(deleteBookmark(form));
+    else dispatch(setBookmark(form));
+  };
 
   useEffect(() => {
     let elementId = document.getElementById("card");
@@ -27,8 +88,9 @@ const CreaterCard = ({ modal, setModal }) => {
     });
     window.scrollTo(0, 0);
 
-    dispatch(checkBookmarked());
-  });
+    if (router.query.id !== undefined)
+      dispatch(getBookmark(router.query.id, card?.card_id));
+  }, [router.query.id, card]);
 
   return (
     <div
@@ -40,51 +102,30 @@ const CreaterCard = ({ modal, setModal }) => {
           type="button"
           className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center border-0"
           onClick={() => {
-            setModal(!modal);
+            setModal(true);
           }}
         >
           + Add New Card
         </button>
-        <BsBookmark />
+        {bookmark ? (
+          <BsBookmarkFill onClick={bookmarkClick} />
+        ) : (
+          <BsBookmark onClick={bookmarkClick} />
+        )}
         <BsThreeDots />
       </div>
-      <div className="my-4 mx-2 overflow-auto" style={{ height: "600px" }}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+      <div className="my-4 mx-2 py-4 overflow-auto" style={{ height: "600px" }}>
+        {cards?.count > 0 &&
+          cards?.results?.map((card) => {
+            return (
+              <Card
+                card={card}
+                key={card.card_id}
+                setUpdateModal={setUpdateModal}
+                setUpdateCardId={setUpdateCardId}
+              />
+            );
+          })}
       </div>
       <button className="background_gradient button_shadow rounded-pill border-0 px-5 py-3 fs-3 fw-bold text-white text-center col-12">
         Publish

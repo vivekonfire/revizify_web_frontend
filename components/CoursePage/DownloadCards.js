@@ -1,16 +1,36 @@
 import React, { useEffect } from "react";
-import { BsThreeDots, BsBookmark, BsThreeDotsVertical } from "react-icons/bs";
+import { BsThreeDots, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import styles from "../../styles/Cards.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { downloadCourse } from "../../store/actions/courseAction";
+import { getCard } from "../../store/actions/cardAction";
+import {
+  getBookmark,
+  setBookmark,
+  deleteBookmark,
+} from "../../store/actions/cardAction";
 
 const Card = ({ card }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const cardSelect = () => {
+    const form = {
+      course_id: router.query.id,
+      card_id: card.card_id,
+    };
+
+    dispatch(getCard(form));
+  };
+
   return (
-    <div className="col-11 rounded-3 bg-black bg-opacity-50 my-2 p-2 d-flex justify-content-between align-items-center">
-      {card.title}
-      <BsThreeDotsVertical />
+    <div
+      className="col-11 rounded-3 bg-black bg-opacity-50 my-2 p-2 d-flex justify-content-between align-items-center pointer_cursor"
+      onClick={cardSelect}
+    >
+      {card?.title}
     </div>
   );
 };
@@ -18,6 +38,9 @@ const Card = ({ card }) => {
 const DownloadCards = ({ cards }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const card = useSelector((state) => state.card.card);
+  const bookmark = useSelector((state) => state.card.bookmark);
 
   const DownloadClick = (e) => {
     e.preventDefault();
@@ -27,6 +50,18 @@ const DownloadCards = ({ cards }) => {
     };
 
     dispatch(downloadCourse(form));
+  };
+
+  const bookmarkClick = (e) => {
+    e.preventDefault();
+
+    const form = {
+      course_id: router.query.id,
+      card_id: card?.card_id,
+    };
+
+    if (bookmark) dispatch(deleteBookmark(form));
+    else dispatch(setBookmark(form));
   };
 
   useEffect(() => {
@@ -40,7 +75,10 @@ const DownloadCards = ({ cards }) => {
       }
     });
     window.scrollTo(0, 0);
-  });
+
+    if (router.query.id !== undefined)
+      dispatch(getBookmark(router.query.id, card?.card_id));
+  }, [router.query.id, card]);
 
   return (
     <div
@@ -55,7 +93,11 @@ const DownloadCards = ({ cards }) => {
           <HiDownload />
           Download
         </button>
-        <BsBookmark />
+        {bookmark ? (
+          <BsBookmarkFill onClick={bookmarkClick} />
+        ) : (
+          <BsBookmark onClick={bookmarkClick} />
+        )}
         <BsThreeDots />
       </div>
       <div className="my-4 mx-2 overflow-auto" style={{ height: "700px" }}>
