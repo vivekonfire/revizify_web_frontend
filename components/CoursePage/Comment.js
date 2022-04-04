@@ -1,24 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import Reply from "./Reply";
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { getReplys } from "../../store/actions/CommentActions";
+import { useRouter } from "next/router";
 
-const Comment = () => {
+const Comment = ({ value }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [replyDropDown, setReplyDropDown] = useState(false);
   const [reply, setReply] = useState(false);
+  const r = useSelector((state) => state.comment.replys);
+
+  const { comment_id, course, name, text, user, user_id, user_name } = value;
+
+  const onClick = () => {
+    setReplyDropDown(!replyDropDown);
+
+    if (router.query.id !== undefined)
+      dispatch(getReplys(router.query.id, comment_id));
+  };
 
   return (
     <div className="col-11">
       <div className="bg-black bg-opacity-25 rounded-lg position-relative py-3 px-5">
         <FaUserAlt className="fs-3 position-absolute top-50 start-0 translate-middle" />
         <div className="d-flex">
-          <div className="bg-black rounded-pill bg-opacity-25 fs-5 p-2 px-4">
-            Vivek Matalia
-          </div>
+          <Link href={`/profile?name=${user_name}`}>
+            <div className="bg-black rounded-pill bg-opacity-25 fs-5 p-2 px-4 pointer_cursor">
+              {name}
+            </div>
+          </Link>
         </div>
-        <div className="fs-6 px-4 my-4">
-          Commodo fugiat reprehenderit irure deserunt magna Lorem proident velit
-          minim deserunt proident. Proident nostrud aliqua ut velit voluptate.
-        </div>
+        <div className="fs-6 px-4 my-4">{text}</div>
         <div
           className="d-flex justify-content-end pe-5 mt-5 pointer_cursor"
           onClick={() => {
@@ -38,19 +54,16 @@ const Comment = () => {
           ____ hide replies
         </div>
       ) : (
-        <div
-          className="my-4 fs-5 pointer_cursor"
-          onClick={() => {
-            setReplyDropDown(!replyDropDown);
-          }}
-        >
+        <div className="my-4 fs-5 pointer_cursor" onClick={onClick}>
           ____ view replies
         </div>
       )}
       {replyDropDown && (
         <div className="d-flex flex-column justify-content-start align-items-end">
-          <Reply />
-          <Reply />
+          {r?.count > 0 &&
+            r?.results.map((value) => {
+              return <Reply value={value} key={value.comment_id} />;
+            })}
         </div>
       )}
       {reply && (
