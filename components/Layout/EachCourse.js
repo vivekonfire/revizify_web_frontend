@@ -53,8 +53,12 @@ const EachCourse = ({ keey, course, name }) => {
       { headers }
     );
 
-    if (res?.data?.like === 1) setLike(true);
+    console.log(res);
+
+    if (res.data.like === 1) setLike(true);
     else setLike(false);
+
+    console.log(like);
   };
 
   useEffect(() => {
