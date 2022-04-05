@@ -36,9 +36,12 @@ const EachCourse = ({ keey, course, name }) => {
     user_name,
   } = course;
 
-  const likeClick = () => {
-    if (!like) dispatch(likeCourse(course_id));
-    else dispatch(removeLikeCourse(course_id));
+  const likeClick = async () => {
+    if (!like) {
+      await dispatch(likeCourse(course_id));
+    } else {
+      await dispatch(removeLikeCourse(course_id));
+    }
     loader();
   };
 
@@ -121,7 +124,7 @@ const EachCourse = ({ keey, course, name }) => {
             className="d-flex justify-content-center align-items-center  rounded-circle course_option"
             onClick={likeClick}
           >
-            {!like ? <BsHandThumbsUp /> : <BsHandThumbsUpFill />}
+            {like === false ? <BsHandThumbsUp /> : <BsHandThumbsUpFill />}
           </div>
           <div className="d-flex justify-content-center align-items-center  rounded-circle course_option">
             <HiDownload />

@@ -112,6 +112,33 @@ export const editCourse = (form) => async (dispatch) => {
   }
 };
 
+export const getLikeCourse = (id) => async (dispatch) => {
+  try {
+    const token = Cookies.get("token");
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${token}`,
+      },
+      params: {
+        course_id: id,
+      },
+    };
+
+    const res = await axios.get(
+      "http://data.revizify.com/api/v1/courses/like",
+      config
+    );
+
+    console.log(res.data.like);
+
+    dispatch({ type: "LIKE", payload: res.data.like });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const likeCourse = (id) => async (dispatch) => {
   try {
     const token = Cookies.get("token");

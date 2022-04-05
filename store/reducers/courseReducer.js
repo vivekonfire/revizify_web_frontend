@@ -3,6 +3,7 @@ const initialState = {
   course: [],
   explore: null,
   bookmarkCheck: false,
+  like: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +37,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         bookmarkCheck: action.payload,
+      };
+    case "LIKE":
+      return {
+        ...state,
+        like: action.payload,
       };
     default:
       return state;

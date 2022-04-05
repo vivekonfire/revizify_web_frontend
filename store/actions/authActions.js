@@ -167,8 +167,6 @@ export const verifyEducator = (form) => async (dispatch) => {
       form,
       { headers }
     );
-
-    console.log(res);
   } catch (err) {
     console.error(err);
   }
@@ -210,7 +208,7 @@ export const usernameValidaor = (form) => async (dispatch) => {
   }
 };
 
-export const resetPasswordEmail = (form) => async (dispatch) => {
+export const resetPasswordEmail = (form) => async () => {
   try {
     const headers = {
       "Content-Type": "Application/json",
@@ -221,14 +219,12 @@ export const resetPasswordEmail = (form) => async (dispatch) => {
       form,
       { headers }
     );
-
-    console.log(res);
   } catch (err) {
     console.error(err);
   }
 };
 
-export const resetPassword = (form) => async (dispatch) => {
+export const resetPassword = (form) => async () => {
   try {
     const headers = {
       "Content-Type": "Application/json",
@@ -239,8 +235,6 @@ export const resetPassword = (form) => async (dispatch) => {
       form,
       { headers }
     );
-
-    console.log(res);
   } catch (err) {
     console.error(err);
   }
