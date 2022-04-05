@@ -20,8 +20,6 @@ export const userCourse = (name) => async (dispatch) => {
       { headers }
     );
 
-    console.log(res);
-
     dispatch({ type: "USER_COURSE", payload: res.data });
   } catch (error) {
     console.error(error);

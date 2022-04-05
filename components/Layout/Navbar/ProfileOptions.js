@@ -1,12 +1,13 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
-import Image from "next/image";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../store/actions/authActions";
 
 const ProfileOptions = () => {
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.auth.user);
 
   const onClick = () => {
     dispatch(logout());
@@ -19,10 +20,10 @@ const ProfileOptions = () => {
           <div className="me-3 d-flex align-items-center">
             <FaUserCircle alt="profile image" className="pointer_cursor fs-3" />
           </div>
-          <div className="fs-6">Vivek Matalia</div>
+          <div className="fs-6">{user.name}</div>
         </li>
         <li className="border-bottom border-bottom-2 border-white py-3">
-          <Link href="/profile">
+          <Link href={`/profile?name=${user.user_name}`}>
             <div className="pointer_cursor">My Profile</div>
           </Link>
         </li>
@@ -32,7 +33,7 @@ const ProfileOptions = () => {
           </Link>
         </li>
         <li className="border-bottom border-bottom-2 border-white py-3">
-          <Link href="/forgotpassword">
+          <Link href="/changepassword">
             <div className="pointer_cursor">Change Password</div>
           </Link>
         </li>

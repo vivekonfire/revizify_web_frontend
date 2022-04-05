@@ -8,24 +8,21 @@ import { useRouter } from "next/router";
 const LoginEmail = () => {
   const router = useRouter();
 
+  const user_exist = useSelector((state) => state.auth.user_exist);
+
   const dispatch = useDispatch();
   const [data, setData] = useState("");
 
-  const user_exist = useSelector((state) => state.auth.user_exist);
-
-  const onClick = (e) => {
+  const onClick = async (e) => {
     e.preventDefault();
 
-    dispatch(checkUser({ id: data }));
+    await dispatch(checkUser({ id: data }));
 
-    // setTimeout(() => {
-    // if (user_exist) {
-    router.replace(`/loginPassword?email=${data}`);
-    // }
-    // else {
-    // router.replace(`/registerForm?email=${data}`);
-    // }
-    // }, 1000);
+    if (user_exist) {
+      router.replace(`/loginPassword?email=${data}`);
+    } else {
+      router.replace(`/registerForm?email=${data}`);
+    }
   };
 
   return (

@@ -13,11 +13,15 @@ import {
 import { HiDownload } from "react-icons/hi";
 import { FaShareAlt } from "react-icons/fa";
 import cards from "../../public/cards.svg";
-// import Cards from "./Cards";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { getCourse } from "../../store/actions/courseAction";
+import {
+  getCourse,
+  getLikeCourse,
+  likeCourse,
+  removeLikeCourse,
+} from "../../store/actions/courseAction";
 import { deckStatus, readCard, getCards } from "../../store/actions/cardAction";
 
 const Deck = ({ name, energy, card, display, keey }) => {
@@ -70,6 +74,7 @@ const CourseDetials = () => {
   const course = useSelector((state) => state.course.course);
   const deck = useSelector((state) => state.card.deck);
   const card = useSelector((state) => state.card.card);
+  const like = useSelector((state) => state.course.like);
 
   const tickClick = (e) => {
     e.preventDefault();
@@ -82,10 +87,18 @@ const CourseDetials = () => {
     dispatch(readCard(form));
   };
 
+  const likeClick = async () => {
+    if (like === 1) await dispatch(removeLikeCourse(router.query.id));
+    else await dispatch(likeCourse(router.query.id));
+
+    await dispatch(getLikeCourse(router.query.id));
+  };
+
   useEffect(() => {
     if (router.query.id !== undefined) {
       dispatch(getCourse(router.query.id));
       dispatch(deckStatus(router.query.id));
+      dispatch(getLikeCourse(router.query.id));
     }
   }, [router.query.id]);
 
@@ -159,10 +172,22 @@ const CourseDetials = () => {
                   <HiDownload /> {num_of_downloads}
                 </div>
                 <div className="d-flex justify-content-between ps-4 align-items-center  rounded-pill course_option bg-black w-25">
-                  <BsHandThumbsUpFill />
-                  <button className="btn background_gradient button_shadow rounded-pill text-white h-100 border-0">
-                    Like
-                  </button>
+                  {like === 1 ? <BsHandThumbsUpFill /> : <BsHandThumbsUp />}
+                  {like === 0 ? (
+                    <button
+                      className="btn background_gradient button_shadow rounded-pill text-white h-100 border-0"
+                      onClick={likeClick}
+                    >
+                      Like
+                    </button>
+                  ) : (
+                    <button
+                      className="btn background_gradient button_shadow rounded-pill text-white h-100 border-0"
+                      onClick={likeClick}
+                    >
+                      Unlike
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
