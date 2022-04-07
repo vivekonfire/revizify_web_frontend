@@ -43,7 +43,7 @@ const NavBar = () => {
         </Link>
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className=" d-flex justify-content-between align-items-center w-100 navbar-nav">
+        <ul className=" d-flex justify-content-start gap-5 align-items-center w-100 navbar-nav">
           <li className="nav-item">
             <Link href="/">
               <div className="d-flex p-2 bg-light bg-opacity-25 border border-2 border-light rounded-3 align-items-center pointer_cursor">
@@ -85,16 +85,23 @@ const NavBar = () => {
         </div>
         {!token ? (
           <Link href="/loginEmail">
-            <AiOutlineLogin className="pointer_cursor fs-3" />
+            <AiOutlineLogin
+              className="pointer_cursor fs-3"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              title="Login/SignUp"
+            />
           </Link>
         ) : (
           <FaUserCircle
-            className="pointer_cursor fs-3"
+            className="pointer_cursor fs-3 z-10"
             onClick={handleProfileDropDown}
           />
         )}
       </div>
-      {profileDropDown === true && <ProfileDropDown />}
+      {profileDropDown === true && (
+        <ProfileDropDown setProfileDropDown={setProfileDropDown} />
+      )}
     </nav>
   );
 };

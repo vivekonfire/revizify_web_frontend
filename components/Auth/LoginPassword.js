@@ -11,24 +11,36 @@ import { useRouter } from "next/router";
 const LoginPassword = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const email = useSelector((state) => state.auth.user.email);
 
+  const user = useSelector((state) => state.auth.user);
+  const error = useSelector((state) => state.auth.loginError);
   const [password, setPassword] = useState(null);
+  const [eye, setEye] = useState(false);
+  const [localError, setLocalError] = useState("");
 
   const onForgot = (e) => {
     e.preventDefault();
+
     alert("Check your mail");
     dispatch(resetPasswordEmail({ email: router.query.email }));
+
+    router.replace("/");
   };
 
-  const onClick = (e) => {
+  const onClick = async (e) => {
     e.preventDefault();
 
-    const form = {
-      email: email,
-      password: password,
-    };
-    dispatch(loginAction(form));
+    if (password === null) {
+      setLocalError("Please enter your password before submitting");
+    } else {
+      const form = {
+        email: user.email,
+        password: password,
+      };
+      await dispatch(loginAction(form));
+
+      if (error === null) router.replace("/");
+    }
   };
 
   return (
@@ -51,23 +63,61 @@ const LoginPassword = () => {
             htmlFor="email"
             className="fs-4 fw-bold col-12 text-md-start text-center mb-5"
           >
-            Hi Abhinav Agarwal! (
+            Hi {user.user_name}! (
             <Link href="/loginEmail">
               <span className="text-danger fw-light"> not you? </span>
             </Link>
             )
           </label>
+          {/* {error !== null ? (
+            <p className="text-red fs-6 fw-bold mb-2">{error}</p>
+          ) : (
+            <></>
+          )} */}
+          {localError !== null ? (
+            <div className="text-danger fs-6 fw-bold mb-2">{localError}</div>
+          ) : (
+            <></>
+          )}
           <div className="position-relative">
-            <input
-              className="form-control rounded-pill border-0 bg-black bg-opacity-25 p-3 col-12 text-white"
-              name="password"
-              type="password"
-              placeholder="Password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <BsFillEyeFill className="position-absolute top-50 end-0 mx-3 translate-middle-y" />
+            {eye ? (
+              <input
+                className="form-control rounded-pill border-0 bg-black bg-opacity-25 p-3 col-12 text-white"
+                name="password"
+                type="text"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            ) : (
+              <input
+                className="form-control rounded-pill border-0 bg-black bg-opacity-25 p-3 col-12 text-white"
+                name="password"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            )}
+            {eye ? (
+              <BsFillEyeSlashFill
+                className="position-absolute top-50 end-0 mx-3 translate-middle-y pointer_cursor fs-5"
+                onClick={() => {
+                  setEye(!eye);
+                }}
+              />
+            ) : (
+              <BsFillEyeFill
+                className="position-absolute top-50 end-0 mx-3 translate-middle-y pointer_cursor fs-5"
+                onClick={() => {
+                  setEye(!eye);
+                }}
+              />
+            )}
           </div>
           <div
             className="d-flex justify-content-end fw-lighter pointer_cursor"
@@ -81,9 +131,7 @@ const LoginPassword = () => {
               type="submit"
               className="btn rounded-pill background_gradient button_shadow border-0 text-light col-4 p-2 fs-5 mt-4"
             >
-              <Link href="/">
-                <div>Login</div>
-              </Link>
+              <div>Login</div>
             </button>
           </div>
         </form>

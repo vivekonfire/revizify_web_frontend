@@ -23,6 +23,7 @@ const ExploreCourses = () => {
                 keey={String(index)}
                 course={course}
                 key={course?.id}
+                show={false}
               />
             );
           })}

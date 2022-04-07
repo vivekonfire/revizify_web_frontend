@@ -1,8 +1,7 @@
-// import { REGISTER, CHECK_USER_EXISTING } from "../types";
-
 const initialState = {
   validity_password: "",
   validity_username: "",
+  loginError: "asd",
   valid_token: false,
   user_exist: false,
   token: null,
@@ -11,6 +10,7 @@ const initialState = {
     name: null,
     email: null,
     phone_number: null,
+    user_name: null,
   },
 };
 
@@ -26,6 +26,7 @@ const authreducer = (state = initialState, action) => {
           name: action.payload.name,
           email: action.payload.email,
           phone_number: action.payload.phone_number,
+          user_name: action.payload.user_name,
         },
       };
     case "LOGIN":
@@ -38,14 +39,20 @@ const authreducer = (state = initialState, action) => {
           name: action.payload.name,
           email: action.payload.email,
           phone_number: action.payload.phone_number,
+          user_name: action.payload.user_name,
         },
+      };
+    case "LOGIN_ERROR":
+      return {
+        ...state,
+        loginError: action.payload,
       };
     case "CHECK_USER_EXISTING":
       return {
         ...state,
         user_exist: true,
         user: {
-          name: action.payload.user_name,
+          user_name: action.payload.user_name,
           email: action.payload.email,
         },
       };

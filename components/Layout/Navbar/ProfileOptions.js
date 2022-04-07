@@ -3,11 +3,13 @@ import { FaUserCircle } from "react-icons/fa";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../store/actions/authActions";
+import Cookies from "js-cookie";
 
 const ProfileOptions = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.auth.user);
+  const user_name = Cookies.get("userName");
+  const name = Cookies.get("name");
 
   const onClick = () => {
     dispatch(logout());
@@ -20,10 +22,10 @@ const ProfileOptions = () => {
           <div className="me-3 d-flex align-items-center">
             <FaUserCircle alt="profile image" className="pointer_cursor fs-3" />
           </div>
-          <div className="fs-6">{user.name}</div>
+          <div className="fs-6">{name}</div>
         </li>
         <li className="border-bottom border-bottom-2 border-white py-3">
-          <Link href={`/profile?name=${user.user_name}`}>
+          <Link href={`/profile?name=${user_name}`}>
             <div className="pointer_cursor">My Profile</div>
           </Link>
         </li>
@@ -39,7 +41,7 @@ const ProfileOptions = () => {
         </li>
       </ul>
       <button
-        className="background_gradient button_shadow p-2 rounded-pill w-50 float-end mx-3 btn text-light"
+        className="background_gradient button_shadow p-2 rounded-pill w-50 float-end mx-3 btn text-light border-0"
         onClick={onClick}
       >
         Log Out

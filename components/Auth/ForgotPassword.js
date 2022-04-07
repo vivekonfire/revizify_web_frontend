@@ -100,9 +100,9 @@ const ForgotPassword = () => {
                 className="btn rounded-pill background_gradient button_shadow border-0 text-light col-4 p-2 fs-5 "
                 onClick={onSubmit}
               >
-                {/* <Link href="/"> */}
-                <div>Confirm</div>
-                {/* </Link> */}
+                <Link href="/loginEmail">
+                  <div>Confirm</div>
+                </Link>
               </button>
             </div>
           </form>

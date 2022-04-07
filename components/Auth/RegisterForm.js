@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import man_flying from "../../public/man_flying.png";
 import { FaUserAlt } from "react-icons/fa";
-import { BsFillEyeFill } from "react-icons/bs";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { registerAction } from "../../store/actions/authActions";
@@ -20,6 +20,7 @@ const RegisterForm = () => {
     phone_number: "",
     name: "",
   });
+  const [eye, setEye] = useState(false);
 
   useEffect(() => {
     if (router.query.email !== undefined)
@@ -108,13 +109,36 @@ const RegisterForm = () => {
                 Password
               </label>
               <div className="position-relative col-md-9 col-sm-8 col-12">
-                <input
-                  className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
-                  name="password"
-                  type="password"
-                  onChange={onChange}
-                />
-                <BsFillEyeFill className="position-absolute top-50 end-0 mx-3 translate-middle-y" />
+                {eye ? (
+                  <input
+                    className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
+                    name="password"
+                    type="text"
+                    onChange={onChange}
+                  />
+                ) : (
+                  <input
+                    className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
+                    name="password"
+                    type="password"
+                    onChange={onChange}
+                  />
+                )}
+                {eye ? (
+                  <BsFillEyeSlashFill
+                    className="position-absolute top-50 end-0 mx-3 translate-middle-y pointer_cursor fs-5"
+                    onClick={() => {
+                      setEye(!eye);
+                    }}
+                  />
+                ) : (
+                  <BsFillEyeFill
+                    className="position-absolute top-50 end-0 mx-3 translate-middle-y pointer_cursor fs-5"
+                    onClick={() => {
+                      setEye(!eye);
+                    }}
+                  />
+                )}
               </div>
             </div>
             <div className="d-sm-flex justify-content-between mt-5">
