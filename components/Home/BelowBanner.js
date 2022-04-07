@@ -19,7 +19,7 @@ const BelowBanner = () => {
           <Image src={videoimg} alt="video content" />
         </div>
       </div>
-      <div className="d-lg-flex w-100 px-5 justify-content-lg-between my-5 my-lg-0">
+      <div className="d-lg-flex w-100 px-5 justify-content-lg-between my-5">
         <div className="d-flex justify-content-center align-items-center">
           <Image src={bulbimg} alt="image for ideas" />
         </div>
@@ -37,7 +37,7 @@ const BelowBanner = () => {
           </Link>
         </div>
       </div>
-      <div className="d-lg-flex w-100 px-5 justify-content-between background_gradient_reverse row m-0">
+      <div className="d-lg-flex w-100 px-5 justify-content-between background_gradient_reverse py-5">
         <div className="col-lg-6 my-3 d-flex flex-column justify-content-evenly text-lg-start text-center">
           <h1>Download or make flash card bases revision courses!</h1>
           <h3>Add texts, images, audio notes or video as per requirement</h3>

@@ -15,6 +15,9 @@ export const registerAction = (form) => async (dispatch) => {
 
     Cookies.set("token", res.data.at);
     Cookies.set("refreshToken", res.data.rt);
+    Cookies.set("userName", res.data.user_name);
+    Cookies.set("name", res.data.name);
+    Cookies.set("email", res.data.email);
 
     dispatch({ type: "REGISTER", payload: res.data });
   } catch (err) {
@@ -36,10 +39,13 @@ export const loginAction = (form) => async (dispatch) => {
 
     Cookies.set("token", res.data.at);
     Cookies.set("refreshToken", res.data.rt);
+    Cookies.set("userName", res.data.user_name);
+    Cookies.set("name", res.data.name);
+    Cookies.set("email", res.data.email);
 
     dispatch({ type: "LOGIN", payload: res.data });
   } catch (err) {
-    console.error(err);
+    // dispatch({ type: "LOGIN_ERROR ", payload: "Wrong password" });
   }
 };
 
@@ -124,6 +130,9 @@ export const logout = () => (dispatch) => {
   try {
     Cookies.remove("token");
     Cookies.remove("refreshToken");
+    Cookies.remove("userName");
+    Cookies.remove("name");
+    Cookies.remove("email");
 
     dispatch({ type: "LOGOUT" });
   } catch (err) {
@@ -131,7 +140,7 @@ export const logout = () => (dispatch) => {
   }
 };
 
-export const changePassword = (form) => async (dispatch) => {
+export const changePassword = (form) => async () => {
   try {
     const token = Cookies.get("token");
 
@@ -153,7 +162,7 @@ export const changePassword = (form) => async (dispatch) => {
   }
 };
 
-export const verifyEducator = (form) => async (dispatch) => {
+export const verifyEducator = (form) => async () => {
   try {
     const token = Cookies.get("token");
 
@@ -162,11 +171,9 @@ export const verifyEducator = (form) => async (dispatch) => {
       Authorization: `JWT ${token}`,
     };
 
-    const res = await axios.post(
-      `http://data.revizify.com/api/v1/user/verify_form`,
-      form,
-      { headers }
-    );
+    await axios.post(`http://data.revizify.com/api/v1/user/verify_form`, form, {
+      headers,
+    });
   } catch (err) {
     console.error(err);
   }

@@ -4,11 +4,10 @@ import logo from "../../public/logo_border.png";
 import { checkUser } from "../../store/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const LoginEmail = () => {
   const router = useRouter();
-
-  const user_exist = useSelector((state) => state.auth.user_exist);
 
   const dispatch = useDispatch();
   const [data, setData] = useState("");
@@ -18,7 +17,17 @@ const LoginEmail = () => {
 
     await dispatch(checkUser({ id: data }));
 
-    if (user_exist) {
+    const headers = {
+      "Content-Type": "Application/json",
+    };
+
+    const res = await axios.post(
+      `http://data.revizify.com/api/v1/user/check_user`,
+      { id: data },
+      { headers }
+    );
+
+    if (res.data.is_existing) {
       router.replace(`/loginPassword?email=${data}`);
     } else {
       router.replace(`/registerForm?email=${data}`);

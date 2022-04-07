@@ -5,7 +5,7 @@ import Image from "next/image";
 const Notifications = () => {
   return (
     <div>
-      <ul className="my-3 p-0 mx-2">
+      {/* <ul className="my-3 p-0 mx-2">
         <li className="border-bottom border-bottom-2 border-white py-3 d-flex align-items-center justify-content-between">
           <div className="d-flex align-items-center gap-2">
             <Image
@@ -34,7 +34,7 @@ const Notifications = () => {
           </div>
           <div className="fw-ligher">1hr</div>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };

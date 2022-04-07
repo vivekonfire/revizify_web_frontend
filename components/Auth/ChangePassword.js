@@ -35,7 +35,7 @@ const ChangePassword = () => {
           >
             <div className="mb-5">
               <label htmlFor="confirmPassword" className="mb-2 fs-5">
-                Confirm New Password
+                Confirm Old Password
               </label>
               <div className="position-relative">
                 {eyeOld ? (
