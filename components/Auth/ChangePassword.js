@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changePassword } from "../../store/actions/authActions";
+import SuccessModal from "../Layout/SuccessModal";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
 
   const [eyeOld, setEyeOld] = useState(false);
   const [eyeNew, setEyeNew] = useState(false);
+  const [errorOld, setErrorOld] = useState("");
+  const [errorNew, setErrorNew] = useState("");
+  const [errorConfirm, setErrorConfirm] = useState("");
+  const error = useSelector((state) => state.auth.error);
+  const change_password = useSelector((state) => state.auth.changePassword);
 
   const [form, setForm] = useState({
     old_password: "",
@@ -21,7 +26,16 @@ const ChangePassword = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(changePassword(form));
+    if (password === "") setErrorNew("This is a required field");
+    if (old_password === "") setErrorOld("This is a required field");
+    if (password2 === "") setErrorConfirm("This is a required field");
+    if (password !== password2) {
+      setErrorConfirm("The confirm password and password do not match");
+      setErrorNew("The confirm password and password do not match");
+      setForm({ ...form, password: "", password2: "" });
+    }
+    if (password2 !== "" && password !== "" && old_password !== "")
+      dispatch(changePassword(form));
   };
 
   return (
@@ -35,8 +49,28 @@ const ChangePassword = () => {
           >
             <div className="mb-5">
               <label htmlFor="confirmPassword" className="mb-2 fs-5">
-                Confirm Old Password
+                Confirm Old Password*
               </label>
+              {error?.old_password && (
+                <div>
+                  {error?.length > 0 ? (
+                    error?.old_password?.map((err) => {
+                      return (
+                        <div className="text-danger fs-6 fw-bold mb-2">
+                          {err}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-danger fs-6 fw-bold mb-2">
+                      {error?.old_password}
+                    </div>
+                  )}
+                </div>
+              )}
+              {errorOld.length > 0 && (
+                <div className="text-danger fs-6 fw-bold mb-2">{errorOld}</div>
+              )}
               <div className="position-relative">
                 {eyeOld ? (
                   <input
@@ -78,8 +112,28 @@ const ChangePassword = () => {
             </div>
             <div className="mb-5">
               <label htmlFor="newPassword" className="mb-2 fs-5">
-                Enter New Password
+                Enter New Password*
               </label>
+              {error?.password && (
+                <div>
+                  {error?.length > 0 ? (
+                    error?.password?.map((err) => {
+                      return (
+                        <div className="text-danger fs-6 fw-bold mb-2">
+                          {err}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-danger fs-6 fw-bold mb-2">
+                      {error?.password}
+                    </div>
+                  )}
+                </div>
+              )}
+              {errorNew.length > 0 && (
+                <div className="text-danger fs-6 fw-bold mb-2">{errorNew}</div>
+              )}
               <input
                 className="input-form bg-black bg-opacity-25 border-0 rounded-pill col-12 text-white p-3"
                 name="password"
@@ -91,8 +145,13 @@ const ChangePassword = () => {
             </div>
             <div className="mb-5">
               <label htmlFor="confirmPassword" className="mb-2 fs-5">
-                Confirm New Password
+                Confirm New Password*
               </label>
+              {errorConfirm.length > 0 && (
+                <div className="text-danger fs-6 fw-bold mb-2">
+                  {errorConfirm}
+                </div>
+              )}
               <div className="position-relative">
                 {eyeNew ? (
                   <input
@@ -138,14 +197,13 @@ const ChangePassword = () => {
                 className="btn rounded-pill background_gradient button_shadow border-0 text-light col-4 p-2 fs-5 "
                 onClick={onSubmit}
               >
-                <Link href="/">
-                  <div>Confirm</div>
-                </Link>
+                <div>Confirm</div>
               </button>
             </div>
           </form>
         </div>
       </div>
+      {change_password && <SuccessModal />}
     </div>
   );
 };

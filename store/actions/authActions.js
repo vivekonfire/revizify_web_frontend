@@ -21,7 +21,7 @@ export const registerAction = (form) => async (dispatch) => {
 
     dispatch({ type: "REGISTER", payload: res.data });
   } catch (err) {
-    console.error(err);
+    dispatch({ type: "REGISTER_ERROR", payload: err.response.data });
   }
 };
 
@@ -45,7 +45,7 @@ export const loginAction = (form) => async (dispatch) => {
 
     dispatch({ type: "LOGIN", payload: res.data });
   } catch (err) {
-    // dispatch({ type: "LOGIN_ERROR ", payload: "Wrong password" });
+    dispatch({ type: "LOGIN_ERROR", payload: err.response.data });
   }
 };
 
@@ -61,8 +61,11 @@ export const checkUser = (form) => async (dispatch) => {
       { headers }
     );
 
-    if (res.data.is_existing)
+    if (res.data.is_existing) {
+      Cookies.set("email", res.data.email);
+      Cookies.set("userName", res.data.user_name);
       dispatch({ type: "CHECK_USER_EXISTING", payload: res.data });
+    }
   } catch (err) {
     console.error(err);
   }
@@ -140,7 +143,7 @@ export const logout = () => (dispatch) => {
   }
 };
 
-export const changePassword = (form) => async () => {
+export const changePassword = (form) => async (dispatch) => {
   try {
     const token = Cookies.get("token");
 
@@ -149,16 +152,15 @@ export const changePassword = (form) => async () => {
       Authorization: `JWT ${token}`,
     };
 
-    const res = await axios.put(
+    await axios.put(
       `http://data.revizify.com/api/v1/user/change_password`,
       form,
       { headers }
     );
 
-    if (res.status === 200) {
-    }
+    dispatch({ type: "CHANGE_PASSWORD_SUCCESS" });
   } catch (err) {
-    console.error(err);
+    dispatch({ type: "CHANGE_PASSWORD_ERROR", payload: err.response.data });
   }
 };
 
@@ -179,39 +181,65 @@ export const verifyEducator = (form) => async () => {
   }
 };
 
-export const passwordValidaor = (form) => async (dispatch) => {
+export const passwordValidator = (password) => async (dispatch) => {
   try {
-    const headers = {
-      "Content-Type": "Application/json",
+    const config = {
+      headers: {
+        "Content-Type": "Application/json",
+      },
+      params: {
+        password: password,
+      },
     };
 
-    const res = await axios.post(
+    const res = await axios.get(
       `http://data.revizify.com/api/v1/user/password_validity`,
-      form,
-      { headers }
+      config
     );
 
-    dispatch({ type: "PASSWORD_VALIDITY", payload: res.data });
+    dispatch({
+      type: "PASSWORD_VALIDITY",
+      payload: { message: res.data.message, status: res.status },
+    });
   } catch (err) {
-    console.error(err);
+    dispatch({
+      type: "PASSWORD_VALIDITY",
+      payload: {
+        message: err.response.data.password,
+        status: err.response.status,
+      },
+    });
   }
 };
 
-export const usernameValidaor = (form) => async (dispatch) => {
+export const usernameValidator = (user_name) => async (dispatch) => {
   try {
-    const headers = {
-      "Content-Type": "Application/json",
+    const config = {
+      headers: {
+        "Content-Type": "Application/json",
+      },
+      params: {
+        user_name: user_name,
+      },
     };
 
-    const res = await axios.post(
+    const res = await axios.get(
       `http://data.revizify.com/api/v1/user/username_validity`,
-      form,
-      { headers }
+      config
     );
 
-    dispatch({ type: "USERNAME_VALIDITY", payload: res.data });
+    dispatch({
+      type: "USERNAME_VALIDITY",
+      payload: { message: res.data.message, status: res.status },
+    });
   } catch (err) {
-    console.error(err);
+    dispatch({
+      type: "USERNAME_VALIDITY",
+      payload: {
+        message: err.response.data.user_name,
+        status: err.response.status,
+      },
+    });
   }
 };
 
@@ -221,7 +249,7 @@ export const resetPasswordEmail = (form) => async () => {
       "Content-Type": "Application/json",
     };
 
-    const res = await axios.post(
+    await axios.post(
       `http://data.revizify.com/api/v1/user/password_reset/`,
       form,
       { headers }

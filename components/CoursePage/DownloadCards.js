@@ -11,6 +11,7 @@ import {
   setBookmark,
   deleteBookmark,
 } from "../../store/actions/cardAction";
+import Link from "next/link";
 
 const Card = ({ card }) => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const DownloadCards = ({ cards }) => {
 
   const card = useSelector((state) => state.card.card);
   const bookmark = useSelector((state) => state.card.bookmark);
+  const isLogin = useSelector((state) => state.auth.valid_token);
 
   const DownloadClick = (e) => {
     e.preventDefault();
@@ -65,16 +67,16 @@ const DownloadCards = ({ cards }) => {
   };
 
   useEffect(() => {
-    let elementId = document.getElementById("card");
+    // let elementId = document.getElementById("card");
 
-    document.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        elementId.classList.remove(`${styles.is_sticky}`);
-      } else {
-        elementId.classList.add(`${styles.is_sticky}`);
-      }
-    });
-    window.scrollTo(0, 0);
+    // document.addEventListener("scroll", () => {
+    //   if (window.scrollY > 300) {
+    //     elementId.classList.remove(`${styles.is_sticky}`);
+    //   } else {
+    //     elementId.classList.add(`${styles.is_sticky}`);
+    //   }
+    // });
+    // window.scrollTo(0, 0);
 
     if (router.query.id !== undefined)
       dispatch(getBookmark(router.query.id, card?.card_id));
@@ -86,13 +88,22 @@ const DownloadCards = ({ cards }) => {
       id="card"
     >
       <div className="d-flex justify-content-end align-items-center gap-5">
-        <button
-          className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center border-0"
-          onClick={DownloadClick}
-        >
-          <HiDownload />
-          Download
-        </button>
+        {isLogin ? (
+          <button
+            className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center border-0"
+            onClick={DownloadClick}
+          >
+            <HiDownload />
+            Download
+          </button>
+        ) : (
+          <Link href="/loginEmail">
+            <button className="btn rounded-pill col-4 background_gradient button_shadow p-2 text-light d-flex justify-content-evenly align-items-center border-0">
+              <HiDownload />
+              Download
+            </button>
+          </Link>
+        )}
         {bookmark ? (
           <BsBookmarkFill onClick={bookmarkClick} />
         ) : (
@@ -100,47 +111,11 @@ const DownloadCards = ({ cards }) => {
         )}
         <BsThreeDots />
       </div>
-      <div className="my-4 mx-2 overflow-auto" style={{ height: "700px" }}>
+      <div className="my-4 mx-2 overflow-auto" style={{ height: "1000px" }}>
         {cards?.count > 0 &&
           cards?.results?.map((card) => {
             return <Card card={card} key={card.card_id} />;
           })}
-        {/* <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card /> */}
       </div>
     </div>
   );

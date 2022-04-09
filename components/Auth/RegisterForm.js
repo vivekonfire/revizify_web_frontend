@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import man_flying from "../../public/man_flying.png";
-import { FaUserAlt } from "react-icons/fa";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { registerAction } from "../../store/actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  passwordValidator,
+  registerAction,
+  usernameValidator,
+} from "../../store/actions/authActions";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -21,24 +24,57 @@ const RegisterForm = () => {
     name: "",
   });
   const [eye, setEye] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const error = useSelector((state) => state.auth.error);
+  const ValidateUserName = useSelector((state) => state.auth.validity_username);
+  const ValidatePassword = useSelector((state) => state.auth.validity_password);
+  const [errorName, setErrorName] = useState("");
+  const [errorNumber, setErrorNumber] = useState("");
 
   useEffect(() => {
     if (router.query.email !== undefined)
       setForm({ ...form, email: router.query.email });
-  }, [router.query.email]);
+
+    console.log(error);
+    if (!loading && error === null) router.push("/");
+
+    setLoading(false);
+  }, [router.query.email, error]);
 
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const userNameChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    dispatch(usernameValidator(e.target.value));
+  };
+
+  const passwordChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    dispatch(passwordValidator(e.target.value));
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(registerAction(form));
-
-    setTimeout(() => {
-      router.replace("/");
-    }, 1000);
+    if (form.name === "") {
+      setErrorName("This field required");
+    }
+    if (form.phone_number === "") {
+      setErrorNumber("This field required");
+    }
+    if (form.user_name === "") {
+      dispatch(usernameValidator(""));
+    }
+    if (form.password === "") {
+      dispatch(passwordValidator(""));
+    }
+    if (form.name !== "" && form.phone_number !== "") {
+      setErrorNumber("");
+      setErrorName("");
+      dispatch(registerAction(form));
+    }
   };
 
   return (
@@ -54,19 +90,32 @@ const RegisterForm = () => {
               >
                 Email Id*
               </label>
-              <div className="position-relative w-100">
-                <input
-                  name="email"
-                  type="email"
-                  className="form-control rounded-pill w-100 p-3 bg-white bg-opacity-25 border-0 text-white"
-                  value={router.query.email}
-                  readOnly
-                />
-                <Link href="/loginEmail">
-                  <div className="position-absolute top-50 start-100 translate-middle pe-5 pointer_cursor">
-                    edit?
+              <div className="w-100">
+                {error?.email && (
+                  <div>
+                    {error?.email?.map((err) => {
+                      return (
+                        <div className="text-danger fs-6 fw-bold mb-2">
+                          {err}
+                        </div>
+                      );
+                    })}
                   </div>
-                </Link>
+                )}
+                <div className="position-relative w-100">
+                  <input
+                    name="email"
+                    type="email"
+                    className="form-control rounded-pill w-100 p-3 bg-white bg-opacity-25 border-0 text-white"
+                    value={router.query.email}
+                    readOnly
+                  />
+                  <Link href="/loginEmail">
+                    <div className="position-absolute top-50 start-100 translate-middle pe-5 pointer_cursor">
+                      edit?
+                    </div>
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="d-sm-flex justify-content-between mt-5">
@@ -76,12 +125,36 @@ const RegisterForm = () => {
               >
                 Username*
               </label>
-              <input
-                name="user_name"
-                type="text"
-                className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 text-white"
-                onChange={onChange}
-              />
+              <div className="w-100">
+                {error?.user_name && (
+                  <div>
+                    {error?.user_name?.map((err) => {
+                      return (
+                        <div className="text-danger fs-6 fw-bold mb-2">
+                          {err}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                {ValidateUserName?.message?.length > 0 && (
+                  <div
+                    className={
+                      ValidatePassword?.status === 200
+                        ? "text-success fs-6 fw-bold mb-2"
+                        : "text-danger fs-6 fw-bold mb-2"
+                    }
+                  >
+                    {ValidateUserName?.message}
+                  </div>
+                )}
+                <input
+                  name="user_name"
+                  type="text"
+                  className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 text-white"
+                  onChange={userNameChange}
+                />
+              </div>
             </div>
             <p className="mt-3">
               (Username should be unique, you will be searched by this name on
@@ -94,12 +167,30 @@ const RegisterForm = () => {
               >
                 Name*
               </label>
-              <input
-                name="name"
-                type="text"
-                className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 text-white"
-                onChange={onChange}
-              />
+              <div className="w-100">
+                {error?.name && (
+                  <div>
+                    {error?.name?.map((err) => {
+                      return (
+                        <div className="text-danger fs-6 fw-bold mb-2">
+                          {err}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                {errorName.length > 0 && (
+                  <div className="text-danger fs-6 fw-bold mb-2">
+                    {errorName}
+                  </div>
+                )}
+                <input
+                  name="name"
+                  type="text"
+                  className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 text-white"
+                  onChange={onChange}
+                />
+              </div>
             </div>
             <div className="d-sm-flex justify-content-between mt-5">
               <label
@@ -108,37 +199,61 @@ const RegisterForm = () => {
               >
                 Password
               </label>
-              <div className="position-relative col-md-9 col-sm-8 col-12">
-                {eye ? (
-                  <input
-                    className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
-                    name="password"
-                    type="text"
-                    onChange={onChange}
-                  />
-                ) : (
-                  <input
-                    className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
-                    name="password"
-                    type="password"
-                    onChange={onChange}
-                  />
+              <div className="col-md-9 col-sm-8 col-12">
+                {error?.password && (
+                  <div>
+                    {error?.password?.map((err) => {
+                      return (
+                        <div className="text-danger fs-6 fw-bold mb-2">
+                          {err}
+                        </div>
+                      );
+                    })}
+                  </div>
                 )}
-                {eye ? (
-                  <BsFillEyeSlashFill
-                    className="position-absolute top-50 end-0 mx-3 translate-middle-y pointer_cursor fs-5"
-                    onClick={() => {
-                      setEye(!eye);
-                    }}
-                  />
-                ) : (
-                  <BsFillEyeFill
-                    className="position-absolute top-50 end-0 mx-3 translate-middle-y pointer_cursor fs-5"
-                    onClick={() => {
-                      setEye(!eye);
-                    }}
-                  />
+                {ValidatePassword?.message?.length > 0 && (
+                  <div
+                    className={
+                      ValidatePassword?.status === 200
+                        ? "text-success fs-6 fw-bold mb-2"
+                        : "text-danger fs-6 fw-bold mb-2"
+                    }
+                  >
+                    {ValidatePassword?.message}
+                  </div>
                 )}
+                <div className="position-relative">
+                  {eye ? (
+                    <input
+                      className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
+                      name="password"
+                      type="text"
+                      onChange={passwordChange}
+                    />
+                  ) : (
+                    <input
+                      className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
+                      name="password"
+                      type="password"
+                      onChange={passwordChange}
+                    />
+                  )}
+                  {eye ? (
+                    <BsFillEyeSlashFill
+                      className="position-absolute top-50 end-0 mx-3 translate-middle-y pointer_cursor fs-5"
+                      onClick={() => {
+                        setEye(!eye);
+                      }}
+                    />
+                  ) : (
+                    <BsFillEyeFill
+                      className="position-absolute top-50 end-0 mx-3 translate-middle-y pointer_cursor fs-5"
+                      onClick={() => {
+                        setEye(!eye);
+                      }}
+                    />
+                  )}
+                </div>
               </div>
             </div>
             <div className="d-sm-flex justify-content-between mt-5">
@@ -148,12 +263,30 @@ const RegisterForm = () => {
               >
                 Phone Number*
               </label>
-              <input
-                name="phone_number"
-                type="text"
-                className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
-                onChange={onChange}
-              />
+              <div className="w-100">
+                {error?.phone_number && (
+                  <div>
+                    {error?.phone_number?.map((err) => {
+                      return (
+                        <div className="text-danger fs-6 fw-bold mb-2">
+                          {err}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                {errorNumber.length > 0 && (
+                  <div className="text-danger fs-6 fw-bold mb-2">
+                    {errorNumber}
+                  </div>
+                )}
+                <input
+                  name="phone_number"
+                  type="text"
+                  className="form-control rounded-pill w-100 p-3 bg-black bg-opacity-25 border-0 my-3 text-white"
+                  onChange={onChange}
+                />
+              </div>
             </div>
             <p className="mt-3">
               (ProvidingYour Phone number is beneficial if you are a creator and

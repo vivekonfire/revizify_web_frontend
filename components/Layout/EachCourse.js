@@ -15,13 +15,13 @@ import { likeCourse, removeLikeCourse } from "../../store/actions/courseAction";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
 
 const EachCourse = ({ keey, course, name, show }) => {
   const [moreOption, setMoreOption] = useState(false);
   const [like, setLike] = useState(false);
   const dispatch = useDispatch();
-  const router = useRouter();
+
+  const isLogin = useSelector((state) => state.auth.valid_token);
 
   const myLoader = ({ src, width, quality }) => {
     return `https://picsum.photos/${width}/200?random=${src}`;
@@ -41,7 +41,8 @@ const EachCourse = ({ keey, course, name, show }) => {
 
   let courseLink = ``;
 
-  if (name === userName || user_name === userName) courseLink = `createrCourse`;
+  if ((name === userName || user_name === userName) && isLogin)
+    courseLink = `createrCourse`;
   else courseLink = `viewCourse`;
 
   const likeClick = async () => {
@@ -64,12 +65,8 @@ const EachCourse = ({ keey, course, name, show }) => {
       { headers }
     );
 
-    console.log(res);
-
     if (res.data.like === 1) setLike(true);
     else setLike(false);
-
-    console.log(like);
   };
 
   useEffect(() => {
