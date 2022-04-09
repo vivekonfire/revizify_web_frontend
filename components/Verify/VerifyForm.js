@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { verifyEducator } from "../../store/actions/authActions";
+import SuccessModal from "../Layout/SuccessModal";
 
 const VerifyForm = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const VerifyForm = () => {
   const [errorQues3, setErrorQues3] = useState("");
   const [errorQues4, setErrorQues4] = useState("");
   const [errorQues5, setErrorQues5] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -31,8 +33,10 @@ const VerifyForm = () => {
     if (ques3 === "") setErrorQues3("This is a required field");
     if (ques4 === "") setErrorQues4("This is a required field");
     if (ques5 === "") setErrorQues5("This is a required field");
-    if (ques5 !== "" && ques1 !== "" && ques3 !== "" && ques4 !== "")
+    if (ques5 !== "" && ques1 !== "" && ques3 !== "" && ques4 !== "") {
       dispatch(verifyEducator(form));
+      setSuccess(true);
+    }
   };
   return (
     <div className="container d-flex justify-content-center flex-column p-4 text-light ">
@@ -160,6 +164,7 @@ const VerifyForm = () => {
           </div>
         </form>
       </div>
+      {success && <SuccessModal />}
     </div>
   );
 };
