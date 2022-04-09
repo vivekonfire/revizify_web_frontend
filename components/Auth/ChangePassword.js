@@ -54,9 +54,12 @@ const ChangePassword = () => {
               {error?.old_password && (
                 <div>
                   {error?.length > 0 ? (
-                    error?.old_password?.map((err) => {
+                    error?.old_password?.map((err, index) => {
                       return (
-                        <div className="text-danger fs-6 fw-bold mb-2">
+                        <div
+                          className="text-danger fs-6 fw-bold mb-2"
+                          key={index}
+                        >
                           {err}
                         </div>
                       );
@@ -117,9 +120,12 @@ const ChangePassword = () => {
               {error?.password && (
                 <div>
                   {error?.length > 0 ? (
-                    error?.password?.map((err) => {
+                    error?.password?.map((err, index) => {
                       return (
-                        <div className="text-danger fs-6 fw-bold mb-2">
+                        <div
+                          className="text-danger fs-6 fw-bold mb-2"
+                          key={index}
+                        >
                           {err}
                         </div>
                       );
