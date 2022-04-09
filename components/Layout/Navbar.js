@@ -30,7 +30,7 @@ const NavBar = () => {
         data-bs-target="#navbarSupportedContent"
       >
         <div className="d-flex align-items-center justify-content-center my-auto">
-          <FiMenu className="fs-2" onClick={() => setToggle(!toggle)} />
+          <FiMenu className="fs-2 z-10" onClick={() => setToggle(!toggle)} />
         </div>
         <Link href="/">
           <div className="d-flex p-2 bg-light bg-opacity-25 border border-2 border-light rounded-3 align-items-center pointer_cursor ">
