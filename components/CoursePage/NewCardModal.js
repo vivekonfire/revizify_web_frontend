@@ -12,6 +12,9 @@ const NewCardModal = ({ setModal }) => {
   const [text, setText] = useState("");
   const [selectVideo, setVideo] = useState(null);
   const [selectVideoFile, setVideoFile] = useState(null);
+  const [errorHeadline, setErrorHeadline] = useState("");
+  const [errorText, setErrorText] = useState("");
+  const [errorVideo, setErrorVideo] = useState("");
 
   const onVideoPick = (e) => {
     const video = e.target.files[0];
@@ -30,7 +33,13 @@ const NewCardModal = ({ setModal }) => {
     formdata.append("video", selectVideoFile);
     formdata.append("course_id", router.query.id);
 
-    dispatch(createCard(formdata));
+    if (headline === "") setErrorHeadline("This is a required field");
+    if (text === "") setErrorText("This is a required field");
+    if (selectVideoFile === null) setErrorVideo("This is a required field");
+    if (headline !== "" && text !== "" && selectVideoFile !== "")
+      dispatch(createCard(formdata));
+
+    setModal(false);
   };
   return (
     <div className="position-fixed start-0 top-0 z-10 min-vh-100 min-vw-100 bg-black bg-opacity-75 d-flex flex-column justify-content-center align-items-center text-white">
@@ -53,6 +62,11 @@ const NewCardModal = ({ setModal }) => {
         <form onSubmit={CardSubmit}>
           <div className="my-4 mx-2">
             <label htmlFor="headline">HeadLine*</label>
+            {errorHeadline.length > 0 && (
+              <div className="text-danger fs-6 fw-bold mb-2">
+                {errorHeadline}
+              </div>
+            )}
             <input
               type="text"
               name="headline"
@@ -65,17 +79,24 @@ const NewCardModal = ({ setModal }) => {
           <div className="my-4 mx-2">
             <label htmlFor="video">
               Add Video*
-              <div className=" d-xxl-flex justify-content-center align-items-stretch">
+              <div className=" d-xxl-flex justify-content-stretch align-items-center flex-column">
+                {errorVideo.length > 0 && (
+                  <div className="text-danger fs-6 fw-bold mb-2">
+                    {errorVideo}
+                  </div>
+                )}
                 <div className="d-flex justify-content-center align-items-center col-xxl-6 col-12">
                   {selectVideo ? (
                     <div className="col-8 d-flex justify-content-center">
-                      {/* <Image
-                        src={selectVideo}
-                        alt="course image"
-                        width={223}
-                        height={126}
-                        className="rounded-sm"
-                      /> */}
+                      {selectVideo && (
+                        <video
+                          src={selectVideo}
+                          width="223"
+                          height="126"
+                          controls
+                          id="video"
+                        />
+                      )}
                     </div>
                   ) : (
                     <div
@@ -102,6 +123,9 @@ const NewCardModal = ({ setModal }) => {
           </div>
           <div className="my-4 mx-2">
             <label htmlFor="text">Add Text*</label>
+            {errorText.length > 0 && (
+              <div className="text-danger fs-6 fw-bold mb-2">{errorText}</div>
+            )}
             <textarea
               className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25 border-0 text-white"
               onChange={(e) => {

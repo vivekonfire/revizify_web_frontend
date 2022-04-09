@@ -21,7 +21,7 @@ const ShowCourse = () => {
       {isLogin && (
         <div className="my-5 d-lg-flex flex-row-reverse">
           <div className="d-flex w-100 justify-content-end py-2">
-            <button className="background_gradient button_shadow p-2 btn rounded-pill text-light">
+            <button className="background_gradient button_shadow p-2 btn rounded-pill text-light border-0">
               <Link href="/createCourse">
                 <div>+ Add New Course</div>
               </Link>

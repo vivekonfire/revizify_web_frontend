@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="fs-6">Revizify</div>
         </div>
       </div>
-      <div className="d-md-flex justify-content-center text-center align-items-center">
+      <div className="d-lg-flex justify-content-center text-center align-items-center d-none ">
         <Link href="/">
           <div className="mx-3 my-2 pointer_cursor">About Us</div>
         </Link>

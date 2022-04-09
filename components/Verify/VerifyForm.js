@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { verifyEducator } from "../../store/actions/authActions";
 
@@ -11,6 +11,10 @@ const VerifyForm = () => {
   const [ques4, setQues4] = useState("");
   const [ques5, setQues5] = useState("");
   const [is_experienced, setIsExperienced] = useState(false);
+  const [errorQues1, setErrorQues1] = useState("");
+  const [errorQues3, setErrorQues3] = useState("");
+  const [errorQues4, setErrorQues4] = useState("");
+  const [errorQues5, setErrorQues5] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +27,12 @@ const VerifyForm = () => {
       is_experienced: is_experienced,
     };
 
-    dispatch(verifyEducator(form));
+    if (ques1 === "") setErrorQues1("This is a required field");
+    if (ques3 === "") setErrorQues3("This is a required field");
+    if (ques4 === "") setErrorQues4("This is a required field");
+    if (ques5 === "") setErrorQues5("This is a required field");
+    if (ques5 !== "" && ques1 !== "" && ques3 !== "" && ques4 !== "")
+      dispatch(verifyEducator(form));
   };
   return (
     <div className="container d-flex justify-content-center flex-column p-4 text-light ">
@@ -33,7 +42,10 @@ const VerifyForm = () => {
       <div className="bg-black bg-opacity-25 rounded-md h-100 mx-xxl-5 mx-xl-0 mx-lg-5 mx-sm-0 p-5 shadow-lg">
         <form onSubmit={onSubmit}>
           <div className="mt-3">
-            <p>What topics do you teach / Create Courses on ?</p>
+            <p>What topics do you teach / Create Courses on ?*</p>
+            {errorQues1.length > 0 && (
+              <div className="text-danger fs-6 fw-bold mb-2">{errorQues1}</div>
+            )}
             <textarea
               className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25 text-white border-0"
               placeholder="Enter here"
@@ -43,7 +55,7 @@ const VerifyForm = () => {
             />
           </div>
           <div className="mt-3">
-            <p>How many years of experience in your field?</p>
+            <p>How many years of experience in your field ?*</p>
             <select
               onChange={(e) => {
                 setQues2(e.target.value);
@@ -66,8 +78,11 @@ const VerifyForm = () => {
           <div className="mt-3">
             <p>
               Links of your work ( Youtube, Instagram, Linkdin, Website,
-              Research paper, others etc)
+              Research paper, others etc)*
             </p>
+            {errorQues3.length > 0 && (
+              <div className="text-danger fs-6 fw-bold mb-2">{errorQues3}</div>
+            )}
             <textarea
               className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25 border-0 text-white"
               placeholder="Enter here"
@@ -79,8 +94,11 @@ const VerifyForm = () => {
           <div className="mt-3">
             <p>
               Tell us a bit about yourself. Why should you get verified? (This
-              can be different from your bio)
+              can be different from your bio)*
             </p>
+            {errorQues4.length > 0 && (
+              <div className="text-danger fs-6 fw-bold mb-2">{errorQues4}</div>
+            )}
             <textarea
               className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25 border-0 text-white"
               placeholder="Enter here"
@@ -90,7 +108,7 @@ const VerifyForm = () => {
             />
           </div>
           <div className="mt-3">
-            <p>Any Prior experience on creating online courses?</p>
+            <p>Any Prior experience on creating online courses ?*</p>
             <button
               type="button"
               className={
@@ -119,7 +137,10 @@ const VerifyForm = () => {
             </button>
           </div>
           <div className="mt-3">
-            <p>What Languages do you teach in ?</p>
+            <p>What Languages do you teach in ?*</p>
+            {errorQues5.length > 0 && (
+              <div className="text-danger fs-6 fw-bold mb-2">{errorQues5}</div>
+            )}
             <textarea
               className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25 border-0 text-white"
               placeholder="Enter here"

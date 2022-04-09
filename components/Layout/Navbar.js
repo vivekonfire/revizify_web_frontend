@@ -9,6 +9,7 @@ import { AiOutlineLogin } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import ProfileDropDown from "./Navbar/ProfileDropDown";
 import { useSelector } from "react-redux";
+import ToggleOptions from "./Navbar/ToggleOptions";
 
 const NavBar = () => {
   const token = useSelector((state) => state.auth.valid_token);
@@ -18,11 +19,7 @@ const NavBar = () => {
   }, [token]);
 
   const [profileDropDown, setProfileDropDown] = useState(false);
-
-  const handleProfileDropDown = () => {
-    if (profileDropDown) setProfileDropDown(false);
-    else setProfileDropDown(true);
-  };
+  const [toggle, setToggle] = useState(false);
 
   return (
     <nav className="d-lg-flex text-light w-100 px-sm-5 px-2 background_gradient shadow position-fixed justify-content-between align-items-center gap-5 navbar navbar-expand-lg z-10">
@@ -33,7 +30,7 @@ const NavBar = () => {
         data-bs-target="#navbarSupportedContent"
       >
         <div className="d-flex align-items-center justify-content-center my-auto">
-          <FiMenu className="fs-2" />
+          <FiMenu className="fs-2" onClick={() => setToggle(!toggle)} />
         </div>
         <Link href="/">
           <div className="d-flex p-2 bg-light bg-opacity-25 border border-2 border-light rounded-3 align-items-center pointer_cursor ">
@@ -95,13 +92,16 @@ const NavBar = () => {
         ) : (
           <FaUserCircle
             className="pointer_cursor fs-3 z-10"
-            onClick={handleProfileDropDown}
+            onClick={() => {
+              setProfileDropDown(!profileDropDown);
+            }}
           />
         )}
       </div>
-      {profileDropDown === true && (
+      {profileDropDown && (
         <ProfileDropDown setProfileDropDown={setProfileDropDown} />
       )}
+      {toggle && <ToggleOptions setToggle={setToggle} />}
     </nav>
   );
 };

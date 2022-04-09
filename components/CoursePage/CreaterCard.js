@@ -33,12 +33,12 @@ const Card = ({ card, setUpdateModal, setUpdateCardId }) => {
 
   return (
     <div
-      className="col-11 rounded-3 bg-black bg-opacity-50 my-2 p-2 d-flex justify-content-between align-items-center pointer_cursor position-relative "
-      // onClick={cardSelect}
+      className="col-11 rounded-3 bg-black bg-opacity-50 my-2 px-2 d-flex justify-content-between align-items-center pointer_cursor position-relative "
+      onClick={cardSelect}
     >
       {card?.title}
       <div
-        className="d-flex justify-content-center align-items-center rounded-circle course_option z-10"
+        className="d-flex justify-content-center align-items-center rounded-circle course_option z-9"
         onClick={() => {
           setMoreOption(!moreOption);
         }}
@@ -77,16 +77,16 @@ const CreaterCard = ({ setModal, cards, setUpdateModal, setUpdateCardId }) => {
   };
 
   useEffect(() => {
-    let elementId = document.getElementById("card");
+    // let elementId = document.getElementById("card");
 
-    document.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        elementId.classList.remove(`${styles.is_sticky}`);
-      } else {
-        elementId.classList.add(`${styles.is_sticky}`);
-      }
-    });
-    window.scrollTo(0, 0);
+    // document.addEventListener("scroll", () => {
+    //   if (window.scrollY > 300) {
+    //     elementId.classList.remove(`${styles.is_sticky}`);
+    //   } else {
+    //     elementId.classList.add(`${styles.is_sticky}`);
+    //   }
+    // });
+    // window.scrollTo(0, 0);
 
     if (router.query.id !== undefined)
       dispatch(getBookmark(router.query.id, card?.card_id));
@@ -114,7 +114,7 @@ const CreaterCard = ({ setModal, cards, setUpdateModal, setUpdateCardId }) => {
         )}
         <BsThreeDots />
       </div>
-      <div className="my-4 mx-2 py-4 overflow-auto" style={{ height: "600px" }}>
+      <div className="my-4 mx-2 py-4 overflow-auto" style={{ height: "900px" }}>
         {cards?.count > 0 &&
           cards?.results?.map((card) => {
             return (

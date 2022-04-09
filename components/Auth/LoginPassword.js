@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import Image from "next/image";
@@ -7,25 +7,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../store/actions/authActions";
 import { resetPasswordEmail } from "../../store/actions/authActions";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const LoginPassword = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const user = useSelector((state) => state.auth.user);
-  const error = useSelector((state) => state.auth.loginError);
+  const error = useSelector((state) => state.auth.error);
   const [password, setPassword] = useState(null);
   const [eye, setEye] = useState(false);
   const [localError, setLocalError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const email = Cookies.get("email");
+  const user_name = Cookies.get("userName");
 
   const onForgot = (e) => {
     e.preventDefault();
 
     alert("Check your mail");
-    dispatch(resetPasswordEmail({ email: router.query.email }));
+    dispatch(resetPasswordEmail({ email: email }));
 
     router.replace("/");
   };
+  useEffect(() => {
+    if (error === null && !loading) router.push("/");
+
+    setLoading(false);
+  }, [error]);
 
   const onClick = async (e) => {
     e.preventDefault();
@@ -34,12 +42,10 @@ const LoginPassword = () => {
       setLocalError("Please enter your password before submitting");
     } else {
       const form = {
-        email: user.email,
+        email: email,
         password: password,
       };
-      await dispatch(loginAction(form));
-
-      if (error === null) router.replace("/");
+      dispatch(loginAction(form));
     }
   };
 
@@ -63,17 +69,17 @@ const LoginPassword = () => {
             htmlFor="email"
             className="fs-4 fw-bold col-12 text-md-start text-center mb-5"
           >
-            Hi {user.user_name}! (
+            Hi {user_name}! (
             <Link href="/loginEmail">
               <span className="text-danger fw-light"> not you? </span>
             </Link>
             )
           </label>
-          {/* {error !== null ? (
-            <p className="text-red fs-6 fw-bold mb-2">{error}</p>
-          ) : (
-            <></>
-          )} */}
+          {error && (
+            <div className="text-danger fs-6 fw-bold mb-2">
+              {error?.password}
+            </div>
+          )}
           {localError !== null ? (
             <div className="text-danger fs-6 fw-bold mb-2">{localError}</div>
           ) : (

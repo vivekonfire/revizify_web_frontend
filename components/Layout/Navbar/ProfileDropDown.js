@@ -61,7 +61,11 @@ const ProfileDropDown = ({ setProfileDropDown }) => {
             </div>
           )}
         </div>
-        {focus === 0 ? <ProfileOptions /> : <Notifications />}
+        {focus === 0 ? (
+          <ProfileOptions setProfileDropDown={setProfileDropDown} />
+        ) : (
+          <Notifications />
+        )}
       </div>
     </div>
   );

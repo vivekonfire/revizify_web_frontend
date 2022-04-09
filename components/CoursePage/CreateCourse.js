@@ -12,6 +12,9 @@ const CreateCourse = () => {
   const [aboutCourse, setAboutCourse] = useState("");
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
+  const [errorName, setErrorName] = useState("");
+  const [errorAbout, setErrorAbout] = useState("");
+  const [errorImage, setErrorImage] = useState("");
 
   const onImagePick = (e) => {
     const image = e.target.files[0];
@@ -31,7 +34,11 @@ const CreateCourse = () => {
     formdata.append("course_name", courseName);
     formdata.append("course_desc", aboutCourse);
 
-    dispatch(addCourse(formdata));
+    if (courseName === "") setErrorName("This is a required field");
+    if (aboutCourse === "") setErrorAbout("This is a required field");
+    if (selectedImageFile === null) setErrorImage("This is a required field");
+    if (courseName !== "" && aboutCourse !== "" && selectedImageFile !== null)
+      dispatch(addCourse(formdata));
   };
 
   return (
@@ -45,10 +52,13 @@ const CreateCourse = () => {
                 htmlFor="name"
                 className="pt-5 d-flex justify-content-between"
               >
-                <div className="fs-4">Course Name</div>
+                <div className="fs-4">Course Name*</div>
                 <div className="fs-6">(0/100)</div>
                 <div className="fs-6">The Title of your course</div>
               </label>
+              {errorName.length > 0 && (
+                <div className="text-danger fs-6 fw-bold mb-2">{errorName}</div>
+              )}
               <input
                 name="name"
                 type="text"
@@ -63,9 +73,14 @@ const CreateCourse = () => {
                 htmlFor="about"
                 className="pt-5 d-flex justify-content-between"
               >
-                <div className="fs-4">About the course</div>
+                <div className="fs-4">About the course*</div>
                 <div className="fs-6">(0/500)</div>
               </label>
+              {errorAbout.length > 0 && (
+                <div className="text-danger fs-6 fw-bold mb-2">
+                  {errorAbout}
+                </div>
+              )}
               <textarea
                 className="rounded-sm w-100 p-3 height_text_area bg-black bg-opacity-25 text-white"
                 placeholder="Enter here"
@@ -79,10 +94,15 @@ const CreateCourse = () => {
             <br />
             <div>
               <label htmlFor="thumbnail" className="pt-4 fs-4">
-                Upload Course Thumbnail
+                Upload Course Thumbnail*
                 <br />
                 <div className=" d-xxl-flex justify-content-center align-items-stretch">
-                  <div className="d-flex justify-content-center align-items-center col-xxl-6 col-12">
+                  <div className="d-flex justify-content-center align-items-center flex-column col-xxl-6 col-12">
+                    {errorImage.length > 0 && (
+                      <div className="text-danger fs-6 fw-bold mb-2">
+                        {errorImage}
+                      </div>
+                    )}
                     {selectedImage ? (
                       <div className="col-8 d-flex justify-content-center">
                         <Image

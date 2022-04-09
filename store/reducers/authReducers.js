@@ -1,7 +1,15 @@
 const initialState = {
-  validity_password: "",
-  validity_username: "",
-  loginError: "asd",
+  validity_password: {
+    status: null,
+    message: null,
+  },
+  validity_username: {
+    status: null,
+    message: null,
+  },
+  changePassword: false,
+  error: null,
+  registerError: null,
   valid_token: false,
   user_exist: false,
   token: null,
@@ -22,6 +30,7 @@ const authreducer = (state = initialState, action) => {
         token: action.payload.at,
         refreshToken: action.payload.rt,
         valid_token: true,
+        error: null,
         user: {
           name: action.payload.name,
           email: action.payload.email,
@@ -35,6 +44,7 @@ const authreducer = (state = initialState, action) => {
         token: action.payload.at,
         refreshToken: action.payload.rt,
         valid_token: true,
+        error: null,
         user: {
           name: action.payload.name,
           email: action.payload.email,
@@ -42,10 +52,26 @@ const authreducer = (state = initialState, action) => {
           user_name: action.payload.user_name,
         },
       };
+    case "CHANGE_PASSWORD_SUCCESS":
+      return {
+        ...state,
+        changePassword: true,
+        error: null,
+      };
     case "LOGIN_ERROR":
       return {
         ...state,
-        loginError: action.payload,
+        error: action.payload,
+      };
+    case "REGISTER_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case "CHANGE_PASSWORD_ERROR":
+      return {
+        ...state,
+        error: action.payload,
       };
     case "CHECK_USER_EXISTING":
       return {
@@ -86,12 +112,18 @@ const authreducer = (state = initialState, action) => {
     case "PASSWORD_VALIDITY":
       return {
         ...state,
-        validity_password: action.payload.message,
+        validity_password: {
+          status: action.payload.status,
+          message: action.payload.message,
+        },
       };
     case "USERNAME_VALIDITY":
       return {
         ...state,
-        username_password: action.payload.message,
+        validity_username: {
+          status: action.payload.status,
+          message: action.payload.message,
+        },
       };
     default:
       return state;

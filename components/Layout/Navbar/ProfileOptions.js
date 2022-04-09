@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../store/actions/authActions";
 import Cookies from "js-cookie";
 
-const ProfileOptions = () => {
+const ProfileOptions = ({ setProfileDropDown }) => {
   const dispatch = useDispatch();
 
   const user_name = Cookies.get("userName");
@@ -16,7 +16,11 @@ const ProfileOptions = () => {
   };
 
   return (
-    <div>
+    <div
+      onClick={() => {
+        setProfileDropDown(false);
+      }}
+    >
       <ul className="my-3 p-0 mx-4">
         <li className="border-bottom border-bottom-2 border-white py-3 d-flex align-items-center">
           <div className="me-3 d-flex align-items-center">

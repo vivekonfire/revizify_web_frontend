@@ -28,7 +28,7 @@ const LoginEmail = () => {
     );
 
     if (res.data.is_existing) {
-      router.replace(`/loginPassword?email=${data}`);
+      router.replace(`/loginPassword`);
     } else {
       router.replace(`/registerForm?email=${data}`);
     }
