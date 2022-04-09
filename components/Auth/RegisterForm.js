@@ -93,9 +93,12 @@ const RegisterForm = () => {
               <div className="w-100">
                 {error?.email && (
                   <div>
-                    {error?.email?.map((err) => {
+                    {error?.email?.map((err, index) => {
                       return (
-                        <div className="text-danger fs-6 fw-bold mb-2">
+                        <div
+                          className="text-danger fs-6 fw-bold mb-2"
+                          key={index}
+                        >
                           {err}
                         </div>
                       );
@@ -128,9 +131,12 @@ const RegisterForm = () => {
               <div className="w-100">
                 {error?.user_name && (
                   <div>
-                    {error?.user_name?.map((err) => {
+                    {error?.user_name?.map((err, index) => {
                       return (
-                        <div className="text-danger fs-6 fw-bold mb-2">
+                        <div
+                          className="text-danger fs-6 fw-bold mb-2"
+                          key={index}
+                        >
                           {err}
                         </div>
                       );
@@ -170,9 +176,12 @@ const RegisterForm = () => {
               <div className="w-100">
                 {error?.name && (
                   <div>
-                    {error?.name?.map((err) => {
+                    {error?.name?.map((err, index) => {
                       return (
-                        <div className="text-danger fs-6 fw-bold mb-2">
+                        <div
+                          className="text-danger fs-6 fw-bold mb-2"
+                          key={index}
+                        >
                           {err}
                         </div>
                       );
@@ -202,9 +211,12 @@ const RegisterForm = () => {
               <div className="col-md-9 col-sm-8 col-12">
                 {error?.password && (
                   <div>
-                    {error?.password?.map((err) => {
+                    {error?.password?.map((err, index) => {
                       return (
-                        <div className="text-danger fs-6 fw-bold mb-2">
+                        <div
+                          className="text-danger fs-6 fw-bold mb-2"
+                          key={index}
+                        >
                           {err}
                         </div>
                       );
@@ -266,9 +278,12 @@ const RegisterForm = () => {
               <div className="w-100">
                 {error?.phone_number && (
                   <div>
-                    {error?.phone_number?.map((err) => {
+                    {error?.phone_number?.map((err, index) => {
                       return (
-                        <div className="text-danger fs-6 fw-bold mb-2">
+                        <div
+                          className="text-danger fs-6 fw-bold mb-2"
+                          key={index}
+                        >
                           {err}
                         </div>
                       );
