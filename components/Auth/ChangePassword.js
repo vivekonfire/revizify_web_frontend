@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { changePassword } from "../../store/actions/authActions";
@@ -6,6 +7,7 @@ import SuccessModal from "../Layout/SuccessModal";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [eyeOld, setEyeOld] = useState(false);
   const [eyeNew, setEyeNew] = useState(false);
@@ -14,6 +16,7 @@ const ChangePassword = () => {
   const [errorConfirm, setErrorConfirm] = useState("");
   const error = useSelector((state) => state.auth.error);
   const change_password = useSelector((state) => state.auth.changePassword);
+  const isLogin = useSelector((state) => state.auth.valid_token);
 
   const [form, setForm] = useState({
     old_password: "",
@@ -34,15 +37,22 @@ const ChangePassword = () => {
       setErrorNew("The confirm password and password do not match");
       setForm({ ...form, password: "", password2: "" });
     }
+    if (password !== "") setErrorNew("");
+    if (old_password !== "") setErrorOld("");
+    if (password2 !== "") setErrorConfirm("");
     if (password2 !== "" && password !== "" && old_password !== "")
       dispatch(changePassword(form));
   };
 
+  useEffect(() => {
+    if (!isLogin) router.push("/");
+  });
+
   return (
     <div className="min-vh-100 leave_navbar text-white d-flex justify-content-center align-items-center">
-      <div className="mx-2">
+      <div>
         <p className="fs-3 fw-bold w-100 text-center">Reset Your Password</p>
-        <div className="bg-black bg-opacity-25 rounded-md m-4 form_container">
+        <div className="bg-black bg-opacity-25 rounded-md m-2 form_container">
           <form
             className="px-md-5 px-2 py-5 d-flex flex-column justify-content-evenly w-100 h-100"
             onSubmit={onSubmit}

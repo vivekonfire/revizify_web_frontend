@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../../public/logo_border.png";
 import { checkUser } from "../../store/actions/authActions";
@@ -8,9 +8,10 @@ import axios from "axios";
 
 const LoginEmail = () => {
   const router = useRouter();
-
   const dispatch = useDispatch();
+
   const [data, setData] = useState("");
+  const isLogin = useSelector((state) => state.auth.valid_token);
 
   const onClick = async (e) => {
     e.preventDefault();
@@ -33,6 +34,10 @@ const LoginEmail = () => {
       router.replace(`/registerForm?email=${data}`);
     }
   };
+
+  useEffect(() => {
+    if (isLogin) router.push("/");
+  });
 
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center text-light flex-column">

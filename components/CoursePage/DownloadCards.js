@@ -111,7 +111,7 @@ const DownloadCards = ({ cards }) => {
         )}
         <BsThreeDots />
       </div>
-      <div className="my-4 mx-2 overflow-auto" style={{ height: "1000px" }}>
+      <div className={`${styles.view_card_container} my-4 mx-2 overflow-auto`}>
         {cards?.count > 0 &&
           cards?.results?.map((card) => {
             return <Card card={card} key={card.card_id} />;

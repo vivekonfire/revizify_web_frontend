@@ -3,6 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { createCard } from "../../store/actions/cardAction";
+import styles from "../../styles/Cards.module.css";
 
 const NewCardModal = ({ setModal }) => {
   const router = useRouter();
@@ -44,11 +45,7 @@ const NewCardModal = ({ setModal }) => {
   return (
     <div className="position-fixed start-0 top-0 z-10 min-vh-100 min-vw-100 bg-black bg-opacity-75 d-flex flex-column justify-content-center align-items-center text-white">
       <div
-        className="background_gradient overflow-hidden rounded-md"
-        style={{
-          minHeight: "664px",
-          minWidth: "443px",
-        }}
+        className={`${styles.new_card} background_gradient overflow-hidden rounded-md`}
       >
         <div className="py-4 w-100 bg-black bg-opacity-50 d-flex px-4 justify-content-between">
           <p className="m-0 fs-3">New Card</p>

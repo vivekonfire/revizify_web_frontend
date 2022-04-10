@@ -16,13 +16,18 @@ const CreaterCourse = () => {
   const [updateModal, setUpdateModal] = useState(false);
   const [updateCardId, setUpdateCardId] = useState();
   const cards = useSelector((state) => state.card.cards);
+  const course = useSelector((state) => state.card.course);
 
   useEffect(() => {
     const form = {
       course_id: router.query.id,
     };
     if (router.query.id !== undefined) dispatch(getCards(form));
-  }, [router.query.id]);
+
+    if (course === false) {
+      router.push("/404");
+    }
+  }, [router.query.id, course]);
 
   return (
     <div className="leave_navbar mx-sm-5 mx-1 min-vh-100 ">

@@ -114,7 +114,9 @@ const CreaterCard = ({ setModal, cards, setUpdateModal, setUpdateCardId }) => {
         )}
         <BsThreeDots />
       </div>
-      <div className="my-4 mx-2 py-4 overflow-auto" style={{ height: "900px" }}>
+      <div
+        className={`${styles.creater_card_container} my-4 mx-2 py-4 overflow-auto`}
+      >
         {cards?.count > 0 &&
           cards?.results?.map((card) => {
             return (

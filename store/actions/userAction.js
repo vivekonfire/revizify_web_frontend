@@ -22,6 +22,6 @@ export const userCourse = (name) => async (dispatch) => {
 
     dispatch({ type: "USER_COURSE", payload: res.data });
   } catch (error) {
-    console.error(error);
+    dispatch({ type: "USER_ERROR" });
   }
 };

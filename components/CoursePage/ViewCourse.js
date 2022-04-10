@@ -11,13 +11,18 @@ const ViewCourse = () => {
   const router = useRouter();
 
   const cards = useSelector((state) => state.card.cards);
+  const course = useSelector((state) => state.course.course);
 
   useEffect(() => {
     const form = {
       course_id: router.query.id,
     };
     if (router.query.id !== undefined) dispatch(getCards(form));
-  }, [router.query.id]);
+
+    if (!course) {
+      router.push("/404");
+    }
+  }, [router.query.id, course]);
 
   return (
     <div className="leave_navbar mx-sm-5 mx-1 min-vh-100">

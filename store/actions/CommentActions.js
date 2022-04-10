@@ -33,7 +33,7 @@ export const postReply = (form) => async (dispatch) => {
       headers,
     });
 
-    dispatch(getComments(form.course_id, form.parent_id));
+    dispatch(getReplys(form.course_id, form.parent_id));
   } catch (error) {
     console.error(error);
   }

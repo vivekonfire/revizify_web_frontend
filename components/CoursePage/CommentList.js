@@ -35,6 +35,7 @@ const Comments = () => {
           onChange={(e) => {
             setComment(e.target.value);
           }}
+          value={comment}
         />
         <div className="col-12 d-flex justify-content-end align-items-center mb-5">
           <button

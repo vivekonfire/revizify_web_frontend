@@ -1,0 +1,12 @@
+.more_options_container {
+  margin-top: 6rem;
+  width: 350px;
+  height: 465px;
+}
+
+@media only screen and (max-width: 450px) {
+  .more_options_container {
+    width: 300px;
+    height: 447px;
+  }
+}

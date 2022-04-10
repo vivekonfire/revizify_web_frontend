@@ -9,7 +9,7 @@ import Image from "next/image";
 const ShowCourse = () => {
   const dispatch = useDispatch();
 
-  const courses = useSelector((state) => state.course.courses);
+  const courses = useSelector((state) => state.course.created_courses);
   const isLogin = useSelector((state) => state.auth.valid_token);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const ShowCourse = () => {
               className="btn rounded-pill background_gradient button_shadow border-0 text-light col-4 p-2 fs-5 "
             >
               <Link href="/loginEmail">
-                <div>Login/SignUp</div>
+                <div>Login</div>
               </Link>
             </button>
           </>
