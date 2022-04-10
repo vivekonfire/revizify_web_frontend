@@ -76,10 +76,11 @@ const EachCourse = ({ keey, course, name, show }) => {
   return (
     <Link href={`/${courseLink}?id=${course_id}`}>
       <div
-        className="col d-flex justify-content-center my-3 pointer_cursor position-relative"
-        style={{ height: "395px", width: "372px" }}
+        className="col d-flex justify-content-center my-3 pointer_cursor position-relative px-4 col-12 col-sm-6 col-md-4 col-lg-3"
+        style={{ height: "395px"}}
       >
-        <div className="w-100 bg-black bg-opacity-50 p-3 d-flex flex-column justify-content-between rounded-md">
+        <div className="w-100 bg-black bg-opacity-50 p-3 d-flex flex-column justify-content-between rounded-md" 
+        >
           <div className="position-relative">
             <div className="d-flex justify-content-center items-align-center">
               <Image
