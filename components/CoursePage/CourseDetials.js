@@ -102,19 +102,6 @@ const CourseDetials = () => {
     }
   }, [router.query.id]);
 
-  const {
-    course_id,
-    course_name,
-    course_desc,
-    user_id,
-    course_img,
-    num_of_downloads,
-    num_of_likes,
-    num_of_cards,
-    user_name,
-    user_pic,
-  } = course;
-
   return (
     <div className="col-xl-7 col-12 me-5 text-white">
       <p className="fs-5 fw-bold">{card?.title}</p>
@@ -139,7 +126,6 @@ const CourseDetials = () => {
               minHeight: "153px",
               minWidth: "339px",
               maxWidth: "518px",
-              maxHeight: "246px",
             }}
           >
             <div className="w-100 bg-black bg-opacity-50 p-3 d-flex flex-column justify-content-between rounded-sm">
@@ -148,15 +134,17 @@ const CourseDetials = () => {
                   <Image src={image} alt="course image" />
                 </div>
                 <div>
-                  <div className="fs-6 m-2 fw-bold">{course_name}</div>
-                  <div className="fs-6 m-2 text-secondary">{course_desc}</div>
+                  <div className="fs-6 m-2 fw-bold">{course?.course_name}</div>
+                  <div className="fs-6 m-2 text-secondary">
+                    {course?.course_desc}
+                  </div>
                 </div>
               </div>
               <div className="d-flex justify-content-between">
-                <Link href={`/profile?name=${user_name}`}>
+                <Link href={`/profile?name=${course?.user_name}`}>
                   <div className="d-flex justify-content-evenly align-items-center mt-3 pointer_cursor">
                     <Image src={profileImage} alt="profile image" />
-                    <p className="small_text">{user_name}</p>
+                    <p className="small_text">{course?.user_name}</p>
                   </div>
                 </Link>
               </div>
@@ -166,10 +154,10 @@ const CourseDetials = () => {
                 </div>
                 <div className="d-flex justify-content-evenly align-items-center course_option w-25">
                   <Image src={cards} alt="Image of cards" />
-                  {num_of_cards}
+                  {course?.num_of_cards}
                 </div>
                 <div className="d-flex justify-content-evenly align-items-center  rounded-circle course_option">
-                  <HiDownload /> {num_of_downloads}
+                  <HiDownload /> {course?.num_of_downloads}
                 </div>
                 <div className="d-flex justify-content-between ps-4 align-items-center  rounded-pill course_option bg-black w-25">
                   {like === 1 ? <BsHandThumbsUpFill /> : <BsHandThumbsUp />}

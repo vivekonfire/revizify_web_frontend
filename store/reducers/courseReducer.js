@@ -1,6 +1,7 @@
 const initialState = {
-  courses: null,
-  course: [],
+  created_courses: null,
+  downloaded_courses: null,
+  course: null,
   explore: null,
   bookmarkCheck: false,
   like: 0,
@@ -11,17 +12,22 @@ const reducer = (state = initialState, action) => {
     case "GET_COURSES":
       return {
         ...state,
-        courses: action.payload,
+        created_courses: action.payload,
       };
     case "GET_COURSE":
       return {
         ...state,
         course: action.payload,
       };
+    case "GET_COURSE_ERROR":
+      return {
+        ...state,
+        course: false,
+      };
     case "GET_DOWNLOAD_COURSES":
       return {
         ...state,
-        courses: action.payload,
+        downloaded_courses: action.payload,
       };
     case "GET_ARCHIVE_COURSES":
       return {

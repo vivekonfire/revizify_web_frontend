@@ -9,6 +9,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         userinfo: action.payload,
       };
+    case "USER_ERROR":
+      return {
+        ...state,
+        userinfo: false,
+      };
     default:
       return state;
   }

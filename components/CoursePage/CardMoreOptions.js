@@ -29,7 +29,12 @@ const CardMoreOptions = ({
   };
 
   return (
-    <div className="position-absolute px-4 py-2 bg-black bg-opacity-75 rounded-sm  bottom-0 end-0">
+    <div
+      className="position-absolute px-4 py-2 bg-black bg-opacity-75 rounded-sm  bottom-0 end-0"
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <div className="text-white mb-2">
         <div
           className="d-flex justify-content-center align-items-center gap-2 pointer_cursor"

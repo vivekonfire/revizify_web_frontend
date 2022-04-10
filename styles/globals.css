@@ -127,8 +127,9 @@ button:hover {
 }
 
 .spaced_text {
-  letter-spacing: 0.92em;
-  padding-left: 0.92em;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em;
+  text-align: right;
 }
 
 .spaced_text:last-child {
@@ -157,5 +158,11 @@ button:hover {
 @media only screen and (max-width: 576px) {
   .form_container {
     width: 400px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .form_container {
+    width: 325px;
   }
 }

@@ -63,7 +63,7 @@ export const getCourse = (id) => async (dispatch) => {
 
     dispatch({ type: "GET_COURSE", payload: res.data });
   } catch (err) {
-    console.error(err);
+    dispatch({ type: "GET_COURSE_ERROR", payload: err.response.data });
   }
 };
 
@@ -130,8 +130,6 @@ export const getLikeCourse = (id) => async (dispatch) => {
       "http://data.revizify.com/api/v1/courses/like",
       config
     );
-
-    console.log(res.data.like);
 
     dispatch({ type: "LIKE", payload: res.data.like });
   } catch (error) {

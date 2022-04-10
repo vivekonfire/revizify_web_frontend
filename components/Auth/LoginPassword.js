@@ -20,20 +20,21 @@ const LoginPassword = () => {
   const [loading, setLoading] = useState(true);
   const email = Cookies.get("email");
   const user_name = Cookies.get("userName");
+  const isLogin = useSelector((state) => state.auth.valid_token);
 
   const onForgot = (e) => {
     e.preventDefault();
 
     alert("Check your mail");
     dispatch(resetPasswordEmail({ email: email }));
-
-    router.replace("/");
+    console.log(error);
+    router.push("/");
   };
   useEffect(() => {
-    if (error === null && !loading) router.push("/");
+    if (error === null && !loading && isLogin) router.push("/");
 
     setLoading(false);
-  }, [error]);
+  }, [error, isLogin]);
 
   const onClick = async (e) => {
     e.preventDefault();

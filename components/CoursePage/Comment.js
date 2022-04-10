@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { getReplys } from "../../store/actions/CommentActions";
 import { useRouter } from "next/router";
+import { postReply } from "../../store/actions/CommentActions";
 
 const Comment = ({ value }) => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Comment = ({ value }) => {
 
   const [replyDropDown, setReplyDropDown] = useState(false);
   const [reply, setReply] = useState(false);
+  const [replyText, setReplyText] = useState("");
   const r = useSelector((state) => state.comment.replys);
 
   const { comment_id, course, name, text, user, user_id, user_name } = value;
@@ -21,6 +23,18 @@ const Comment = ({ value }) => {
 
     if (router.query.id !== undefined)
       dispatch(getReplys(router.query.id, comment_id));
+  };
+
+  const replySubmit = (e) => {
+    e.preventDefault();
+
+    const form = {
+      parent_id: comment_id,
+      course_id: router.query.id,
+      text: replyText,
+    };
+
+    dispatch(postReply(form));
   };
 
   return (
@@ -72,8 +86,15 @@ const Comment = ({ value }) => {
             type="text"
             className="border-top-0 border-start-0 border-end-0 border-bottom-2 border-white bg-transparent p-2 col-12 my-4 text-white"
             placeholder="Write your reply here..."
+            onChange={(e) => {
+              setReplyText(e.target.value);
+            }}
           />
-          <button className="col-3 btn border-0 background_gradient button_shadow rounded-pill text-white p-2 fs-6">
+          <button
+            className="col-3 btn border-0 background_gradient button_shadow rounded-pill text-white p-2 fs-6"
+            type="button"
+            onClick={replySubmit}
+          >
             Post
           </button>
         </div>

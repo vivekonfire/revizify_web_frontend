@@ -3,6 +3,7 @@ import { BiHomeAlt, BiCheckboxChecked } from "react-icons/bi";
 import { MdOutlineCreate } from "react-icons/md";
 import { AiOutlineDownload } from "react-icons/ai";
 import Link from "next/link";
+import styles from "../../../styles/Navbar.module.css";
 
 const ToggleOptions = ({ setToggle }) => {
   return (
@@ -13,12 +14,7 @@ const ToggleOptions = ({ setToggle }) => {
       }}
     >
       <div
-        className="background_gradient rounded-sm position-absolute top-0 start-0 mx-4 overflow-hidden z-10"
-        style={{
-          marginTop: "6rem",
-          width: "350px",
-          height: "465px",
-        }}
+        className={`${styles.more_options_container} background_gradient rounded-sm position-absolute top-0 start-0 mx-4 overflow-hidden z-10`}
       >
         <ul className="my-3 p-0 mx-4">
           <li>

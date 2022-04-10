@@ -19,7 +19,7 @@ const Verify = () => {
             className="btn rounded-pill background_gradient button_shadow border-0 text-light col-4 p-2 fs-5 "
           >
             <Link href="/loginEmail">
-              <div>Login/SignUp</div>
+              <div>Login</div>
             </Link>
           </button>
         </div>

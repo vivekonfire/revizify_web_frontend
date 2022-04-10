@@ -4,3 +4,32 @@
   right: 5.5rem;
   height: 700px;
 }
+
+.new_card {
+  min-height: 664px;
+  min-width: 443px;
+}
+
+.creater_card_container {
+  height: 900px;
+}
+
+.view_card_container {
+  height: 1000px;
+}
+
+@media only screen and (max-width: 450px) {
+  .new_card {
+    min-width: 318.91px;
+    min-height: 478px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .creater_card_container {
+    height: auto;
+  }
+  .view_card_container {
+    height: auto;
+  }
+}

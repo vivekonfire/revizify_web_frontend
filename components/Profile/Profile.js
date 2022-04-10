@@ -13,9 +13,9 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(userCourse(router.query.name));
-  }, [router.query.name]);
 
-  // const { name, user_name, user_bio, results, count } = details;
+    if (!details) router.push("/404");
+  }, [router.query.name, details]);
 
   return (
     <div className="min-vh-100">

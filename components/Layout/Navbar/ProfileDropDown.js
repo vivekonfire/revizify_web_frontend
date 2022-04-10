@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProfileOptions from "./ProfileOptions";
 import Notifications from "./Notifications";
+import styles from "../../../styles/Navbar.module.css";
 
 const ProfileDropDown = ({ setProfileDropDown }) => {
   const [focus, setFocus] = useState(0);
@@ -13,12 +14,7 @@ const ProfileDropDown = ({ setProfileDropDown }) => {
       }}
     >
       <div
-        className="background_gradient rounded-sm position-absolute top-0 end-0 mx-4 overflow-hidden z-10"
-        style={{
-          marginTop: "6rem",
-          width: "350px",
-          height: "420px",
-        }}
+        className={`${styles.more_options_container} background_gradient rounded-sm position-absolute top-0 end-0 mx-4 overflow-hidden z-10`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="d-flex">
