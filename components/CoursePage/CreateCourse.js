@@ -37,6 +37,9 @@ const CreateCourse = () => {
     if (courseName === "") setErrorName("This is a required field");
     if (aboutCourse === "") setErrorAbout("This is a required field");
     if (selectedImageFile === null) setErrorImage("This is a required field");
+    if (courseName !== "") setErrorName("");
+    if (aboutCourse !== "") setErrorAbout("");
+    if (selectedImageFile !== null) setErrorImage("");
     if (courseName !== "" && aboutCourse !== "" && selectedImageFile !== null)
       dispatch(addCourse(formdata));
   };

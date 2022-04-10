@@ -7,7 +7,7 @@ const VerifyForm = () => {
   const dispatch = useDispatch();
 
   const [ques1, setQues1] = useState("");
-  const [ques2, setQues2] = useState("");
+  const [ques2, setQues2] = useState("1");
   const [ques3, setQues3] = useState("");
   const [ques4, setQues4] = useState("");
   const [ques5, setQues5] = useState("");
@@ -33,13 +33,17 @@ const VerifyForm = () => {
     if (ques3 === "") setErrorQues3("This is a required field");
     if (ques4 === "") setErrorQues4("This is a required field");
     if (ques5 === "") setErrorQues5("This is a required field");
+    if (ques1 !== "") setErrorQues1("");
+    if (ques3 !== "") setErrorQues3("");
+    if (ques4 !== "") setErrorQues4("");
+    if (ques5 !== "") setErrorQues5("");
     if (ques5 !== "" && ques1 !== "" && ques3 !== "" && ques4 !== "") {
       dispatch(verifyEducator(form));
       setSuccess(true);
     }
   };
   return (
-    <div className="container d-flex justify-content-center flex-column p-4 text-light ">
+    <div className="container d-flex justify-content-center flex-column p-4 text-light">
       <h1 className="mb-5 mx-xxl-5 mx-xl-0 mx-lg-5 mx-sm-0 text-center">
         Verification Form
       </h1>
@@ -65,6 +69,7 @@ const VerifyForm = () => {
                 setQues2(e.target.value);
               }}
               className="bg-black text-white border-0 p-2 rounded-3 bg-opacity-50"
+              defaultValue={"1"}
             >
               <option value="1">1</option>
               <option value="2">2</option>

@@ -16,7 +16,7 @@ const CreaterCourse = () => {
   const [updateModal, setUpdateModal] = useState(false);
   const [updateCardId, setUpdateCardId] = useState();
   const cards = useSelector((state) => state.card.cards);
-  const course = useSelector((state) => state.card.course);
+  const course = useSelector((state) => state.course.course);
 
   useEffect(() => {
     const form = {
@@ -25,7 +25,7 @@ const CreaterCourse = () => {
     if (router.query.id !== undefined) dispatch(getCards(form));
 
     if (course === false) {
-      router.push("/404");
+      router.push("/courseNotFound");
     }
   }, [router.query.id, course]);
 

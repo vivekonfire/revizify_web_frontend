@@ -20,7 +20,7 @@ const ViewCourse = () => {
     if (router.query.id !== undefined) dispatch(getCards(form));
 
     if (!course) {
-      router.push("/404");
+      router.push("/courseNotFound");
     }
   }, [router.query.id, course]);
 

@@ -76,27 +76,22 @@ const EachCourse = ({ keey, course, name, show }) => {
   return (
     <Link href={`/${courseLink}?id=${course_id}`}>
       <div
-        className="col d-flex justify-content-center my-3 pointer_cursor position-relative px-4 col-12 col-sm-6 col-md-4 col-lg-3"
-        style={{ height: "395px"}}
+        className="col d-flex justify-content-center my-3 pointer_cursor position-relative px-4 col-md-6 col-lg-4 col-xl-3 col-12"
+        style={{ height: "395px" }}
       >
-        <div className="w-100 bg-black bg-opacity-50 p-3 d-flex flex-column justify-content-between rounded-md" 
-        >
+        <div className="w-100 bg-black bg-opacity-50 p-3 d-flex flex-column justify-content-between rounded-md">
           <div className="position-relative">
             <div className="d-flex justify-content-center items-align-center">
               <Image
                 loader={myLoader}
                 src={keey}
                 alt="Picture of the author"
-                width={330}
+                width={400}
                 height={200}
                 className="rounded-md"
               />
             </div>
             <div className=""></div>
-            <div className="bg-black bg-opacity-75 p-2 rounded-pill gap-2 d-flex align-items-center position-absolute bottom-0 start-0 mx-2 my-3">
-              <BsLightningFill />
-              <p className="p-0 m-0">100</p>
-            </div>
             <div className="bg-black bg-opacity-75 p-2 rounded-pill gap-2 d-flex align-items-center position-absolute bottom-0 end-0 mx-2 my-3">
               <div className="d-flex align-items-center justify-content-center">
                 <Image src={cards} alt="Image of cards" />

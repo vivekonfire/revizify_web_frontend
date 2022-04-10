@@ -24,6 +24,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         course: false,
       };
+    case "CLEAR_COURSE":
+      return {
+        ...state,
+        course: null,
+      };
     case "GET_DOWNLOAD_COURSES":
       return {
         ...state,

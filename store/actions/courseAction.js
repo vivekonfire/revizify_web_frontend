@@ -306,3 +306,7 @@ export const restoreArchiveCourses = (id) => async (dispatch) => {
     console.error(err);
   }
 };
+
+export const clearCourse = () => async (dispatch) => {
+  dispatch({ type: "CLEAR_COURSE" });
+};

@@ -26,7 +26,7 @@ const DownloadCourse = () => {
           </div>
         )}
       </div>
-      <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 justify-content-evenly">
+      <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4">
         {!isLogin ? (
           <>
             <div className="d-flex w-100 flex-column">
