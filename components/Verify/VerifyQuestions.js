@@ -55,7 +55,7 @@ const VerifyQuestions = () => {
         {q3 && (
           <p className="px-4 pb-4">
             There are 3 badges that all verified educators get in ascending
-            order. The badge will be changed by Revizify's team as per the
+            order. The badge will be changed by Revizify&apos;s team as per the
             quality of courses posted by the educator and the downloads they get
             on Revizify. All verified educators start with a Bronze batch.
             <ul>
