@@ -19,20 +19,21 @@ import Cookies from "js-cookie";
 const EachCourse = ({ keey, course, name, show }) => {
   const [moreOption, setMoreOption] = useState(false);
   const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   const dispatch = useDispatch();
-
   const isLogin = useSelector((state) => state.auth.valid_token);
 
   const myLoader = ({ src, width, quality }) => {
-    return `https://picsum.photos/${width}/200?random=${src}`;
+    return `${src}`;
   };
 
   const {
     course_id,
     course_name,
-    course_img,
     num_of_downloads,
     num_of_cards,
+    num_of_likes,
+    is_downloaded,
     created_at,
     user_name,
   } = course;
@@ -46,12 +47,14 @@ const EachCourse = ({ keey, course, name, show }) => {
   else courseLink = `viewCourse`;
 
   const likeClick = async () => {
-    if (!like) {
-      await dispatch(likeCourse(course_id));
-    } else {
-      await dispatch(removeLikeCourse(course_id));
+    if (isLogin) {
+      if (!like) {
+        await dispatch(likeCourse(course_id));
+      } else {
+        await dispatch(removeLikeCourse(course_id));
+      }
+      loader();
     }
-    loader();
   };
 
   const loader = async () => {
@@ -61,23 +64,27 @@ const EachCourse = ({ keey, course, name, show }) => {
       Authorization: `JWT ${token}`,
     };
     const res = await axios.get(
-      `http://data.revizify.com/api/v1/courses/like?course_id=${course_id}`,
+      `https://data.revizify.com/api/v1/courses/like?course_id=${course_id}`,
       { headers }
     );
+
+    setLikeCount(res.data.count);
 
     if (res.data.like === 1) setLike(true);
     else setLike(false);
   };
 
   useEffect(() => {
-    loader();
+    if (isLogin) {
+      loader();
+    }
   }, [course_id]);
 
   return (
     <Link href={`/${courseLink}?id=${course_id}`}>
       <div
         className="col d-flex justify-content-center my-3 pointer_cursor position-relative px-4 col-md-6 col-lg-4 col-xl-3 col-12"
-        style={{ height: "395px" }}
+      // style={{ "max-height": "395px" }}
       >
         <div className="w-100 bg-black bg-opacity-50 p-3 d-flex flex-column justify-content-between rounded-md">
           <div className="position-relative">
@@ -85,7 +92,7 @@ const EachCourse = ({ keey, course, name, show }) => {
               <Image
                 loader={myLoader}
                 src={keey}
-                alt="Picture of the author"
+                alt={course.course_name}
                 width={400}
                 height={200}
                 className="rounded-md"
@@ -99,19 +106,15 @@ const EachCourse = ({ keey, course, name, show }) => {
               <p className="p-0 m-0">{num_of_cards}</p>
             </div>
           </div>
-          <div className="fs-6 m-2">{course_name}</div>
+          <h2 className="fs-6 my-3">{course_name}</h2>
           <div className="d-flex justify-content-between">
-            <div className="d-flex justify-content-evenly align-items-center">
+            <div className="d-flex justify-content-evenly align-items-center my-2">
               <FaUserCircle className="fs-5" />
-              {name !== undefined ? (
-                <Link href={`/profile?name=${name}`}>
-                  <p className="small_text pointer_cursor">{name}</p>
-                </Link>
-              ) : (
-                <Link href={`/profile?name=${user_name}`}>
-                  <p className="small_text pointer_cursor">{user_name}</p>
-                </Link>
-              )}
+
+              <Link href={`/profile?name=${user_name}`}>
+                <p className="small_text pointer_cursor">{user_name}</p>
+              </Link>
+
             </div>
             {created_at !== undefined && (
               <p className="small_text my-auto">Published - {created_at}</p>
@@ -128,7 +131,7 @@ const EachCourse = ({ keey, course, name, show }) => {
                 e.stopPropagation();
               }}
             >
-              {like === false ? <BsHandThumbsUp /> : <BsHandThumbsUpFill />}
+              {like === false ? <BsHandThumbsUp /> : <BsHandThumbsUpFill />}{likeCount}
             </div>
             <div className="d-flex justify-content-center align-items-center  rounded-circle course_option">
               <HiDownload />

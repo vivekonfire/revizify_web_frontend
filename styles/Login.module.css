@@ -1,0 +1,11 @@
+.redph ::-webkit-input-placeholder { /* Edge */
+    color: red;
+  }
+  
+.redph :-ms-input-placeholder { /* Internet Explorer */
+    color: red;
+  }
+  
+.redph ::placeholder {
+    color: red;
+  }

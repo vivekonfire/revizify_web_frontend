@@ -1,5 +1,12 @@
 import Cookies from "js-cookie";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import authreducer from "../reducers/authReducers";
+
+const baseURL = "https://data.revizify.com/api/v1/"
+
+
+// const baseURL = useSelector((state) => state.auth.baseURL);
 
 export const addCourse = (form) => async (dispatch) => {
   try {
@@ -11,7 +18,7 @@ export const addCourse = (form) => async (dispatch) => {
     };
 
     await axios.post(
-      "http://data.revizify.com/api/v1/courses/create_course",
+      `${baseURL}courses/create_course`,
       form,
       { headers }
     );
@@ -32,7 +39,7 @@ export const getCourses = () => async (dispatch) => {
     };
 
     const res = await axios.get(
-      "http://data.revizify.com/api/v1/courses/create_course",
+      `${baseURL}courses/create_course`,
       { headers }
     );
 
@@ -56,7 +63,7 @@ export const getCourse = (id) => async (dispatch) => {
     };
 
     const res = await axios.post(
-      "http://data.revizify.com/api/v1/courses/eachCourse",
+      `${baseURL}courses/eachCourse`,
       form,
       { headers }
     );
@@ -81,7 +88,7 @@ export const archiveCourse = (id) => async (dispatch) => {
     };
 
     const res = await axios.delete(
-      "http://data.revizify.com/api/v1/courses/create_course",
+      `${baseURL}courses/create_course`,
       { headers, data }
     );
 
@@ -101,7 +108,7 @@ export const editCourse = (form) => async (dispatch) => {
     };
 
     await axios.patch(
-      "http://data.revizify.com/api/v1/courses/create_course",
+      `${baseURL}courses/create_course`,
       form,
       { headers }
     );
@@ -127,7 +134,7 @@ export const getLikeCourse = (id) => async (dispatch) => {
     };
 
     const res = await axios.get(
-      "http://data.revizify.com/api/v1/courses/like",
+      `${baseURL}courses/like`,
       config
     );
 
@@ -151,7 +158,7 @@ export const likeCourse = (id) => async (dispatch) => {
     };
 
     const res = await axios.post(
-      "http://data.revizify.com/api/v1/courses/like",
+      `${baseURL}courses/like`,
       form,
       { headers }
     );
@@ -176,7 +183,7 @@ export const removeLikeCourse = (id) => async (dispatch) => {
     };
 
     const res = await axios.delete(
-      "http://data.revizify.com/api/v1/courses/like",
+      `${baseURL}courses/like`,
 
       { headers, data }
     );
@@ -197,7 +204,7 @@ export const downloadCourse = (form) => async () => {
     };
 
     await axios.post(
-      "http://data.revizify.com/api/v1/courses/download_course",
+      `${baseURL}courses/download_course`,
       form,
       { headers }
     );
@@ -216,7 +223,7 @@ export const getDownloadedCourses = () => async (dispatch) => {
     };
 
     const res = await axios.get(
-      "http://data.revizify.com/api/v1/courses/download_course",
+      `${baseURL}courses/download_course`,
       { headers }
     );
 
@@ -240,7 +247,7 @@ export const deleteDownloadCourses = (id) => async (dispatch) => {
     };
 
     await axios.delete(
-      "http://data.revizify.com/api/v1/courses/download_course",
+      `${baseURL}courses/download_course`,
       { headers, data }
     );
 
@@ -253,7 +260,7 @@ export const deleteDownloadCourses = (id) => async (dispatch) => {
 export const exploreCourse = () => async (dispatch) => {
   try {
     const res = await axios.get(
-      "http://data.revizify.com/api/v1/courses/explore_course"
+      `${baseURL}courses/explore_course`
     );
 
     dispatch({ type: "EXPLORE_COURSE", payload: res.data });
@@ -272,7 +279,7 @@ export const getArchivedCourses = () => async (dispatch) => {
     };
 
     const res = await axios.get(
-      "http://data.revizify.com/api/v1/courses/archive_course",
+      `${baseURL}courses/archive_course`,
       { headers }
     );
 
@@ -296,7 +303,7 @@ export const restoreArchiveCourses = (id) => async (dispatch) => {
     };
 
     await axios.put(
-      "http://data.revizify.com/api/v1/courses/archive_course",
+      `${baseURL}courses/archive_course`,
       data,
       { headers }
     );

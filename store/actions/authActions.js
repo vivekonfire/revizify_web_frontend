@@ -37,11 +37,11 @@ export const loginAction = (form) => async (dispatch) => {
       { headers }
     );
 
-    Cookies.set("token", res.data.at);
-    Cookies.set("refreshToken", res.data.rt);
-    Cookies.set("userName", res.data.user_name);
-    Cookies.set("name", res.data.name);
-    Cookies.set("email", res.data.email);
+    Cookies.set("token", res.data.at, { expires: 2 });
+    Cookies.set("refreshToken", res.data.rt, { expires: 14 });
+    Cookies.set("userName", res.data.user_name, { expires: 14 });
+    Cookies.set("name", res.data.name, { expires: 14 });
+    Cookies.set("email", res.data.email, { expires: 14 });
 
     dispatch({ type: "LOGIN", payload: res.data });
   } catch (err) {
@@ -77,27 +77,33 @@ export const validateToken = (rtoken, token) => async (dispatch) => {
       "Content-Type": "Application/json",
     };
 
-    const form = {
-      token: token,
-    };
+    if (token) {
+      const form = {
+        token: token,
+      };
 
-    const res = await axios.post(
-      `http://data.revizify.com/api/v1/user/token/verify`,
-      form,
-      { headers }
-    );
+      const res = await axios.post(
+        `http://data.revizify.com/api/v1/user/token/verify`,
+        form,
+        { headers }
+      );
 
-    const data = {
-      token: token,
-      rtoken: rtoken,
-    };
+      const data = {
+        token: token,
+        rtoken: rtoken,
+      };
 
-    if (Object.keys(res.data).length === 0) {
-      dispatch({ type: "VALIDATE_TOKEN", payload: data });
+      if (Object.keys(res.data).length === 0) {
+        dispatch({ type: "VALIDATE_TOKEN", payload: data });
+      } else {
+        dispatch({ type: "ERROR_VALIDATE" });
+        dispatch(refreshToken(rtoken));
+      }
     } else {
-      dispatch({ type: "ERROR_VALIDATE" });
       dispatch(refreshToken(rtoken));
     }
+
+
   } catch (err) {
     console.error(err);
   }
@@ -119,8 +125,14 @@ export const refreshToken = (token) => async (dispatch) => {
       { headers }
     );
 
-    if (res.data.refresh !== null)
+    if (res.data.refresh !== null) {
+      Cookies.set("token", res.data.access, { expires: 2 });
+      Cookies.set("refreshToken", res.data.refresh, { expires: 14 });
+      Cookies.set("userName", Cookies.get("user_name"), { expires: 14 });
+      Cookies.set("name", Cookies.get("name"), { expires: 14 });
+      Cookies.set("email", Cookies.get("email"), { expires: 14 });
       dispatch({ type: "REFRESH_TOKEN", payload: res.data });
+    }
     else {
       dispatch(logout);
     }

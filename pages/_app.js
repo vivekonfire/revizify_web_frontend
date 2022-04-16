@@ -26,14 +26,16 @@ function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(validateToken(refreshToken, token));
+    if (token || refreshToken){
+      dispatch(validateToken(refreshToken, token));
+    }
   }, []);
 
   return (
-    <BottomScrollListener onBottom={() => {}}>
-      <NavBar />
-      <Component {...pageProps} />
-      <Footer />
+    <BottomScrollListener onBottom={() => { }}>
+        <NavBar />
+        <Component {...pageProps} />
+        <Footer />
     </BottomScrollListener>
   );
 }

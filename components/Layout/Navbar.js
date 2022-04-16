@@ -81,7 +81,7 @@ const NavBar = () => {
           <BiSearch className="fs-3 pointer_cursor" />
         </div>
         {!token ? (
-          <Link href="/loginEmail">
+          <Link href="/login">
             <AiOutlineLogin
               className="pointer_cursor fs-3"
               data-bs-toggle="tooltip"

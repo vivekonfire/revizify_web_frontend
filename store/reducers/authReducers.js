@@ -1,4 +1,5 @@
 const initialState = {
+  baseURL: "http://data.revizify.com/api/v1/",
   validity_password: {
     status: null,
     message: null,
