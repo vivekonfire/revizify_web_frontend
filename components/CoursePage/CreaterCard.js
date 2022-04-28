@@ -63,7 +63,7 @@ const CreaterCard = ({ setModal, cards, setUpdateModal, setUpdateCardId }) => {
 
   const card = useSelector((state) => state.card.card);
   const bookmark = useSelector((state) => state.card.bookmark);
-
+  
   const bookmarkClick = (e) => {
     e.preventDefault();
 

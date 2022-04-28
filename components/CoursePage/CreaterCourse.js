@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CourseDetails from "./CourseDetials";
+import CourseDetails from "./CourseDetails";
 import CreaterCard from "./CreaterCard";
 import Comments from "./CommentList";
 import NewCardModal from "./NewCardModal";

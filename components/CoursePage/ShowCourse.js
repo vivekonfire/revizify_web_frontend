@@ -51,9 +51,10 @@ const ShowCourse = () => {
           </>
         ) : courses?.count > 0 ? (
           courses.results?.map((course, index) => {
+            // alert(course?.img ? course.img : String(index))
             return (
               <EachCourse
-                keey={String(index)}
+                keey={course?.course_img ? course.course_img : "https://picsum.photos/200/300?ramdom="+String(index)}
                 course={course}
                 key={course.course_id}
                 name={courses.user_name}

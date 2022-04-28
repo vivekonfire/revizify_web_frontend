@@ -6,10 +6,12 @@ const Layout = ({ children }) => {
   
 
   return (
+    <>
     <div className="content">
-      {isLogin? {children}:
-      <LoginEmail />}
+      {isLogin? children:
+      <LoginEmail/>}
     </div>
+    </>
   );
 };
 

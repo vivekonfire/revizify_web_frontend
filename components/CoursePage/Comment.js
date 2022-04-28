@@ -40,7 +40,7 @@ const Comment = ({ value }) => {
   return (
     <div className="col-11">
       <div className="bg-black bg-opacity-25 rounded-lg position-relative py-3 px-5">
-        <FaUserAlt className="fs-3 position-absolute top-50 start-0 translate-middle" />
+        <FaUserAlt className="fs-1 rounded-circle position-absolute top-50 start-0 translate-middle" />
         <div className="d-flex">
           <Link href={`/profile?name=${user_name}`}>
             <div className="bg-black rounded-pill bg-opacity-25 fs-5 p-2 px-4 pointer_cursor">
@@ -48,9 +48,9 @@ const Comment = ({ value }) => {
             </div>
           </Link>
         </div>
-        <div className="fs-6 px-4 my-4">{text}</div>
+        <div className="fs-6 px-4 my-2">{text}</div>
         <div
-          className="d-flex justify-content-end pe-5 mt-5 pointer_cursor"
+          className="d-flex justify-content-end pe-5 pointer_cursor"
           onClick={() => {
             setReply(!reply);
           }}

@@ -81,7 +81,7 @@ const EachCourse = ({ keey, course, name, show }) => {
   }, [course_id]);
 
   return (
-    <Link href={`/${courseLink}?id=${course_id}`}>
+    <Link href={`/course/${course_name}-${user_name}?id=${course_id}`}>
       <div
         className="col d-flex justify-content-center my-3 pointer_cursor position-relative px-4 col-md-6 col-lg-4 col-xl-3 col-12"
       // style={{ "max-height": "395px" }}
@@ -131,7 +131,7 @@ const EachCourse = ({ keey, course, name, show }) => {
                 e.stopPropagation();
               }}
             >
-              {like === false ? <BsHandThumbsUp /> : <BsHandThumbsUpFill />}{likeCount}
+              {like === false ? <BsHandThumbsUp /> : <BsHandThumbsUpFill />}{isLogin? likeCount : num_of_likes}
             </div>
             <div className="d-flex justify-content-center align-items-center  rounded-circle course_option">
               <HiDownload />

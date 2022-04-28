@@ -10,8 +10,8 @@ const download = () => {
   return (
     <>
       <Layout>
-      <DownloadCourse/>
-    </Layout>
+        <DownloadCourse />
+      </Layout>
     </>
   );
 };

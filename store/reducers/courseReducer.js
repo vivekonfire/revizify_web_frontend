@@ -5,6 +5,8 @@ const initialState = {
   explore: null,
   bookmarkCheck: false,
   like: 0,
+  likecount: 0,
+  is_status_ok: false,
 };
 
 const reducer = (state = initialState, action) => {

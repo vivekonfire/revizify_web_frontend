@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import CourseDetails from "./CourseDetials";
 import DownloadCards from "./DownloadCards";
 import Comments from "./CommentList";
 import { getCards } from "../../store/actions/cardAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import CourseDetails from "./CourseDetails";
 
 const ViewCourse = () => {
   const dispatch = useDispatch();

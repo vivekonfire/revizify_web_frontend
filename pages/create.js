@@ -8,9 +8,9 @@ const create = () => {
 
   return (
     <>
-    <Layout>
-      <ShowCourse/>
-    </Layout>
+      <Layout>
+        <ShowCourse />
+      </Layout>
     </>
   );
 };

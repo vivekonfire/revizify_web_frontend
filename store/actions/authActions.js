@@ -93,7 +93,7 @@ export const validateToken = (rtoken, token) => async (dispatch) => {
         rtoken: rtoken,
       };
 
-      if (Object.keys(res.data).length === 0) {
+      if (res.data.length === 0) {
         dispatch({ type: "VALIDATE_TOKEN", payload: data });
       } else {
         dispatch({ type: "ERROR_VALIDATE" });
@@ -120,7 +120,7 @@ export const refreshToken = (token) => async (dispatch) => {
     };
 
     const res = await axios.post(
-      `http://data.revizify.com/api/v1/user/token/refresh`,
+      `https://data.revizify.com/api/v1/user/token/refresh`,
       form,
       { headers }
     );

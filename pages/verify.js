@@ -9,8 +9,8 @@ const verify = () => {
   return (
     <>
       <Layout>
-      <Verify/>
-    </Layout>
+        <Verify />
+      </Layout>
     </>
   );
 };

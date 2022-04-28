@@ -36,14 +36,14 @@ export const getCards = (form) => async (dispatch) => {
       form,
       { headers }
     );
-
+      console.log(res, "res")
     if (res.status === 200) {
       const formdata = {
         course_id: form.course_id,
         card_id: res?.data?.results[0]?.card_id,
       };
 
-      console.log(formdata);
+      console.warn(formdata);
 
       dispatch(getCard(formdata));
     }

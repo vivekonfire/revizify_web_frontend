@@ -4,9 +4,12 @@ import robot from "../../public/robot.png";
 import { BsCardImage } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { addCourse } from "../../store/actions/courseAction";
+import { useRouter } from "next/router";
 
 const CreateCourse = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  // const success = 
 
   const [courseName, setCourseName] = useState("");
   const [aboutCourse, setAboutCourse] = useState("");
@@ -42,6 +45,7 @@ const CreateCourse = () => {
     if (selectedImageFile !== null) setErrorImage("");
     if (courseName !== "" && aboutCourse !== "" && selectedImageFile !== null)
       dispatch(addCourse(formdata));
+      router.push("/create");
   };
 
   return (

@@ -47,7 +47,7 @@ const DownloadCourse = () => {
           download.results?.map((course, index) => {
             return (
               <EachCourse
-                keey={String(index)}
+              keey={course?.course_img ? course.course_img : "https://picsum.photos/200/300?ramdom="+String(index)}
                 course={course}
                 key={course.course_id}
                 name={download?.user_name}
